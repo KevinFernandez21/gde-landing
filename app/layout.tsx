@@ -9,14 +9,14 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'GDE — Grupo Digital Ecommerce',
-  description: 'El ecosistema digital donde los emprendedores crecen. Comunidad, automatizaciones y software a la medida.',
+  title: 'Nombre — Inteligencia Artificial para tu Negocio',
+  description: 'Automatiza, escala y transforma tu empresa con chatbots, flujos inteligentes y agentes de IA.',
   openGraph: {
-    title: 'GDE — Grupo Digital Ecommerce',
-    description: 'Comunidad digital, automatizaciones y software a la medida para emprendedores.',
-    url: 'https://gdesas.org',
-    siteName: 'GDE',
-    locale: 'es_EC',
+    title: 'Nombre — Inteligencia Artificial para tu Negocio',
+    description: 'Automatiza, escala y transforma tu empresa con chatbots, flujos inteligentes y agentes de IA.',
+    url: 'https://gptfy.biz',
+    siteName: 'Nombre',
+    locale: 'es_LA',
     type: 'website',
   },
 }
