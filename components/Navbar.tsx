@@ -5,9 +5,9 @@ import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const links = [
-  { label: 'Inicio', href: '#inicio' },
-  { label: 'Quiénes Somos', href: '#nosotros' },
   { label: 'Servicios', href: '#servicios' },
+  { label: 'Cómo Funciona', href: '#como-funciona' },
+  { label: 'Nosotros', href: '#nosotros' },
   { label: 'Contacto', href: '#contacto' },
 ]
 
@@ -31,8 +31,8 @@ export default function Navbar() {
       )}
     >
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a href="#inicio" className="text-2xl font-bold tracking-tight text-white">
-          GDE
+        <a href="#" className="text-2xl font-bold tracking-tight text-white">
+          Nombre
         </a>
 
         <ul className="hidden md:flex items-center gap-8">
@@ -49,12 +49,10 @@ export default function Navbar() {
         </ul>
 
         <a
-          href="https://gdesas.org"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#contacto"
           className="hidden md:inline-flex items-center px-4 py-2 rounded-full bg-accent-violet text-white text-sm font-medium hover:bg-accent-violet/80 transition-colors"
         >
-          Únete
+          Hablar con un experto
         </a>
 
         <button
@@ -79,12 +77,11 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="https://gdesas.org"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#contacto"
             className="inline-flex items-center justify-center px-4 py-2 rounded-full bg-accent-violet text-white text-sm font-medium"
+            onClick={() => setOpen(false)}
           >
-            Únete
+            Hablar con un experto
           </a>
         </div>
       )}
