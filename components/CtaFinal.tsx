@@ -26,19 +26,17 @@ export default function CtaFinal() {
           {...anim(0)}
           className="text-3xl md:text-5xl font-bold tracking-tight text-text-primary mb-6"
         >
-          ¿Listo para unirte a esta gran obra?
+          ¿Listo para automatizar tu negocio con IA?
         </motion.h2>
         <motion.p {...anim(0.1)} className="text-lg text-text-muted leading-relaxed mb-10">
-          Forma parte de la comunidad que está transformando el ecommerce en Latinoamérica.
+          Hablemos sobre cómo la inteligencia artificial puede transformar tus procesos y escalar tu empresa.
         </motion.p>
         <motion.div {...anim(0.2)}>
           <a
-            href="https://gdesas.org"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="mailto:contacto@gptfy.biz"
             className="inline-flex items-center px-10 py-5 rounded-full bg-accent-violet text-white text-lg font-semibold hover:bg-accent-violet/80 transition-all hover:scale-105 active:scale-95"
           >
-            ¡Me quiero unir!
+            Hablar con un experto
           </a>
         </motion.div>
       </div>
