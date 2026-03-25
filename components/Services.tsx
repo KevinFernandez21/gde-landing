@@ -2,38 +2,44 @@
 
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
-import { Youtube, Mic, Calendar, Zap, Code2 } from 'lucide-react'
+import { Bot, Workflow, Cpu, Zap, LineChart, Code2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const services = [
   {
-    icon: Youtube,
-    title: 'YouTube & Contenido',
-    description: 'Canal educativo con videos de valor para importadores y emprendedores.',
+    icon: Bot,
+    title: 'Chatbots con IA',
+    description: 'Agentes conversacionales entrenados con tu información empresarial.',
     accent: 'teal',
   },
   {
-    icon: Mic,
-    title: 'Podcast',
-    description: 'Episodios con casos reales de negocios digitales.',
+    icon: Workflow,
+    title: 'Flujos Automatizados',
+    description: 'Automatiza procesos repetitivos con flujos inteligentes conectados a tus herramientas.',
     accent: 'teal',
   },
   {
-    icon: Calendar,
-    title: 'Eventos & Ferias',
-    description: 'Encuentros presenciales y virtuales para conectar la comunidad.',
+    icon: Cpu,
+    title: 'Agentes de IA',
+    description: 'Agentes autónomos que ejecutan tareas complejas sin intervención humana.',
     accent: 'teal',
   },
   {
     icon: Zap,
-    title: 'Automatizaciones',
-    description: 'Flujos automatizados para optimizar procesos de negocio.',
+    title: 'Automatización Empresarial',
+    description: 'Integración de IA en tus sistemas actuales para optimizar operaciones.',
+    accent: 'violet',
+  },
+  {
+    icon: LineChart,
+    title: 'Consultoría en IA',
+    description: 'Diagnóstico, estrategia e implementación de IA adaptada a tu negocio.',
     accent: 'violet',
   },
   {
     icon: Code2,
     title: 'Software a la Medida',
-    description: 'Desarrollo personalizado adaptado a las necesidades del cliente.',
+    description: 'Desarrollo personalizado con IA integrada desde el día uno.',
     accent: 'violet',
   },
 ]
@@ -60,7 +66,7 @@ export default function Services() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="text-3xl md:text-4xl font-bold tracking-tight text-text-primary text-center mb-14"
         >
-          Todo lo que necesitas para crecer digitalmente
+          Todo lo que necesitas para escalar con IA
         </motion.h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -78,8 +84,7 @@ export default function Services() {
                   'transition-all duration-300 hover:scale-[1.02]',
                   isTeal
                     ? 'hover:shadow-[0_0_24px_rgba(6,214,160,0.2)] hover:border-accent-teal/30'
-                    : 'hover:shadow-[0_0_24px_rgba(124,58,237,0.2)] hover:border-accent-violet/30',
-                  i === 4 && 'sm:col-start-1 lg:col-start-2'
+                    : 'hover:shadow-[0_0_24px_rgba(124,58,237,0.2)] hover:border-accent-violet/30'
                 )}
               >
                 <div
