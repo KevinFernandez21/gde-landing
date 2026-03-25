@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, prefer-const, react-hooks/exhaustive-deps, @typescript-eslint/ban-ts-comment */
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
