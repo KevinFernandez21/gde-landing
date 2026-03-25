@@ -1,14 +1,10 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-// @ts-ignore
-import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer';
-// @ts-ignore
-import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
-// @ts-ignore
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
-// @ts-ignore
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
 import { gsap } from 'gsap';
 // @ts-ignore
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
