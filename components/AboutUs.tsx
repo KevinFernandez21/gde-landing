@@ -2,13 +2,13 @@
 
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
-import { Globe, Mic, Zap, Code2 } from 'lucide-react'
+import { Bot, Workflow, Zap, Code2 } from 'lucide-react'
 
 const miniCards = [
-  { icon: Globe, label: 'Comunidad Digital' },
-  { icon: Mic, label: 'Contenido & Podcast' },
-  { icon: Zap, label: 'Automatizaciones' },
-  { icon: Code2, label: 'Software a la Medida' },
+  { icon: Bot,      label: 'Chatbots & Agentes' },
+  { icon: Workflow, label: 'Flujos Inteligentes' },
+  { icon: Zap,      label: 'Automatización' },
+  { icon: Code2,    label: 'Software a la Medida' },
 ]
 
 export default function AboutUs() {
@@ -30,12 +30,12 @@ export default function AboutUs() {
             Quiénes Somos
           </motion.p>
           <motion.h2 {...anim(0.1)} className="text-3xl md:text-4xl font-bold tracking-tight text-text-primary mb-6">
-            Grupo Digital Ecommerce
+            Impulsamos negocios con Inteligencia Artificial
           </motion.h2>
           <motion.p {...anim(0.2)} className="text-text-muted leading-relaxed text-base">
-            Somos una comunidad de emprendedores y empresarios digitales comprometidos con el crecimiento real.
-            Conectamos personas, generamos contenido de valor y desarrollamos soluciones tecnológicas para
-            el mercado latinoamericano.
+            Somos un equipo especializado en soluciones de IA para empresas y emprendedores de
+            Latinoamérica. Diseñamos, construimos y desplegamos tecnología que automatiza, escala
+            y transforma negocios reales.
           </motion.p>
         </div>
 
