@@ -4,10 +4,10 @@ import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
 
 const steps = [
-  { n: '01', title: 'Únete', desc: 'Ingresa a la comunidad GDE y conecta con emprendedores afines.' },
-  { n: '02', title: 'Aprende', desc: 'Accede a contenido, podcasts y eventos exclusivos.' },
-  { n: '03', title: 'Conéctate', desc: 'Colabora con socios, mentores y aliados estratégicos.' },
-  { n: '04', title: 'Escala', desc: 'Lanza o crece tu negocio con apoyo real.' },
+  { n: '01', title: 'Diagnóstico',  desc: 'Analizamos tus procesos y detectamos dónde la IA genera mayor impacto.' },
+  { n: '02', title: 'Diseño',       desc: 'Creamos la arquitectura de solución adaptada a tus sistemas y objetivos.' },
+  { n: '03', title: 'Desarrollo',   desc: 'Construimos e integramos la solución con pruebas rigurosas en cada etapa.' },
+  { n: '04', title: 'Despliegue',   desc: 'Lanzamos, monitoreamos y optimizamos continuamente tu solución de IA.' },
 ]
 
 export default function HowItWorks() {
@@ -16,14 +16,14 @@ export default function HowItWorks() {
   const reduce = useReducedMotion()
 
   return (
-    <section className="px-6 py-24" ref={ref}>
+    <section id="como-funciona" className="px-6 py-24" ref={ref}>
       <div className="max-w-7xl mx-auto">
         <motion.p
           initial={reduce ? {} : { opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           className="text-xs uppercase tracking-widest text-accent-teal text-center mb-3"
         >
-          Proceso
+          Metodología
         </motion.p>
         <motion.h2
           initial={reduce ? {} : { opacity: 0, y: 16 }}
@@ -31,7 +31,7 @@ export default function HowItWorks() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="text-3xl md:text-4xl font-bold tracking-tight text-text-primary text-center mb-16"
         >
-          De la idea al negocio en 4 pasos
+          Cómo Trabajamos
         </motion.h2>
 
         <div className="relative flex flex-col md:flex-row gap-8 md:gap-0">
