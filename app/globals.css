@@ -15,15 +15,17 @@ html {
 ::-webkit-scrollbar-track { background: #080810; }
 ::-webkit-scrollbar-thumb { background: #7c3aed; border-radius: 3px; }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-.animate-marquee {
-  animation: marquee 28s linear infinite;
-}
-
-.animate-marquee:hover {
-  animation-play-state: paused;
-}
+/* Ethereal Hero */
+.scroll-hero { position: relative; }
+.hero-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 0; pointer-events: none; }
+.hero-section { position: relative; z-index: 1; height: 100vh; display: flex; align-items: center; justify-content: center; }
+.section-content { text-align: center; max-width: 800px; padding: 0 24px; }
+.section-headline { font-size: clamp(3rem, 8vw, 7rem); font-weight: 700; color: #f0f0ff; line-height: 1; margin-bottom: 12px; }
+.section-subheadline { font-size: clamp(1.2rem, 3vw, 2rem); color: #06d6a0; margin-bottom: 16px; }
+.section-body { font-size: clamp(1rem, 2vw, 1.25rem); color: #7878a0; max-width: 560px; margin: 0 auto; }
+.nav-container { display: none; }
+.loading-overlay { position: fixed; inset: 0; background: #080810; display: flex; align-items: center; justify-content: center; z-index: 100; transition: opacity 0.8s; }
+.loading-overlay.loaded { opacity: 0; pointer-events: none; }
+.loading-text { color: #7878a0; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; }
+.scroll-progress { position: fixed; right: 16px; top: 50%; transform: translateY(-50%); width: 2px; height: 80px; background: rgba(255,255,255,0.08); z-index: 50; border-radius: 2px; overflow: hidden; }
+.scroll-progress-bar { width: 100%; height: 100%; background: #7c3aed; transform-origin: top; transform: scaleY(0); border-radius: 2px; }
