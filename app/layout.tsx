@@ -17,13 +17,17 @@ const dm = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'Nombre — Inteligencia Artificial para tu Negocio',
+  title: 'GDE — Grupo Digital Ecommerce',
   description: 'Automatiza, escala y transforma tu empresa con chatbots, flujos inteligentes y agentes de IA.',
+  icons: {
+    icon: '/Logo/logo.jpeg',
+    apple: '/Logo/logo.jpeg',
+  },
   openGraph: {
-    title: 'Nombre — Inteligencia Artificial para tu Negocio',
+    title: 'GDE — Grupo Digital Ecommerce',
     description: 'Automatiza, escala y transforma tu empresa con chatbots, flujos inteligentes y agentes de IA.',
     url: 'https://gptfy.biz',
-    siteName: 'Nombre',
+    siteName: 'GDE',
     locale: 'es_LA',
     type: 'website',
   },

@@ -38,7 +38,7 @@ export default function Navbar() {
 
         {/* Logo */}
         <a href="#" className="font-display" style={{ textDecoration: 'none', flexShrink: 0, display: 'flex', alignItems: 'center', gap: 2 }}>
-          <span style={{ fontSize: 20, fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.04em' }}>gpt</span><span style={{ fontSize: 20, fontWeight: 800, color: '#4F7EFF', letterSpacing: '-0.04em' }}>fy</span>
+          <span style={{ fontSize: 22, fontWeight: 700, color: '#FFFFFF', letterSpacing: '0.08em', fontFamily: 'Georgia, serif' }}>GDE</span>
         </a>
 
         {/* Desktop links */}

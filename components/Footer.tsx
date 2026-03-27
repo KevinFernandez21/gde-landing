@@ -16,9 +16,9 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="font-display" style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
-              <span style={{ fontSize: 22, fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.04em' }}>gpt</span><span style={{ fontSize: 22, fontWeight: 800, color: '#4F7EFF', letterSpacing: '-0.04em' }}>fy</span>
+              <span style={{ fontSize: 26, fontWeight: 700, color: '#FFFFFF', letterSpacing: '0.1em', fontFamily: 'Georgia, serif' }}>GDE</span>
             </div>
-            <p className="font-body" style={{ fontSize: 12, color: '#8B9AB5', lineHeight: 1.6 }}>IA · Automatización · Innovación</p>
+            <p className="font-body" style={{ fontSize: 10, color: '#8B9AB5', letterSpacing: '0.16em', textTransform: 'uppercase', lineHeight: 1.6 }}>Grupo Digital Ecommerce</p>
           </div>
 
           {Object.entries(footerLinks).map(([title, items]) => (
@@ -64,7 +64,7 @@ export default function Footer() {
         </div>
 
         <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: 24, display: 'flex', justifyContent: 'space-between' }}>
-          <p className="font-body" style={{ fontSize: 11, color: '#56647E' }}>© 2026 gptfy</p>
+          <p className="font-body" style={{ fontSize: 11, color: '#56647E' }}>© 2026 GDE · Grupo Digital Ecommerce</p>
           <p className="font-body" style={{ fontSize: 11, color: '#56647E' }}>Todos los derechos reservados</p>
         </div>
 
