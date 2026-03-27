@@ -7,7 +7,6 @@ const stats: { value: number | string; label: string }[] = [
   { value: 6,       label: 'Servicios de IA' },
   { value: '100%',  label: 'Personalizado' },
   { value: '24/7',  label: 'Agentes activos' },
-  { value: 'LATAM', label: 'Mercado objetivo' },
 ]
 
 function Counter({ value }: { value: number | string }) {
@@ -19,47 +18,40 @@ function Counter({ value }: { value: number | string }) {
   const inView = useInView(ref, { once: true })
 
   useEffect(() => {
-    if (typeof value !== 'number') return
-    if (!inView) return
+    if (typeof value !== 'number' || !inView) return
     if (reduce) { setDisplay(value); return }
-
-    let start = 0
-    const duration = 1500
-    const step = 16
-    const increment = value / (duration / step)
-
+    let n = 0
+    const inc = value / (1200 / 16)
     const timer = setInterval(() => {
-      start += increment
-      if (start >= value) {
-        setDisplay(value)
-        clearInterval(timer)
-      } else {
-        setDisplay(Math.floor(start))
-      }
-    }, step)
-
+      n += inc
+      if (n >= value) { setDisplay(value); clearInterval(timer) }
+      else setDisplay(Math.floor(n))
+    }, 16)
     return () => clearInterval(timer)
   }, [inView, value, reduce])
 
-  return (
-    <span ref={ref} className="text-4xl md:text-5xl font-bold text-accent-violet">
-      {display}
-    </span>
-  )
+  return <span ref={ref}>{display}</span>
 }
 
 export default function Stats() {
   return (
-    <section className="px-6 py-8">
-      <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-bg-card border border-white/[0.07] rounded-2xl p-8">
-          {stats.map((s) => (
-            <div key={s.label} className="flex flex-col items-center text-center gap-2">
+    <section style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '0 24px' }}>
+      <div style={{ maxWidth: 896, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
+        {stats.map((s, i) => (
+          <div
+            key={s.label}
+            style={{
+              display: 'flex', flexDirection: 'column', alignItems: 'center',
+              textAlign: 'center', padding: '40px 24px',
+              borderRight: i < 2 ? '1px solid rgba(255,255,255,0.08)' : 'none',
+            }}
+          >
+            <p className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.03em', color: '#FFFFFF', lineHeight: 1, marginBottom: 8 }}>
               <Counter value={s.value} />
-              <p className="text-sm text-text-muted leading-snug">{s.label}</p>
-            </div>
-          ))}
-        </div>
+            </p>
+            <p className="font-body" style={{ fontSize: 12, color: '#8B9AB5' }}>{s.label}</p>
+          </div>
+        ))}
       </div>
     </section>
   )

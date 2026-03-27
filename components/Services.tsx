@@ -1,109 +1,216 @@
 'use client'
 
-import { motion, useInView, useReducedMotion } from 'framer-motion'
-import { useRef } from 'react'
+import { motion, AnimatePresence, useInView, useReducedMotion } from 'framer-motion'
+import { useRef, useState, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import { Bot, Workflow, Cpu, Zap, LineChart, Code2 } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import type { LucideIcon } from 'lucide-react'
 
-const services = [
-  {
-    icon: Bot,
-    title: 'Chatbots con IA',
-    description: 'Agentes conversacionales entrenados con tu información empresarial.',
-    accent: 'teal',
-  },
-  {
-    icon: Workflow,
-    title: 'Flujos Automatizados',
-    description: 'Automatiza procesos repetitivos con flujos inteligentes conectados a tus herramientas.',
-    accent: 'teal',
-  },
-  {
-    icon: Cpu,
-    title: 'Agentes de IA',
-    description: 'Agentes autónomos que ejecutan tareas complejas sin intervención humana.',
-    accent: 'teal',
-  },
-  {
-    icon: Zap,
-    title: 'Automatización Empresarial',
-    description: 'Integración de IA en tus sistemas actuales para optimizar operaciones.',
-    accent: 'violet',
-  },
-  {
-    icon: LineChart,
-    title: 'Consultoría en IA',
-    description: 'Diagnóstico, estrategia e implementación de IA adaptada a tu negocio.',
-    accent: 'violet',
-  },
-  {
-    icon: Code2,
-    title: 'Software a la Medida',
-    description: 'Desarrollo personalizado con IA integrada desde el día uno.',
-    accent: 'violet',
-  },
+// ─── Data ──────────────────────────────────────────────────────────
+type Service = {
+  icon: LucideIcon
+  title: string
+  description: string
+  video: string
+}
+
+const services: Service[] = [
+  { icon: Bot,       title: 'Chatbots con IA',           description: 'Agentes conversacionales entrenados con tu información empresarial.',                           video: '/videos/chatbots.mp4' },
+  { icon: Workflow,  title: 'Flujos Automatizados',       description: 'Automatiza procesos repetitivos con flujos inteligentes conectados a tus herramientas.',        video: '/videos/flujos.mp4' },
+  { icon: Cpu,       title: 'Agentes de IA',              description: 'Agentes autónomos que ejecutan tareas complejas sin intervención humana.',                      video: '/videos/agentes.mp4' },
+  { icon: Zap,       title: 'Automatización Empresarial', description: 'Integración de IA en tus sistemas actuales para optimizar operaciones.',                        video: '/videos/automatizacion.mp4' },
+  { icon: LineChart, title: 'Consultoría en IA',          description: 'Diagnóstico, estrategia e implementación de IA adaptada a tu negocio.',                         video: '/videos/consultoria.mp4' },
+  { icon: Code2,     title: 'Software a la Medida',       description: 'Desarrollo personalizado con IA integrada desde el día uno.',                                   video: '/videos/software.mp4' },
 ]
 
+// ─── Video popup (renders in document.body via portal) ─────────────
+function VideoPopup({ service }: { service: Service }) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const Icon = service.icon
+
+  useEffect(() => {
+    videoRef.current?.play().catch(() => {})
+    return () => { videoRef.current?.pause() }
+  }, [])
+
+  return createPortal(
+    <motion.div
+      key="backdrop"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 200,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: 'rgba(0,0,0,0.65)',
+        backdropFilter: 'blur(14px)',
+        WebkitBackdropFilter: 'blur(14px)',
+        pointerEvents: 'none', // mouse events pass through — card onMouseLeave still fires
+      }}
+    >
+      <motion.div
+        key="popup"
+        initial={{ scale: 0.88, y: 24, opacity: 0 }}
+        animate={{ scale: 1,    y: 0,  opacity: 1 }}
+        exit={{    scale: 0.94, y: 12, opacity: 0 }}
+        transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          width: 'min(62vw, 780px)',
+          borderRadius: 20,
+          overflow: 'hidden',
+          background: '#0D1018',
+          border: '1px solid rgba(255,255,255,0.1)',
+          boxShadow: '0 48px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(79,126,255,0.08)',
+        }}
+      >
+        {/* Video area */}
+        <div style={{ position: 'relative', aspectRatio: '16/9', background: '#000' }}>
+          <video
+            ref={videoRef}
+            muted
+            loop
+            playsInline
+            src={service.video}
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          />
+          {/* Placeholder shown when no video file exists yet */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+            gap: 12, pointerEvents: 'none',
+          }}>
+            <Icon size={36} style={{ color: 'rgba(79,126,255,0.25)' }} />
+            <span className="font-body" style={{ fontSize: 11, color: 'rgba(255,255,255,0.15)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+              Video próximamente
+            </span>
+          </div>
+        </div>
+
+        {/* Info bar */}
+        <div style={{ padding: '18px 24px 22px', display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+          <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(79,126,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 2 }}>
+            <Icon size={15} style={{ color: '#4F7EFF' }} />
+          </div>
+          <div>
+            <h3 className="font-display" style={{ fontSize: 14, fontWeight: 600, color: '#EAECF4', marginBottom: 5 }}>
+              {service.title}
+            </h3>
+            <p className="font-body" style={{ fontSize: 13, color: '#8B9AB5', lineHeight: 1.6 }}>
+              {service.description}
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>,
+    document.body
+  )
+}
+
+// ─── Individual card ───────────────────────────────────────────────
+function ServiceCard({
+  service,
+  delay,
+  inView,
+  reduce,
+}: {
+  service: Service
+  delay: number
+  inView: boolean
+  reduce: boolean | null
+}) {
+  const [hovered, setHovered] = useState(false)
+  const Icon = service.icon
+
+  return (
+    <>
+      <motion.div
+        initial={reduce ? {} : { opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4, delay }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          background: hovered ? '#111722' : '#07090F',
+          padding: 28,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 20,
+          cursor: 'default',
+          transition: 'background 0.25s',
+        }}
+      >
+        <div style={{
+          width: 36, height: 36, borderRadius: 8,
+          background: hovered ? 'rgba(79,126,255,0.2)' : 'rgba(79,126,255,0.1)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          transition: 'background 0.25s',
+        }}>
+          <Icon size={17} style={{ color: '#4F7EFF' }} />
+        </div>
+        <div>
+          <h3 className="font-display" style={{ fontSize: 14, fontWeight: 600, color: '#EAECF4', marginBottom: 8, lineHeight: 1.3 }}>
+            {service.title}
+          </h3>
+          <p className="font-body" style={{ fontSize: 13, color: '#8B9AB5', lineHeight: 1.65 }}>
+            {service.description}
+          </p>
+        </div>
+      </motion.div>
+
+      {/* Popup rendered in body, outside the grid */}
+      <AnimatePresence>
+        {hovered && <VideoPopup service={service} />}
+      </AnimatePresence>
+    </>
+  )
+}
+
+// ─── Section ───────────────────────────────────────────────────────
 export default function Services() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const reduce = useReducedMotion()
 
   return (
-    <section id="servicios" className="px-6 py-24" ref={ref}>
-      <div className="max-w-7xl mx-auto">
+    <section id="servicios" style={{ padding: '96px 24px' }} ref={ref}>
+      <div style={{ maxWidth: 1152, margin: '0 auto' }}>
+
         <motion.p
-          initial={reduce ? {} : { opacity: 0, y: 16 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.4 }}
-          className="text-xs uppercase tracking-widest text-accent-teal text-center mb-3"
+          className="font-display"
+          initial={reduce ? {} : { opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#4F7EFF', textAlign: 'center', marginBottom: 16 }}
         >
           Servicios
         </motion.p>
+
         <motion.h2
-          initial={reduce ? {} : { opacity: 0, y: 16 }}
+          className="font-display"
+          initial={reduce ? {} : { opacity: 0, y: 12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="text-3xl md:text-4xl font-bold tracking-tight text-text-primary text-center mb-14"
+          transition={{ duration: 0.5, delay: 0.08 }}
+          style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.03em', color: '#FFFFFF', textAlign: 'center', marginBottom: 64, lineHeight: 1.1 }}
         >
           Todo lo que necesitas para escalar con IA
         </motion.h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((s, i) => {
-            const Icon = s.icon
-            const isTeal = s.accent === 'teal'
-            return (
-              <motion.div
-                key={s.title}
-                initial={reduce ? {} : { opacity: 0, y: 24 }}
-                animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.4, delay: 0.15 + i * 0.08 }}
-                className={cn(
-                  'bg-bg-card border border-white/[0.07] rounded-2xl p-6 flex flex-col gap-4',
-                  'transition-all duration-300 hover:scale-[1.02]',
-                  isTeal
-                    ? 'hover:shadow-[0_0_24px_rgba(6,214,160,0.2)] hover:border-accent-teal/30'
-                    : 'hover:shadow-[0_0_24px_rgba(124,58,237,0.2)] hover:border-accent-violet/30'
-                )}
-              >
-                <div
-                  className={cn(
-                    'p-2 w-fit rounded-lg',
-                    isTeal ? 'bg-accent-teal/10' : 'bg-accent-violet/10'
-                  )}
-                >
-                  <Icon
-                    size={22}
-                    className={isTeal ? 'text-accent-teal' : 'text-accent-violet'}
-                  />
-                </div>
-                <h3 className="text-base font-semibold text-text-primary">{s.title}</h3>
-                <p className="text-sm text-text-muted leading-relaxed">{s.description}</p>
-              </motion.div>
-            )
-          })}
+        <div style={{
+          display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: 1, background: 'rgba(255,255,255,0.08)',
+          borderRadius: 16, overflow: 'hidden',
+        }}>
+          {services.map((s, i) => (
+            <ServiceCard
+              key={s.title}
+              service={s}
+              delay={0.1 + i * 0.06}
+              inView={inView}
+              reduce={reduce}
+            />
+          ))}
         </div>
+
       </div>
     </section>
   )

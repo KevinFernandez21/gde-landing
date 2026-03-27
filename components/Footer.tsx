@@ -1,34 +1,40 @@
+'use client'
+
 import { Instagram } from 'lucide-react'
 
 const footerLinks = {
-  Links: ['Inicio', 'Nosotros', 'Servicios', 'Contacto'],
+  Links:     ['Inicio', 'Nosotros', 'Servicios', 'Contacto'],
   Servicios: ['Chatbots', 'Flujos', 'Agentes', 'Consultoría', 'Software'],
 }
 
 export default function Footer() {
   return (
-    <footer
-      className="px-6 pt-16 pb-8 border-t border-white/[0.05]"
-      style={{ background: '#060608' }}
-    >
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-          <div className="md:col-span-1">
-            <p className="text-2xl font-bold text-white mb-3">Nombre</p>
-            <p className="text-sm text-text-muted leading-relaxed">
-              IA · Automatización · Innovación
-            </p>
+    <footer style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '64px 24px 32px', background: '#07090F' }}>
+      <div style={{ maxWidth: 1152, margin: '0 auto' }}>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}>
+          {/* Brand */}
+          <div>
+            <div className="font-display" style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>
+              <span style={{ fontSize: 22, fontWeight: 800, color: '#FFFFFF', letterSpacing: '-0.04em' }}>gpt</span><span style={{ fontSize: 22, fontWeight: 800, color: '#4F7EFF', letterSpacing: '-0.04em' }}>fy</span>
+            </div>
+            <p className="font-body" style={{ fontSize: 12, color: '#8B9AB5', lineHeight: 1.6 }}>IA · Automatización · Innovación</p>
           </div>
 
           {Object.entries(footerLinks).map(([title, items]) => (
             <div key={title}>
-              <p className="text-xs uppercase tracking-widest text-text-muted mb-4">{title}</p>
-              <ul className="space-y-2">
+              <p className="font-display" style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4F7EFF', marginBottom: 16 }}>
+                {title}
+              </p>
+              <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {items.map((item) => (
                   <li key={item}>
                     <a
                       href={`#${item.toLowerCase().replace(/\s/g, '-')}`}
-                      className="text-sm text-text-muted hover:text-white transition-colors"
+                      className="font-body"
+                      style={{ fontSize: 13, color: '#8B9AB5', textDecoration: 'none', transition: 'color 0.2s' }}
+                      onMouseEnter={e => (e.currentTarget.style.color = '#EAECF4')}
+                      onMouseLeave={e => (e.currentTarget.style.color = '#8B9AB5')}
                     >
                       {item}
                     </a>
@@ -39,28 +45,29 @@ export default function Footer() {
           ))}
 
           <div>
-            <p className="text-xs uppercase tracking-widest text-text-muted mb-4">
-              Redes Sociales
+            <p className="font-display" style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#4F7EFF', marginBottom: 16 }}>
+              Redes
             </p>
-            <div className="flex flex-col gap-3">
-              <a
-                href="https://instagram.com/nombre"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-text-muted hover:text-white transition-colors"
-              >
-                <Instagram size={16} />
-                @nombre
-              </a>
-            </div>
+            <a
+              href="https://instagram.com/nombre"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-body"
+              style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 13, color: '#8B9AB5', textDecoration: 'none', transition: 'color 0.2s' }}
+              onMouseEnter={e => (e.currentTarget.style.color = '#EAECF4')}
+              onMouseLeave={e => (e.currentTarget.style.color = '#8B9AB5')}
+            >
+              <Instagram size={14} />
+              @nombre
+            </a>
           </div>
         </div>
 
-        <div className="border-t border-white/[0.05] pt-6 text-center">
-          <p className="text-xs text-text-muted">
-            © 2026 Nombre. Todos los derechos reservados.
-          </p>
+        <div style={{ borderTop: '1px solid rgba(255,255,255,0.07)', paddingTop: 24, display: 'flex', justifyContent: 'space-between' }}>
+          <p className="font-body" style={{ fontSize: 11, color: '#56647E' }}>© 2026 gptfy</p>
+          <p className="font-body" style={{ fontSize: 11, color: '#56647E' }}>Todos los derechos reservados</p>
         </div>
+
       </div>
     </footer>
   )

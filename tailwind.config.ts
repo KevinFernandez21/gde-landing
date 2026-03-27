@@ -9,15 +9,22 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'bg-primary': '#080810',
-        'bg-card': '#10101e',
-        'accent-violet': '#7c3aed',
-        'accent-teal': '#06d6a0',
-        'text-primary': '#f0f0ff',
-        'text-muted': '#7878a0',
+        // Backgrounds
+        'base':     '#07090F',   // page background
+        'panel':    '#0D1018',   // card background
+        'panel-hi': '#131824',   // card hover
+        // Brand (safe names — no Tailwind conflicts)
+        'brand':    '#4F7EFF',   // primary blue
+        'brand-d':  '#3560E8',   // darker on hover
+        // Text — high contrast
+        'fore':     '#EAECF4',   // main text (near white)
+        'sub':      '#8B9AB5',   // secondary text (much lighter muted)
+        // Borders
+        'edge':     'rgba(255,255,255,0.07)',
       },
       fontFamily: {
-        sans: ['var(--font-inter)', 'sans-serif'],
+        display: ['var(--font-syne)', 'sans-serif'],
+        body:    ['var(--font-dm)', 'sans-serif'],
       },
     },
   },

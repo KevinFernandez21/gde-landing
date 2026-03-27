@@ -9,7 +9,7 @@ export default function CtaFinal() {
   const reduce = useReducedMotion()
 
   const anim = (delay = 0) => ({
-    initial: reduce ? {} : { opacity: 0, y: 24 },
+    initial: reduce ? {} : { opacity: 0, y: 16 },
     animate: inView ? { opacity: 1, y: 0 } : {},
     transition: { duration: 0.5, delay },
   })
@@ -17,28 +17,47 @@ export default function CtaFinal() {
   return (
     <section
       id="contacto"
-      className="relative px-6 py-28 text-center border-t border-[rgba(124,58,237,0.3)]"
-      style={{ background: 'linear-gradient(135deg, #0d0820 0%, #180830 100%)' }}
+      style={{ padding: '120px 24px', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.08)' }}
       ref={ref}
     >
-      <div className="max-w-3xl mx-auto">
-        <motion.h2
+      <div style={{ maxWidth: 600, margin: '0 auto' }}>
+
+        <motion.p
+          className="font-display"
           {...anim(0)}
-          className="text-3xl md:text-5xl font-bold tracking-tight text-text-primary mb-6"
+          style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#4F7EFF', marginBottom: 24 }}
         >
-          ¿Listo para automatizar tu negocio con IA?
-        </motion.h2>
-        <motion.p {...anim(0.1)} className="text-lg text-text-muted leading-relaxed mb-10">
-          Hablemos sobre cómo la inteligencia artificial puede transformar tus procesos y escalar tu empresa.
+          Empecemos
         </motion.p>
-        <motion.div {...anim(0.2)}>
+
+        <motion.h2
+          className="font-display"
+          {...anim(0.08)}
+          style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, letterSpacing: '-0.04em', color: '#FFFFFF', marginBottom: 24, lineHeight: 1.05 }}
+        >
+          ¿Listo para automatizar tu negocio?
+        </motion.h2>
+
+        <motion.p
+          className="font-body"
+          {...anim(0.16)}
+          style={{ fontSize: 14, color: '#8B9AB5', lineHeight: 1.75, marginBottom: 40, maxWidth: 420, margin: '0 auto 40px' }}
+        >
+          Hablemos sobre cómo la IA puede transformar tus procesos y escalar tu empresa.
+        </motion.p>
+
+        <motion.div {...anim(0.24)}>
           <a
             href="mailto:contacto@gptfy.biz"
-            className="inline-flex items-center px-10 py-5 rounded-full bg-accent-violet text-white text-lg font-semibold hover:bg-accent-violet/80 transition-all hover:scale-105 active:scale-95"
+            className="font-body"
+            style={{ display: 'inline-flex', alignItems: 'center', padding: '14px 32px', borderRadius: 999, backgroundColor: '#4F7EFF', color: '#fff', fontSize: 14, fontWeight: 500, textDecoration: 'none', transition: 'background-color 0.2s' }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#3560E8')}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4F7EFF')}
           >
             Hablar con un experto
           </a>
         </motion.div>
+
       </div>
     </section>
   )

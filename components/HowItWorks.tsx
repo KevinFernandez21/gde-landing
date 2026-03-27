@@ -4,10 +4,10 @@ import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
 
 const steps = [
-  { n: '01', title: 'Diagnóstico',  desc: 'Analizamos tus procesos y detectamos dónde la IA genera mayor impacto.' },
-  { n: '02', title: 'Diseño',       desc: 'Creamos la arquitectura de solución adaptada a tus sistemas y objetivos.' },
-  { n: '03', title: 'Desarrollo',   desc: 'Construimos e integramos la solución con pruebas rigurosas en cada etapa.' },
-  { n: '04', title: 'Despliegue',   desc: 'Lanzamos, monitoreamos y optimizamos continuamente tu solución de IA.' },
+  { n: '01', title: 'Diagnóstico', desc: 'Analizamos tus procesos y detectamos dónde la IA genera mayor impacto.' },
+  { n: '02', title: 'Diseño',      desc: 'Creamos la arquitectura de solución adaptada a tus sistemas y objetivos.' },
+  { n: '03', title: 'Desarrollo',  desc: 'Construimos e integramos la solución con pruebas rigurosas en cada etapa.' },
+  { n: '04', title: 'Despliegue',  desc: 'Lanzamos, monitoreamos y optimizamos continuamente tu solución de IA.' },
 ]
 
 export default function HowItWorks() {
@@ -16,46 +16,48 @@ export default function HowItWorks() {
   const reduce = useReducedMotion()
 
   return (
-    <section id="como-funciona" className="px-6 py-24" ref={ref}>
-      <div className="max-w-7xl mx-auto">
+    <section id="como-funciona" style={{ padding: '96px 24px', background: '#0D1018' }} ref={ref}>
+      <div style={{ maxWidth: 1152, margin: '0 auto' }}>
+
         <motion.p
+          className="font-display"
           initial={reduce ? {} : { opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
-          className="text-xs uppercase tracking-widest text-accent-teal text-center mb-3"
+          style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#4F7EFF', textAlign: 'center', marginBottom: 16 }}
         >
           Metodología
         </motion.p>
+
         <motion.h2
-          initial={reduce ? {} : { opacity: 0, y: 16 }}
+          className="font-display"
+          initial={reduce ? {} : { opacity: 0, y: 12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="text-3xl md:text-4xl font-bold tracking-tight text-text-primary text-center mb-16"
+          transition={{ duration: 0.5, delay: 0.08 }}
+          style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.03em', color: '#FFFFFF', textAlign: 'center', marginBottom: 64, lineHeight: 1.1 }}
         >
           Cómo Trabajamos
         </motion.h2>
 
-        <div className="relative flex flex-col md:flex-row gap-8 md:gap-0">
-          <div
-            className="hidden md:block absolute top-8 left-[calc(12.5%)] right-[calc(12.5%)] h-[2px]"
-            style={{ background: 'linear-gradient(to right, #7c3aed, #06d6a0)' }}
-          />
-
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32 }}>
           {steps.map((s, i) => (
             <motion.div
               key={s.n}
-              initial={reduce ? {} : { opacity: 0, y: 24 }}
+              initial={reduce ? {} : { opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
-              className="flex-1 flex flex-col items-center text-center px-4"
+              transition={{ duration: 0.4, delay: 0.15 + i * 0.1 }}
+              style={{ display: 'flex', flexDirection: 'column', gap: 16 }}
             >
-              <div className="relative z-10 w-16 h-16 rounded-full bg-accent-violet flex items-center justify-center text-white font-bold text-sm mb-5 shrink-0">
+              <span className="font-display" style={{ fontSize: 48, fontWeight: 800, lineHeight: 1, color: 'rgba(79,126,255,0.2)' }}>
                 {s.n}
+              </span>
+              <div>
+                <h3 className="font-display" style={{ fontSize: 14, fontWeight: 600, color: '#EAECF4', marginBottom: 8 }}>{s.title}</h3>
+                <p className="font-body" style={{ fontSize: 13, color: '#8B9AB5', lineHeight: 1.65 }}>{s.desc}</p>
               </div>
-              <h3 className="text-base font-semibold text-text-primary mb-2">{s.title}</h3>
-              <p className="text-sm text-text-muted leading-relaxed">{s.desc}</p>
             </motion.div>
           ))}
         </div>
+
       </div>
     </section>
   )
