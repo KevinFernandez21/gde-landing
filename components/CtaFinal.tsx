@@ -17,7 +17,8 @@ export default function CtaFinal() {
   return (
     <section
       id="contacto"
-      style={{ padding: '120px 24px', textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.08)' }}
+      className="py-16 md:py-24 lg:py-32 px-6"
+      style={{ textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.08)' }}
       ref={ref}
     >
       <div style={{ maxWidth: 600, margin: '0 auto' }}>

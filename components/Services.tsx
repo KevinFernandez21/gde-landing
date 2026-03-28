@@ -173,7 +173,7 @@ export default function Services() {
   const reduce = useReducedMotion()
 
   return (
-    <section id="servicios" style={{ padding: '96px 24px' }} ref={ref}>
+    <section id="servicios" className="py-14 md:py-20 lg:py-24 px-6" ref={ref}>
       <div style={{ maxWidth: 1152, margin: '0 auto' }}>
 
         <motion.p
@@ -190,16 +190,15 @@ export default function Services() {
           initial={reduce ? {} : { opacity: 0, y: 12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.08 }}
-          style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.03em', color: '#FFFFFF', textAlign: 'center', marginBottom: 64, lineHeight: 1.1 }}
+          style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.03em', color: '#FFFFFF', textAlign: 'center', marginBottom: 40, lineHeight: 1.1 }}
         >
           Todo lo que necesitas para escalar con IA
         </motion.h2>
 
-        <div style={{
-          display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: 1, background: 'rgba(255,255,255,0.08)',
-          borderRadius: 16, overflow: 'hidden',
-        }}>
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          style={{ gap: 1, background: 'rgba(255,255,255,0.08)', borderRadius: 16, overflow: 'hidden' }}
+        >
           {services.map((s, i) => (
             <ServiceCard
               key={s.title}

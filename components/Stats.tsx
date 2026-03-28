@@ -36,15 +36,16 @@ function Counter({ value }: { value: number | string }) {
 export default function Stats() {
   return (
     <section style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '0 24px' }}>
-      <div style={{ maxWidth: 896, margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
+      <div className="grid grid-cols-1 md:grid-cols-3" style={{ maxWidth: 896, margin: '0 auto' }}>
         {stats.map((s, i) => (
           <div
             key={s.label}
-            style={{
-              display: 'flex', flexDirection: 'column', alignItems: 'center',
-              textAlign: 'center', padding: '40px 24px',
-              borderRight: i < 2 ? '1px solid rgba(255,255,255,0.08)' : 'none',
-            }}
+            className={
+              i < 2
+                ? 'border-b border-white/[0.08] md:border-b-0 md:border-r'
+                : ''
+            }
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '40px 24px' }}
           >
             <p className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.03em', color: '#FFFFFF', lineHeight: 1, marginBottom: 8 }}>
               <Counter value={s.value} />

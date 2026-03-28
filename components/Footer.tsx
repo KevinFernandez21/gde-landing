@@ -9,10 +9,10 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer style={{ borderTop: '1px solid rgba(255,255,255,0.08)', padding: '64px 24px 32px', background: '#07090F' }}>
+    <footer className="px-6 pt-16 pb-8" style={{ borderTop: '1px solid rgba(255,255,255,0.08)', background: '#07090F' }}>
       <div style={{ maxWidth: 1152, margin: '0 auto' }}>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: 40, marginBottom: 48 }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10" style={{ marginBottom: 48 }}>
           {/* Brand */}
           <div>
             <div className="font-display" style={{ display: 'flex', alignItems: 'center', marginBottom: 8 }}>

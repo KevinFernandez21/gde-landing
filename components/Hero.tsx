@@ -25,7 +25,7 @@ export default function Hero() {
           Construimos soluciones de IA que reemplazan trabajo manual y aceleran tu negocio.
         </p>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-5">
           <a
             href="#contacto"
             className="font-body"

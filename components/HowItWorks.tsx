@@ -16,7 +16,7 @@ export default function HowItWorks() {
   const reduce = useReducedMotion()
 
   return (
-    <section id="como-funciona" style={{ padding: '96px 24px', background: '#0D1018' }} ref={ref}>
+    <section id="como-funciona" className="py-14 md:py-20 lg:py-24 px-6" style={{ background: '#0D1018' }} ref={ref}>
       <div style={{ maxWidth: 1152, margin: '0 auto' }}>
 
         <motion.p
@@ -33,12 +33,12 @@ export default function HowItWorks() {
           initial={reduce ? {} : { opacity: 0, y: 12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.08 }}
-          style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.03em', color: '#FFFFFF', textAlign: 'center', marginBottom: 64, lineHeight: 1.1 }}
+          style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.03em', color: '#FFFFFF', textAlign: 'center', marginBottom: 40, lineHeight: 1.1 }}
         >
           Cómo Trabajamos
         </motion.h2>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32 }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((s, i) => (
             <motion.div
               key={s.n}

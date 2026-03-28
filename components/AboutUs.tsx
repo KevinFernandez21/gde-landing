@@ -23,8 +23,8 @@ export default function AboutUs() {
   })
 
   return (
-    <section id="nosotros" style={{ padding: '96px 24px' }} ref={ref}>
-      <div style={{ maxWidth: 1152, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+    <section id="nosotros" className="py-14 md:py-20 lg:py-24 px-6" ref={ref}>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center" style={{ maxWidth: 1152, margin: '0 auto' }}>
 
         {/* Text */}
         <div>
