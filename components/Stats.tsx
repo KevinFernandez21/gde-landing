@@ -2,12 +2,9 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useInView, useReducedMotion } from 'framer-motion'
+import { useLanguage } from '@/lib/language-context'
 
-const stats: { value: number | string; label: string }[] = [
-  { value: 6,       label: 'Servicios de IA' },
-  { value: '100%',  label: 'Personalizado' },
-  { value: '24/7',  label: 'Agentes activos' },
-]
+const statValues: (number | string)[] = [6, '100%', '24/7']
 
 function Counter({ value }: { value: number | string }) {
   const [display, setDisplay] = useState<number | string>(
@@ -34,10 +31,11 @@ function Counter({ value }: { value: number | string }) {
 }
 
 export default function Stats() {
+  const { t } = useLanguage()
   return (
     <section style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '0 24px' }}>
       <div className="grid grid-cols-1 md:grid-cols-3" style={{ maxWidth: 896, margin: '0 auto' }}>
-        {stats.map((s, i) => (
+        {t.stats.map((s, i) => (
           <div
             key={s.label}
             className={
@@ -48,7 +46,7 @@ export default function Stats() {
             style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', padding: '40px 24px' }}
           >
             <p className="font-display" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.03em', color: '#FFFFFF', lineHeight: 1, marginBottom: 8 }}>
-              <Counter value={s.value} />
+              <Counter value={statValues[i]} />
             </p>
             <p className="font-body" style={{ fontSize: 12, color: '#8B9AB5' }}>{s.label}</p>
           </div>
