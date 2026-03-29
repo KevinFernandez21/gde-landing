@@ -168,7 +168,7 @@ export default function RotatingEarth({
     const path = d3.geoPath().projection(projection).context(ctx)
 
     // ── State ──
-    const rotation = [0, -20]
+    const rotation: [number, number] = [0, -20]
     let autoRotate = true
     let isDragging = false
     let hoveredMarker: GlobeMarker | null = null
@@ -290,7 +290,7 @@ export default function RotatingEarth({
       isDragging = true
       const sx = e.clientX
       const sy = e.clientY
-      const sr = [...rotation]
+      const sr: [number, number] = [rotation[0], rotation[1]]
 
       const onMove = (me: MouseEvent) => {
         rotation[0] = sr[0] + (me.clientX - sx) * 0.5

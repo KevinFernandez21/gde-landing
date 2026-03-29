@@ -46,8 +46,9 @@ function VideoPopup({ service }: { service: Service }) {
   const [videoError, setVideoError] = useState(false)
 
   useEffect(() => {
-    videoRef.current?.play().catch(() => {})
-    return () => { videoRef.current?.pause() }
+    const video = videoRef.current
+    video?.play().catch(() => {})
+    return () => { video?.pause() }
   }, [])
 
   return createPortal(
