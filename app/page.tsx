@@ -3,6 +3,7 @@ import { Header } from '@/components/ui/header-2'
 import Hero from '@/components/Hero'
 
 // Heavy components — loaded as separate JS chunks, only when needed
+const BrandsBar     = dynamic(() => import('@/components/BrandsBar'))
 const Stats         = dynamic(() => import('@/components/Stats'))
 const AboutUs       = dynamic(() => import('@/components/AboutUs'))
 const GlobalPresence = dynamic(() => import('@/components/GlobalPresence'), { ssr: false })
@@ -17,6 +18,7 @@ export default function Home() {
       <Header />
       <Hero />
       <Stats />
+      <BrandsBar />
       <AboutUs />
       <GlobalPresence />
       <Services />
