@@ -2,11 +2,13 @@
 
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
+import { useLanguage } from '@/lib/language-context'
 
 export default function CtaFinal() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const reduce = useReducedMotion()
+  const { t } = useLanguage()
 
   const anim = (delay = 0) => ({
     initial: reduce ? {} : { opacity: 0, y: 16 },
@@ -28,7 +30,7 @@ export default function CtaFinal() {
           {...anim(0)}
           style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#4F7EFF', marginBottom: 24 }}
         >
-          Empecemos
+          {t.cta.eyebrow}
         </motion.p>
 
         <motion.h2
@@ -36,7 +38,7 @@ export default function CtaFinal() {
           {...anim(0.08)}
           style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, letterSpacing: '-0.04em', color: '#FFFFFF', marginBottom: 24, lineHeight: 1.05 }}
         >
-          ¿Listo para automatizar tu negocio?
+          {t.cta.title}
         </motion.h2>
 
         <motion.p
@@ -44,7 +46,7 @@ export default function CtaFinal() {
           {...anim(0.16)}
           style={{ fontSize: 14, color: '#8B9AB5', lineHeight: 1.75, marginBottom: 40, maxWidth: 420, margin: '0 auto 40px' }}
         >
-          Hablemos sobre cómo la IA puede transformar tus procesos y escalar tu empresa.
+          {t.cta.description}
         </motion.p>
 
         <motion.div {...anim(0.24)}>
@@ -55,7 +57,7 @@ export default function CtaFinal() {
             onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#3560E8')}
             onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4F7EFF')}
           >
-            Hablar con un experto
+            {t.cta.button}
           </a>
         </motion.div>
 
