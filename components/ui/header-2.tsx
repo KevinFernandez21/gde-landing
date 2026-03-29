@@ -4,21 +4,48 @@ import { Button, buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon'
 import { useScroll } from '@/components/ui/use-scroll'
+import { useLanguage } from '@/lib/language-context'
+import type { Lang } from '@/lib/translations'
 
 export function Header() {
   const [open, setOpen] = React.useState(false)
   const scrolled = useScroll(10)
+  const { lang, setLanguage, t } = useLanguage()
 
   const links = [
-    { label: 'Servicios',     href: '#servicios' },
-    { label: 'Cómo Funciona', href: '#como-funciona' },
-    { label: 'Nosotros',      href: '#nosotros' },
+    { label: t.nav.services,   href: '#servicios' },
+    { label: t.nav.howItWorks, href: '#como-funciona' },
+    { label: t.nav.about,      href: '#nosotros' },
   ]
 
   React.useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [open])
+
+  const LangToggle = () => (
+    <div className="flex items-center gap-1 font-body" style={{ fontSize: 12 }}>
+      {(['es', 'en'] as Lang[]).map((l, i) => (
+        <React.Fragment key={l}>
+          {i > 0 && <span style={{ color: '#8B9AB5' }}>|</span>}
+          <button
+            onClick={() => setLanguage(l)}
+            style={{
+              background: 'none', border: 'none', cursor: 'pointer', padding: '2px 4px',
+              color: lang === l ? '#FFFFFF' : '#8B9AB5',
+              fontWeight: lang === l ? 600 : 400,
+              fontSize: 12,
+              transition: 'color 0.2s',
+              fontFamily: 'var(--font-dm)',
+              textTransform: 'uppercase',
+            }}
+          >
+            {l}
+          </button>
+        </React.Fragment>
+      ))}
+    </div>
+  )
 
   return (
     <header
@@ -39,86 +66,63 @@ export function Header() {
       >
         {/* Logo */}
         <a href="#" className="flex items-center">
-          <span
-            style={{
-              fontSize: 18,
-              fontWeight: 700,
-              color: 'rgb(var(--foreground))',
-              letterSpacing: '0.1em',
-              fontFamily: 'Georgia, serif',
-            }}
-          >
+          <span style={{ fontSize: 18, fontWeight: 700, color: 'rgb(var(--foreground))', letterSpacing: '0.1em', fontFamily: 'Georgia, serif' }}>
             GDE
           </span>
         </a>
 
-        {/* Desktop links */}
+        {/* Desktop nav */}
         <div className="hidden items-center gap-2 md:flex">
           {links.map((link, i) => (
-            <a
-              key={i}
-              className={buttonVariants({ variant: 'ghost' })}
-              href={link.href}
-              style={{ fontFamily: 'var(--font-dm)', fontSize: 13 }}
-            >
+            <a key={i} className={buttonVariants({ variant: 'ghost' })} href={link.href}
+              style={{ fontFamily: 'var(--font-dm)', fontSize: 13 }}>
               {link.label}
             </a>
           ))}
-          <a
-            href="#contacto"
-            className={buttonVariants({ variant: 'default' })}
-            style={{ fontFamily: 'var(--font-dm)', fontSize: 13 }}
-          >
-            Hablar con un experto
+        </div>
+
+        {/* Desktop right: lang toggle + CTA */}
+        <div className="hidden md:flex items-center gap-3">
+          <LangToggle />
+          <a href="#contacto" className={buttonVariants({ variant: 'default' })}
+            style={{ fontFamily: 'var(--font-dm)', fontSize: 13 }}>
+            {t.nav.cta}
           </a>
         </div>
 
-        {/* Mobile toggle */}
-        <Button
-          size="icon"
-          variant="outline"
-          onClick={() => setOpen(!open)}
-          className="md:hidden"
-        >
+        {/* Mobile hamburger */}
+        <Button size="icon" variant="outline" onClick={() => setOpen(!open)} className="md:hidden">
           <MenuToggleIcon open={open} className="size-5" duration={300} />
         </Button>
       </nav>
 
       {/* Mobile drawer */}
-      <div
-        className={cn(
-          'bg-background/90 fixed top-14 right-0 bottom-0 left-0 z-50 flex flex-col overflow-hidden border-y md:hidden',
-          open ? 'block' : 'hidden',
-        )}
-      >
-        <div
-          data-slot={open ? 'open' : 'closed'}
-          className={cn(
-            'data-[slot=open]:animate-in data-[slot=open]:zoom-in-95 data-[slot=closed]:animate-out data-[slot=closed]:zoom-out-95 ease-out',
-            'flex h-full w-full flex-col justify-between gap-y-2 p-4',
-          )}
-        >
+      <div className={cn(
+        'bg-background/90 fixed top-14 right-0 bottom-0 left-0 z-50 flex flex-col overflow-hidden border-y md:hidden',
+        open ? 'block' : 'hidden',
+      )}>
+        <div data-slot={open ? 'open' : 'closed'} className={cn(
+          'data-[slot=open]:animate-in data-[slot=open]:zoom-in-95 data-[slot=closed]:animate-out data-[slot=closed]:zoom-out-95 ease-out',
+          'flex h-full w-full flex-col justify-between gap-y-2 p-4',
+        )}>
           <div className="grid gap-y-2">
             {links.map((link) => (
-              <a
-                key={link.label}
+              <a key={link.label}
                 className={buttonVariants({ variant: 'ghost', className: 'justify-start' })}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                style={{ fontFamily: 'var(--font-dm)' }}
-              >
+                href={link.href} onClick={() => setOpen(false)}
+                style={{ fontFamily: 'var(--font-dm)' }}>
                 {link.label}
               </a>
             ))}
           </div>
-          <div className="flex flex-col gap-2">
-            <a
-              href="#contacto"
+          <div className="flex flex-col gap-3">
+            <div className="flex justify-center">
+              <LangToggle />
+            </div>
+            <a href="#contacto"
               className={buttonVariants({ variant: 'default', className: 'w-full justify-center' })}
-              onClick={() => setOpen(false)}
-              style={{ fontFamily: 'var(--font-dm)' }}
-            >
-              Hablar con un experto
+              onClick={() => setOpen(false)} style={{ fontFamily: 'var(--font-dm)' }}>
+              {t.nav.cta}
             </a>
           </div>
         </div>
