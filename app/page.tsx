@@ -1,4 +1,4 @@
-import Navbar from '@/components/Navbar'
+import { Header } from '@/components/ui/header-2'
 import Hero from '@/components/Hero'
 import Stats from '@/components/Stats'
 import AboutUs from '@/components/AboutUs'
@@ -10,7 +10,7 @@ import Footer from '@/components/Footer'
 export default function Home() {
   return (
     <main>
-      <Navbar />
+      <Header />
       <Hero />
       <Stats />
       <AboutUs />
