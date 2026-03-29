@@ -5,22 +5,27 @@ import { useRef, useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { Bot, Workflow, Cpu, Zap, LineChart, Code2 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
+import { useLanguage } from '@/lib/language-context'
 
 // ─── Data ──────────────────────────────────────────────────────────
-type Service = {
+type ServiceMeta = {
   icon: LucideIcon
-  title: string
-  description: string
-  video: string
+  video: string        // landscape — desktop popup
+  videoMobile?: string // portrait 9:16 — mobile inline
 }
 
-const services: Service[] = [
-  { icon: Bot,       title: 'Chatbots con IA',           description: 'Agentes conversacionales entrenados con tu información empresarial.',                           video: '/videos/chatbots.mp4' },
-  { icon: Workflow,  title: 'Flujos Automatizados',       description: 'Automatiza procesos repetitivos con flujos inteligentes conectados a tus herramientas.',        video: '/videos/flujos.mp4' },
-  { icon: Cpu,       title: 'Agentes de IA',              description: 'Agentes autónomos que ejecutan tareas complejas sin intervención humana.',                      video: '/videos/agentes.mp4' },
-  { icon: Zap,       title: 'Automatización Empresarial', description: 'Integración de IA en tus sistemas actuales para optimizar operaciones.',                        video: '/videos/automatizacion.mp4' },
-  { icon: LineChart, title: 'Consultoría en IA',          description: 'Diagnóstico, estrategia e implementación de IA adaptada a tu negocio.',                         video: '/videos/consultoria.mp4' },
-  { icon: Code2,     title: 'Software a la Medida',       description: 'Desarrollo personalizado con IA integrada desde el día uno.',                                   video: '/videos/software.mp4' },
+type Service = ServiceMeta & {
+  title: string
+  description: string
+}
+
+const servicesMeta: ServiceMeta[] = [
+  { icon: Bot,       video: '/videos/chatbots.mp4',        videoMobile: '/videos/chatbots-mobile.mp4' },
+  { icon: Workflow,  video: '/videos/flujos.mp4',          videoMobile: '/videos/flujos-mobile.mp4' },
+  { icon: Cpu,       video: '/videos/agentes.mp4',         videoMobile: '/videos/agentes-mobile.mp4' },
+  { icon: Zap,       video: '/videos/automatizacion.mp4',  videoMobile: '/videos/automatizacion-mobile.mp4' },
+  { icon: LineChart, video: '/videos/consultoria.mp4',     videoMobile: '/videos/consultoria-mobile.mp4' },
+  { icon: Code2,     video: '/videos/software.mp4',        videoMobile: '/videos/software-mobile.mp4' },
 ]
 
 // ─── Video popup (renders in document.body via portal) ─────────────
@@ -120,11 +125,107 @@ function ServiceCard({
   reduce: boolean | null
 }) {
   const [hovered, setHovered] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const cardRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const Icon = service.icon
+
+  const isCardInView = useInView(cardRef, { amount: 0.45, once: false })
+
+  // Detect mobile once on mount + on resize
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768)
+    check()
+    window.addEventListener('resize', check)
+    return () => window.removeEventListener('resize', check)
+  }, [])
+
+  // Play / pause inline video on mobile based on scroll visibility
+  useEffect(() => {
+    if (!isMobile || !videoRef.current) return
+    if (isCardInView) {
+      videoRef.current.play().catch(() => {})
+    } else {
+      videoRef.current.pause()
+    }
+  }, [isCardInView, isMobile])
 
   return (
     <>
+      {/* ── Mobile card: reel vertical (hidden on md+) ── */}
       <motion.div
+        ref={cardRef}
+        className="md:hidden"
+        initial={reduce ? {} : { opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.4, delay }}
+        style={{
+          position: 'relative',
+          width: '100%',
+          aspectRatio: '9/16',
+          overflow: 'hidden',
+          background: '#07090F',
+        }}
+      >
+        {/* Video background */}
+        <video
+          ref={videoRef}
+          muted
+          loop
+          playsInline
+          src={service.videoMobile ?? service.video}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+        />
+
+        {/* Placeholder when no video yet */}
+        <div style={{
+          position: 'absolute', inset: 0,
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+          gap: 10, pointerEvents: 'none',
+        }}>
+          <Icon size={32} style={{ color: 'rgba(79,126,255,0.2)' }} />
+          <span className="font-body" style={{ fontSize: 10, color: 'rgba(255,255,255,0.12)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+            Video próximamente
+          </span>
+        </div>
+
+        {/* Fade-in overlay on scroll */}
+        <div
+          style={{
+            position: 'absolute', inset: 0,
+            opacity: isCardInView ? 0 : 1,
+            background: '#07090F',
+            transition: 'opacity 0.7s ease',
+            pointerEvents: 'none',
+          }}
+        />
+
+        {/* Bottom gradient + text */}
+        <div style={{
+          position: 'absolute', bottom: 0, left: 0, right: 0,
+          padding: '64px 24px 28px',
+          background: 'linear-gradient(to top, rgba(7,9,15,0.96) 0%, rgba(7,9,15,0.6) 60%, transparent 100%)',
+        }}>
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+            width: 32, height: 32, borderRadius: 8,
+            background: 'rgba(79,126,255,0.15)',
+            marginBottom: 12,
+          }}>
+            <Icon size={15} style={{ color: '#4F7EFF' }} />
+          </div>
+          <h3 className="font-display" style={{ fontSize: 16, fontWeight: 700, color: '#EAECF4', marginBottom: 6, lineHeight: 1.2 }}>
+            {service.title}
+          </h3>
+          <p className="font-body" style={{ fontSize: 13, color: '#8B9AB5', lineHeight: 1.6 }}>
+            {service.description}
+          </p>
+        </div>
+      </motion.div>
+
+      {/* ── Desktop card: hover + popup (hidden on mobile) ── */}
+      <motion.div
+        className="hidden md:flex"
         initial={reduce ? {} : { opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.4, delay }}
@@ -133,7 +234,6 @@ function ServiceCard({
         style={{
           background: hovered ? '#111722' : '#07090F',
           padding: 28,
-          display: 'flex',
           flexDirection: 'column',
           gap: 20,
           cursor: 'default',
@@ -158,7 +258,7 @@ function ServiceCard({
         </div>
       </motion.div>
 
-      {/* Popup rendered in body, outside the grid */}
+      {/* Desktop popup only */}
       <AnimatePresence>
         {hovered && <VideoPopup service={service} />}
       </AnimatePresence>
@@ -168,9 +268,16 @@ function ServiceCard({
 
 // ─── Section ───────────────────────────────────────────────────────
 export default function Services() {
+  const { t } = useLanguage()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const reduce = useReducedMotion()
+
+  const services: Service[] = servicesMeta.map((meta, i) => ({
+    ...meta,
+    title: t.services.items[i].title,
+    description: t.services.items[i].description,
+  }))
 
   return (
     <section id="servicios" className="py-14 md:py-20 lg:py-24 px-6" ref={ref}>
@@ -182,7 +289,7 @@ export default function Services() {
           animate={inView ? { opacity: 1 } : {}}
           style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#4F7EFF', textAlign: 'center', marginBottom: 16 }}
         >
-          Servicios
+          {t.services.eyebrow}
         </motion.p>
 
         <motion.h2
@@ -192,12 +299,11 @@ export default function Services() {
           transition={{ duration: 0.5, delay: 0.08 }}
           style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.03em', color: '#FFFFFF', textAlign: 'center', marginBottom: 40, lineHeight: 1.1 }}
         >
-          Todo lo que necesitas para escalar con IA
+          {t.services.title}
         </motion.h2>
 
         <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-          style={{ gap: 1, background: 'rgba(255,255,255,0.08)', borderRadius: 16, overflow: 'hidden' }}
+          className="grid grid-cols-1 gap-3 rounded-2xl overflow-hidden md:grid-cols-2 md:gap-px md:bg-[rgba(255,255,255,0.08)] lg:grid-cols-3"
         >
           {services.map((s, i) => (
             <ServiceCard
