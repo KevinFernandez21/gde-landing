@@ -3,7 +3,7 @@
 import { motion, AnimatePresence, useInView, useReducedMotion } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { Bot, Workflow, Cpu, Zap, LineChart, Code2 } from 'lucide-react'
+import { Bot, Workflow, Cpu, Zap, LineChart, Code2, Volume2, VolumeX } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { useLanguage } from '@/lib/language-context'
 
@@ -19,19 +19,31 @@ type Service = ServiceMeta & {
   description: string
 }
 
-const servicesMeta: ServiceMeta[] = [
-  { icon: Bot,       video: '/videos/chatbots.mp4',        videoMobile: '/videos/chatbots-mobile.mp4' },
-  { icon: Workflow,  video: '/videos/flujos.mp4',          videoMobile: '/videos/flujos-mobile.mp4' },
-  { icon: Cpu,       video: '/videos/agentes.mp4',         videoMobile: '/videos/agentes-mobile.mp4' },
-  { icon: Zap,       video: '/videos/automatizacion.mp4',  videoMobile: '/videos/automatizacion-mobile.mp4' },
-  { icon: LineChart, video: '/videos/consultoria.mp4',     videoMobile: '/videos/consultoria-mobile.mp4' },
-  { icon: Code2,     video: '/videos/software.mp4',        videoMobile: '/videos/software-mobile.mp4' },
+const VIDEO_NAMES = [
+  'chatbots',
+  'flujos',
+  'agentes',
+  'automatizacion',
+  'consultoria',
+  'software',
 ]
+
+const VIDEO_ICONS = [Bot, Workflow, Cpu, Zap, LineChart, Code2]
+
+function buildServicesMeta(lang: string): ServiceMeta[] {
+  const folder = lang === 'en' ? 'ingles' : 'español'
+  return VIDEO_NAMES.map((name, i) => ({
+    icon: VIDEO_ICONS[i],
+    video: `/videos/Desktop/${folder}/${name}.mp4`,
+    videoMobile: `/videos/mobil/${folder}/${name}.mp4`,
+  }))
+}
 
 // ─── Video popup (renders in document.body via portal) ─────────────
 function VideoPopup({ service }: { service: Service }) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const Icon = service.icon
+  const [videoError, setVideoError] = useState(false)
 
   useEffect(() => {
     videoRef.current?.play().catch(() => {})
@@ -73,23 +85,26 @@ function VideoPopup({ service }: { service: Service }) {
         <div style={{ position: 'relative', aspectRatio: '16/9', background: '#000' }}>
           <video
             ref={videoRef}
-            muted
+            autoPlay
             loop
             playsInline
             src={service.video}
+            onError={() => setVideoError(true)}
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           />
-          {/* Placeholder shown when no video file exists yet */}
-          <div style={{
-            position: 'absolute', inset: 0,
-            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-            gap: 12, pointerEvents: 'none',
-          }}>
-            <Icon size={36} style={{ color: 'rgba(79,126,255,0.25)' }} />
-            <span className="font-body" style={{ fontSize: 11, color: 'rgba(255,255,255,0.15)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-              Video próximamente
-            </span>
-          </div>
+          {/* Placeholder shown only when video fails to load */}
+          {videoError && (
+            <div style={{
+              position: 'absolute', inset: 0,
+              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+              gap: 12, pointerEvents: 'none',
+            }}>
+              <Icon size={36} style={{ color: 'rgba(79,126,255,0.25)' }} />
+              <span className="font-body" style={{ fontSize: 11, color: 'rgba(255,255,255,0.15)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                Video próximamente
+              </span>
+            </div>
+          )}
         </div>
 
         {/* Info bar */}
@@ -126,6 +141,8 @@ function ServiceCard({
 }) {
   const [hovered, setHovered] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [mobileVideoError, setMobileVideoError] = useState(false)
+  const [muted, setMuted] = useState(true)
   const cardRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
   const Icon = service.icon
@@ -170,24 +187,45 @@ function ServiceCard({
         {/* Video background */}
         <video
           ref={videoRef}
-          muted
+          muted={muted}
           loop
           playsInline
           src={service.videoMobile ?? service.video}
+          onError={() => setMobileVideoError(true)}
           style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
         />
 
-        {/* Placeholder when no video yet */}
-        <div style={{
-          position: 'absolute', inset: 0,
-          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-          gap: 10, pointerEvents: 'none',
-        }}>
-          <Icon size={32} style={{ color: 'rgba(79,126,255,0.2)' }} />
-          <span className="font-body" style={{ fontSize: 10, color: 'rgba(255,255,255,0.12)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-            Video próximamente
-          </span>
-        </div>
+        {/* Mute / unmute button */}
+        <button
+          onClick={() => setMuted(m => !m)}
+          style={{
+            position: 'absolute', top: 14, right: 14,
+            width: 34, height: 34, borderRadius: '50%',
+            background: 'rgba(0,0,0,0.45)',
+            border: '1px solid rgba(255,255,255,0.15)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer', zIndex: 10,
+          }}
+        >
+          {muted
+            ? <VolumeX size={15} style={{ color: 'rgba(255,255,255,0.7)' }} />
+            : <Volume2 size={15} style={{ color: '#fff' }} />
+          }
+        </button>
+
+        {/* Placeholder shown only when video fails to load */}
+        {mobileVideoError && (
+          <div style={{
+            position: 'absolute', inset: 0,
+            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+            gap: 10, pointerEvents: 'none',
+          }}>
+            <Icon size={32} style={{ color: 'rgba(79,126,255,0.2)' }} />
+            <span className="font-body" style={{ fontSize: 10, color: 'rgba(255,255,255,0.12)', letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+              Video próximamente
+            </span>
+          </div>
+        )}
 
         {/* Fade-in overlay on scroll */}
         <div
@@ -268,12 +306,12 @@ function ServiceCard({
 
 // ─── Section ───────────────────────────────────────────────────────
 export default function Services() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const reduce = useReducedMotion()
 
-  const services: Service[] = servicesMeta.map((meta, i) => ({
+  const services: Service[] = buildServicesMeta(lang).map((meta, i) => ({
     ...meta,
     title: t.services.items[i].title,
     description: t.services.items[i].description,

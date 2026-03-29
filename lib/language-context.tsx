@@ -17,6 +17,7 @@ const LanguageContext = React.createContext<LanguageContextValue>({
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLang] = React.useState<Lang>('es')
+  const [fading, setFading] = React.useState(false)
 
   // Detect language once on mount (client-side only)
   React.useEffect(() => {
@@ -30,13 +31,19 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const setLanguage = React.useCallback((l: Lang) => {
-    setLang(l)
-    localStorage.setItem('gde-lang', l)
+    setFading(true)
+    setTimeout(() => {
+      setLang(l)
+      localStorage.setItem('gde-lang', l)
+      setFading(false)
+    }, 180)
   }, [])
 
   return (
     <LanguageContext.Provider value={{ lang, setLanguage, t: translations[lang] as T }}>
-      {children}
+      <div style={{ opacity: fading ? 0 : 1, transition: 'opacity 0.18s ease' }}>
+        {children}
+      </div>
     </LanguageContext.Provider>
   )
 }

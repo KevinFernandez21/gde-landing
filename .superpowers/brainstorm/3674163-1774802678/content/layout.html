@@ -1,0 +1,86 @@
+<h2>¿Cómo debe verse la sección del globo?</h2>
+<p class="subtitle">Elige el layout de la sección que irá encima de Servicios</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="A" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#07090F;padding:24px;font-family:sans-serif;min-height:180px;display:flex;flex-direction:column;align-items:center;gap:12px;">
+        <div style="font-size:9px;letter-spacing:.14em;color:#4F7EFF;text-transform:uppercase">Presencia Global</div>
+        <div style="font-size:15px;font-weight:700;color:#EAECF4;text-align:center">Automatización IA<br/>sin fronteras</div>
+        <!-- Globe placeholder -->
+        <div style="width:120px;height:120px;border-radius:50%;border:2px dashed rgba(79,126,255,0.4);background:radial-gradient(circle at 35% 38%,rgba(79,126,255,0.12),transparent 65%);display:flex;align-items:center;justify-content:center;position:relative">
+          <div style="width:80px;height:80px;border-radius:50%;border:1px solid rgba(79,126,255,0.2);display:flex;align-items:center;justify-content:center">
+            <span style="font-size:28px">🌐</span>
+          </div>
+          <!-- Markers -->
+          <div style="position:absolute;width:7px;height:7px;border-radius:50%;background:#4F7EFF;top:32px;left:38px;box-shadow:0 0 6px #4F7EFF"></div>
+          <div style="position:absolute;width:7px;height:7px;border-radius:50%;background:#4F7EFF;top:48px;left:70px;box-shadow:0 0 6px #4F7EFF"></div>
+          <div style="position:absolute;width:9px;height:9px;border-radius:50%;background:#00FF9D;top:58px;left:42px;box-shadow:0 0 8px #00FF9D"></div>
+        </div>
+        <div style="font-size:9px;color:#8B9AB5;text-align:center">Globo centrado · Encabezado arriba · Sección independiente</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Sección centrada</h3>
+      <p>Globo grande al centro con título arriba. Sección propia entre el contenido existente y Servicios.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="B" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#07090F;padding:24px;font-family:sans-serif;min-height:180px;display:flex;align-items:center;gap:16px;">
+        <!-- Left text -->
+        <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+          <div style="font-size:8px;letter-spacing:.14em;color:#4F7EFF;text-transform:uppercase">Cobertura</div>
+          <div style="font-size:13px;font-weight:700;color:#EAECF4;line-height:1.3">Clientes en<br/>todo el mundo</div>
+          <div style="font-size:10px;color:#8B9AB5;line-height:1.5">Nuestras soluciones de IA operan en múltiples países y zonas horarias.</div>
+          <div style="display:flex;gap:8px;margin-top:4px">
+            <div style="font-size:11px;color:#EAECF4;font-weight:700">12+</div>
+            <div style="font-size:9px;color:#8B9AB5;margin-top:2px">países</div>
+            <div style="font-size:11px;color:#EAECF4;font-weight:700;margin-left:8px">3</div>
+            <div style="font-size:9px;color:#8B9AB5;margin-top:2px">continentes</div>
+          </div>
+        </div>
+        <!-- Right globe -->
+        <div style="width:100px;height:100px;border-radius:50%;border:2px dashed rgba(79,126,255,0.4);background:radial-gradient(circle at 35% 38%,rgba(79,126,255,0.1),transparent 65%);display:flex;align-items:center;justify-content:center;position:relative;flex-shrink:0">
+          <span style="font-size:24px">🌐</span>
+          <div style="position:absolute;width:6px;height:6px;border-radius:50%;background:#4F7EFF;top:22px;left:30px;box-shadow:0 0 5px #4F7EFF"></div>
+          <div style="position:absolute;width:6px;height:6px;border-radius:50%;background:#4F7EFF;top:38px;left:58px;box-shadow:0 0 5px #4F7EFF"></div>
+          <div style="position:absolute;width:8px;height:8px;border-radius:50%;background:#00FF9D;top:50px;left:34px;box-shadow:0 0 7px #00FF9D"></div>
+        </div>
+      </div>
+      <div style="padding:6px 24px 8px;font-size:9px;color:#8B9AB5;background:#07090F;text-align:center">Dos columnas: texto izquierda · globo derecha</div>
+    </div>
+    <div class="card-body">
+      <h3>B — Dos columnas</h3>
+      <p>Copy/stats a la izquierda, globo a la derecha. Más compacto, aprovecha el espacio horizontal.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="C" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#07090F;padding:0;font-family:sans-serif;min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;">
+        <!-- Ambient glow behind globe -->
+        <div style="position:absolute;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(79,126,255,0.15),transparent 70%);top:10px;left:50%;transform:translateX(-50%)"></div>
+        <!-- Globe very large, bleeds edges -->
+        <div style="width:160px;height:160px;border-radius:50%;border:1px dashed rgba(79,126,255,0.3);background:radial-gradient(circle at 38% 40%,rgba(79,126,255,0.08),transparent 65%);display:flex;align-items:center;justify-content:center;position:relative">
+          <span style="font-size:42px">🌐</span>
+          <div style="position:absolute;width:8px;height:8px;border-radius:50%;background:#4F7EFF;top:38px;left:50px;box-shadow:0 0 8px #4F7EFF"></div>
+          <div style="position:absolute;width:8px;height:8px;border-radius:50%;background:#4F7EFF;top:68px;left:92px;box-shadow:0 0 8px #4F7EFF"></div>
+          <div style="position:absolute;width:10px;height:10px;border-radius:50%;background:#00FF9D;top:82px;left:56px;box-shadow:0 0 10px #00FF9D"></div>
+        </div>
+        <!-- Overlay text at bottom -->
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(to top,rgba(7,9,15,0.95),transparent);text-align:center">
+          <div style="font-size:12px;font-weight:700;color:#EAECF4">Presencia global</div>
+          <div style="font-size:9px;color:#8B9AB5">IA sin fronteras</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Globo inmersivo</h3>
+      <p>Globo grande que ocupa casi todo el ancho. Texto superpuesto abajo. Impacto visual fuerte.</p>
+    </div>
+  </div>
+
+</div>

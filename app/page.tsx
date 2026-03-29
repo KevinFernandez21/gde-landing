@@ -1,11 +1,15 @@
+import dynamic from 'next/dynamic'
 import { Header } from '@/components/ui/header-2'
 import Hero from '@/components/Hero'
-import Stats from '@/components/Stats'
-import AboutUs from '@/components/AboutUs'
-import Services from '@/components/Services'
-import HowItWorks from '@/components/HowItWorks'
-import CtaFinal from '@/components/CtaFinal'
-import Footer from '@/components/Footer'
+
+// Heavy components — loaded as separate JS chunks, only when needed
+const Stats         = dynamic(() => import('@/components/Stats'))
+const AboutUs       = dynamic(() => import('@/components/AboutUs'))
+const GlobalPresence = dynamic(() => import('@/components/GlobalPresence'), { ssr: false })
+const Services      = dynamic(() => import('@/components/Services'),       { ssr: false })
+const HowItWorks    = dynamic(() => import('@/components/HowItWorks'))
+const CtaFinal      = dynamic(() => import('@/components/CtaFinal'))
+const Footer        = dynamic(() => import('@/components/Footer'))
 
 export default function Home() {
   return (
@@ -14,6 +18,7 @@ export default function Home() {
       <Hero />
       <Stats />
       <AboutUs />
+      <GlobalPresence />
       <Services />
       <HowItWorks />
       <CtaFinal />
