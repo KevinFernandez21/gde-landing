@@ -3,12 +3,14 @@
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
 import { useLanguage } from '@/lib/language-context'
+import { useExpertModal } from '@/lib/expert-modal-context'
 
 export default function CtaFinal() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const reduce = useReducedMotion()
   const { t } = useLanguage()
+  const { openModal } = useExpertModal()
 
   const anim = (delay = 0) => ({
     initial: reduce ? {} : { opacity: 0, y: 16 },
@@ -50,15 +52,15 @@ export default function CtaFinal() {
         </motion.p>
 
         <motion.div {...anim(0.24)}>
-          <a
-            href="mailto:contacto@gptfy.biz"
+          <button
+            onClick={openModal}
             className="font-body"
-            style={{ display: 'inline-flex', alignItems: 'center', padding: '14px 32px', borderRadius: 999, backgroundColor: '#4F7EFF', color: '#fff', fontSize: 14, fontWeight: 500, textDecoration: 'none', transition: 'background-color 0.2s' }}
+            style={{ display: 'inline-flex', alignItems: 'center', padding: '14px 32px', borderRadius: 999, backgroundColor: '#4F7EFF', color: '#fff', fontSize: 14, fontWeight: 500, border: 'none', cursor: 'pointer', transition: 'background-color 0.2s' }}
             onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#3560E8')}
             onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4F7EFF')}
           >
             {t.cta.button}
-          </a>
+          </button>
         </motion.div>
 
       </div>
