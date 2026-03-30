@@ -50,6 +50,7 @@ export default function ExpertModal() {
     >
       {/* Container — stops click propagation so clicking inside doesn't close */}
       <div
+        className="font-body"
         style={{
           position: 'relative',
           width: '100%',
