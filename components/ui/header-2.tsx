@@ -5,12 +5,14 @@ import { cn } from '@/lib/utils'
 import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon'
 import { useScroll } from '@/components/ui/use-scroll'
 import { useLanguage } from '@/lib/language-context'
+import { useExpertModal } from '@/lib/expert-modal-context'
 import type { Lang } from '@/lib/translations'
 
 export function Header() {
   const [open, setOpen] = React.useState(false)
   const scrolled = useScroll(10)
   const { lang, setLanguage, t } = useLanguage()
+  const { openModal } = useExpertModal()
 
   const links = [
     { label: t.nav.services,   href: '#servicios' },
@@ -84,10 +86,13 @@ export function Header() {
         {/* Desktop right: lang toggle + CTA */}
         <div className="hidden md:flex items-center gap-3">
           <LangToggle />
-          <a href="#contacto" className={buttonVariants({ variant: 'default' })}
-            style={{ fontFamily: 'var(--font-dm)', fontSize: 13 }}>
+          <button
+            onClick={openModal}
+            className={buttonVariants({ variant: 'default' })}
+            style={{ fontFamily: 'var(--font-dm)', fontSize: 13 }}
+          >
             {t.nav.cta}
-          </a>
+          </button>
         </div>
 
         {/* Mobile hamburger */}
@@ -119,11 +124,13 @@ export function Header() {
             <div className="flex justify-center">
               <LangToggle />
             </div>
-            <a href="#contacto"
+            <button
+              onClick={() => { setOpen(false); openModal() }}
               className={buttonVariants({ variant: 'default', className: 'w-full justify-center' })}
-              onClick={() => setOpen(false)} style={{ fontFamily: 'var(--font-dm)' }}>
+              style={{ fontFamily: 'var(--font-dm)' }}
+            >
               {t.nav.cta}
-            </a>
+            </button>
           </div>
         </div>
       </div>
