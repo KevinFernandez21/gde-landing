@@ -52,6 +52,12 @@ export const translations = {
       description: 'Hablemos sobre cómo la IA puede transformar tus procesos y escalar tu empresa.',
       button:      'Hablar con un experto',
     },
+    expertModal: {
+      scheduleTitle: 'Agendar cita',
+      scheduleDesc:  'Elige el horario que mejor te convenga.',
+      diagnoseTitle: 'Te diagnosticamos tu problema',
+      diagnoseDesc:  'Cuéntanos tu caso y nuestro equipo lo analiza.',
+    },
     footer: {
       tagline:      'Grupo Digital Ecommerce',
       linksTitle:   'Links',
@@ -126,6 +132,12 @@ export const translations = {
       title:       'Ready to automate your business?',
       description: "Let's talk about how AI can transform your processes and scale your company.",
       button:      'Talk to an expert',
+    },
+    expertModal: {
+      scheduleTitle: 'Schedule a call',
+      scheduleDesc:  'Pick a time that works for you.',
+      diagnoseTitle: 'We diagnose your problem',
+      diagnoseDesc:  'Tell us your case and our team will analyze it.',
     },
     footer: {
       tagline:      'Digital Ecommerce Group',
