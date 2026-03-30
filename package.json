@@ -14,11 +14,13 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "d3": "^7.9.0",
+    "dotted-map": "^3.1.0",
     "framer-motion": "^12.38.0",
     "gsap": "^3.12.2",
     "lucide-react": "^0.577.0",
     "next": "14.2.35",
     "react": "^18",
+    "react-calendly": "^4.4.0",
     "react-dom": "^18",
     "tailwind-merge": "^3.5.0",
     "three": "^0.178.0"
