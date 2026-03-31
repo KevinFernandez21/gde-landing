@@ -12,13 +12,12 @@ const BRANDS = [
   { name: 'TestoPower',    src: '/logo_externos/testo-powwer.webp' },
   { name: 'HotFlowers',       src: '/logo_externos/hotflowers.webp' },
   { name: 'I3lab-ESPOL',    src: '/logo_externos/i3lab-espol.webp' },
-  { name: 'Hooli',         src: null },
-  { name: 'Hooli',         src: null },
-  { name: 'Hooli',         src: null },
-  { name: 'Hooli',         src: null },
-  { name: 'Hooli',         src: null },
-  { name: 'Hooli',         src: null },
-  { name: 'Hooli',         src: null },
+  { name: 'trabajoYA',         src: '/logo_externos/trabajosYA.webp' },
+  { name: 'PadrinosEcuador',         src: '/logo_externos/padrinosecuador.webp' },
+  { name: 'aws',         src: '/logo_externos/aws.webp' },
+  { name: 'corarmuc',         src: '/logo_externos/corarmuc.webp' },
+  { name: 'Alertia',         src: '/logo_externos/alertia.webp' },
+  
 ]
 
 // Split into two alternating rows and duplicate for seamless loop
