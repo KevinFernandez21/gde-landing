@@ -42,14 +42,18 @@ export default function HowItWorks() {
               initial={reduce ? {} : { opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.15 + i * 0.1 }}
-              style={{ display: 'flex', flexDirection: 'column', gap: 16 }}
+              style={{
+                display: 'flex', flexDirection: 'column', gap: 16,
+                borderTop: '2px solid rgba(79,126,255,0.35)',
+                paddingTop: 24,
+              }}
             >
-              <span className="font-display" style={{ fontSize: 48, fontWeight: 800, lineHeight: 1, color: 'rgba(79,126,255,0.2)' }}>
+              <span className="font-display" style={{ fontSize: 48, fontWeight: 800, lineHeight: 1, color: 'rgba(79,126,255,0.5)' }}>
                 {stepNumbers[i]}
               </span>
               <div>
-                <h3 className="font-display" style={{ fontSize: 14, fontWeight: 600, color: '#EAECF4', marginBottom: 8 }}>{s.title}</h3>
-                <p className="font-body" style={{ fontSize: 13, color: '#8B9AB5', lineHeight: 1.65 }}>{s.desc}</p>
+                <h3 className="font-display" style={{ fontSize: 17, fontWeight: 700, color: '#FFFFFF', marginBottom: 10 }}>{s.title}</h3>
+                <p className="font-body" style={{ fontSize: 14, color: '#A8B8D0', lineHeight: 1.7 }}>{s.desc}</p>
               </div>
             </motion.div>
           ))}

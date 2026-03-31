@@ -27,13 +27,16 @@ export const translations = {
     services: {
       eyebrow: 'Servicios',
       title:   'Todo lo que necesitas para escalar con IA',
+      drawerBuild: '¿Qué obtendrás?',
+      drawerStack: 'Herramientas & Tecnología',
+      drawerCta:   'Hablar con un experto',
       items: [
-        { title: 'Chatbots con IA',           description: 'Agentes conversacionales entrenados con tu información empresarial.' },
-        { title: 'Flujos Automatizados',       description: 'Automatiza procesos repetitivos con flujos inteligentes conectados a tus herramientas.' },
-        { title: 'Agentes de IA',              description: 'Agentes autónomos que ejecutan tareas complejas sin intervención humana.' },
-        { title: 'Automatización Empresarial', description: 'Integración de IA en tus sistemas actuales para optimizar operaciones.' },
-        { title: 'Consultoría en IA',          description: 'Diagnóstico, estrategia e implementación de IA adaptada a tu negocio.' },
-        { title: 'Software a la Medida',       description: 'Desarrollo personalizado con IA integrada desde el día uno.' },
+        { title: 'Chatbots con IA',           description: 'Agentes conversacionales entrenados con tu información empresarial.',       detail: 'Asistente virtual que responde, vende y atiende a tus clientes las 24 horas entrenado con tu información real.',      tags: ['ChatGPT', 'RAG', 'WhatsApp', 'Web', 'Telegram'] },
+        { title: 'Flujos Automatizados',       description: 'Automatiza procesos repetitivos con flujos inteligentes conectados a tus herramientas.', detail: 'Conectamos tus aplicaciones y eliminamos tareas manuales repetitivas con flujos inteligentes sin necesidad de código.',  tags: ['n8n', 'Make', 'Zapier', 'Webhooks', 'API REST'] },
+        { title: 'Agentes de IA',              description: 'Agentes autónomos que ejecutan tareas complejas sin intervención humana.',  detail: 'Agentes que navegan sistemas, toman decisiones y completan objetivos de negocio complejos de forma autónoma.',          tags: ['LangChain', 'OpenAI', 'Pipelines', 'Tools', 'Memory'] },
+        { title: 'Automatización Empresarial', description: 'Integración de IA en tus sistemas actuales para optimizar operaciones.',   detail: 'Integramos inteligencia artificial en tu CRM, ERP y BI actuales para optimizar operaciones sin reemplazar tu stack.',    tags: ['Python', 'APIs', 'CRM', 'ERP', 'Power BI'] },
+        { title: 'Consultoría en IA',          description: 'Diagnóstico, estrategia e implementación de IA adaptada a tu negocio.',    detail: 'Analizamos tus procesos, identificamos oportunidades de IA y te entregamos una hoja de ruta clara con acompañamiento.',  tags: ['Auditoría', 'Roadmap', 'Workshops', 'Estrategia'] },
+        { title: 'Software a la Medida',       description: 'Desarrollo personalizado con IA integrada desde el día uno.',              detail: 'Diseñamos y construimos plataformas o aplicaciones con IA embebida adaptadas exactamente a tus procesos y objetivos.',    tags: ['Next.js', 'FastAPI', 'Docker', 'PostgreSQL', 'GPT-4'] },
       ],
     },
     howItWorks: {
@@ -60,6 +63,7 @@ export const translations = {
     },
     footer: {
       tagline:      'Grupo Digital Ecommerce',
+      description:  'Soluciones de inteligencia artificial para empresas y emprendedores de Latinoamérica.',
       linksTitle:   'Links',
       links: [
         { label: 'Inicio',    href: '#' },
@@ -74,6 +78,13 @@ export const translations = {
         { label: 'Agentes',     href: '#servicios' },
         { label: 'Consultoría', href: '#servicios' },
         { label: 'Software',    href: '#servicios' },
+      ],
+      companyTitle: 'Compañía',
+      company: [
+        { label: 'Nosotros',       href: '#nosotros' },
+        { label: 'Cómo Funciona',  href: '#como-funciona' },
+        { label: 'Casos de Éxito', href: '#' },
+        { label: 'Contacto',       href: '#contacto' },
       ],
       socialTitle: 'Redes',
       copyright:   'Todos los derechos reservados',
@@ -108,13 +119,16 @@ export const translations = {
     services: {
       eyebrow: 'Services',
       title:   'Everything you need to scale with AI',
+      drawerBuild: 'What will you get?',
+      drawerStack: 'Tools & Technology',
+      drawerCta:   'Talk to an expert',
       items: [
-        { title: 'AI Chatbots',         description: 'Conversational agents trained on your business information.' },
-        { title: 'Automated Flows',     description: 'Automate repetitive processes with intelligent flows connected to your tools.' },
-        { title: 'AI Agents',           description: 'Autonomous agents that execute complex tasks without human intervention.' },
-        { title: 'Business Automation', description: 'AI integration into your current systems to optimize operations.' },
-        { title: 'AI Consulting',       description: 'Diagnosis, strategy, and AI implementation tailored to your business.' },
-        { title: 'Custom Software',     description: 'Personalized development with AI integrated from day one.' },
+        { title: 'AI Chatbots',         description: 'Conversational agents trained on your business information.',        detail: 'Virtual assistant that responds, sells, and serves your customers 24/7, trained on your actual business data.',          tags: ['ChatGPT', 'RAG', 'WhatsApp', 'Web', 'Telegram'] },
+        { title: 'Automated Flows',     description: 'Automate repetitive processes with intelligent flows connected to your tools.', detail: 'Connect your apps and eliminate repetitive manual tasks with intelligent flows — no code required.',                    tags: ['n8n', 'Make', 'Zapier', 'Webhooks', 'REST API'] },
+        { title: 'AI Agents',           description: 'Autonomous agents that execute complex tasks without human intervention.', detail: 'Agents that navigate systems, make decisions, and complete complex business goals autonomously.',                     tags: ['LangChain', 'OpenAI', 'Pipelines', 'Tools', 'Memory'] },
+        { title: 'Business Automation', description: 'AI integration into your current systems to optimize operations.',   detail: 'We embed AI into your existing CRM, ERP, and BI systems to optimize operations without replacing your current stack.',  tags: ['Python', 'APIs', 'CRM', 'ERP', 'Power BI'] },
+        { title: 'AI Consulting',       description: 'Diagnosis, strategy, and AI implementation tailored to your business.', detail: 'We analyze your processes, spot AI opportunities, and deliver a clear roadmap with hands-on support throughout.',      tags: ['Audit', 'Roadmap', 'Workshops', 'Strategy'] },
+        { title: 'Custom Software',     description: 'Personalized development with AI integrated from day one.',          detail: 'We design and build platforms or apps with embedded AI, tailored exactly to your processes and business goals.',        tags: ['Next.js', 'FastAPI', 'Docker', 'PostgreSQL', 'GPT-4'] },
       ],
     },
     howItWorks: {
@@ -141,6 +155,7 @@ export const translations = {
     },
     footer: {
       tagline:      'Digital Ecommerce Group',
+      description:  'Artificial intelligence solutions for businesses and entrepreneurs across Latin America.',
       linksTitle:   'Links',
       links: [
         { label: 'Home',     href: '#' },
@@ -155,6 +170,13 @@ export const translations = {
         { label: 'Agents',     href: '#servicios' },
         { label: 'Consulting', href: '#servicios' },
         { label: 'Software',   href: '#servicios' },
+      ],
+      companyTitle: 'Company',
+      company: [
+        { label: 'About Us',    href: '#nosotros' },
+        { label: 'How It Works', href: '#como-funciona' },
+        { label: 'Case Studies', href: '#' },
+        { label: 'Contact',     href: '#contacto' },
       ],
       socialTitle: 'Social',
       copyright:   'All rights reserved',
