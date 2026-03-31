@@ -163,7 +163,7 @@ function ServiceCard({
 
   // Play / pause inline video on mobile based on scroll visibility
   useEffect(() => {
-    if (!isMobile || !videoRef.current) return
+    if (!VIDEOS_ENABLED || !isMobile || !videoRef.current) return
     if (isCardInView) {
       videoRef.current.play().catch(() => {})
     } else {
@@ -293,10 +293,10 @@ function ServiceCard({
           <Icon size={17} style={{ color: '#4F7EFF' }} />
         </div>
         <div>
-          <h3 className="font-display" style={{ fontSize: 14, fontWeight: 600, color: '#EAECF4', marginBottom: 8, lineHeight: 1.3 }}>
+          <h3 className="font-display" style={{ fontSize: 16, fontWeight: 600, color: '#EAECF4', marginBottom: 8, lineHeight: 1.3 }}>
             {service.title}
           </h3>
-          <p className="font-body" style={{ fontSize: 13, color: '#8B9AB5', lineHeight: 1.65 }}>
+          <p className="font-body" style={{ fontSize: 14, color: '#8B9AB5', lineHeight: 1.65 }}>
             {service.description}
           </p>
         </div>
