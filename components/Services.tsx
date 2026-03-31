@@ -7,6 +7,9 @@ import { Bot, Workflow, Cpu, Zap, LineChart, Code2, Volume2, VolumeX } from 'luc
 import type { LucideIcon } from 'lucide-react'
 import { useLanguage } from '@/lib/language-context'
 
+// ─── Feature flag ──────────────────────────────────────────────────
+const VIDEOS_ENABLED = false
+
 // ─── Data ──────────────────────────────────────────────────────────
 type ServiceMeta = {
   icon: LucideIcon
@@ -186,15 +189,17 @@ function ServiceCard({
         }}
       >
         {/* Video background */}
-        <video
-          ref={videoRef}
-          muted={muted}
-          loop
-          playsInline
-          src={service.videoMobile ?? service.video}
-          onError={() => setMobileVideoError(true)}
-          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-        />
+        {VIDEOS_ENABLED && (
+          <video
+            ref={videoRef}
+            muted={muted}
+            loop
+            playsInline
+            src={service.videoMobile ?? service.video}
+            onError={() => setMobileVideoError(true)}
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          />
+        )}
 
         {/* Mute / unmute button */}
         <button
@@ -299,7 +304,7 @@ function ServiceCard({
 
       {/* Desktop popup only */}
       <AnimatePresence>
-        {hovered && <VideoPopup service={service} />}
+        {VIDEOS_ENABLED && hovered && <VideoPopup service={service} />}
       </AnimatePresence>
     </>
   )
