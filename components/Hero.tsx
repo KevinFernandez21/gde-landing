@@ -20,7 +20,7 @@ export default function Hero() {
           ))}
         </h1>
 
-        <p className="font-body" style={{ fontSize: 16, lineHeight: 1.7, color: '#8B9AB5', maxWidth: 380, margin: '0 auto 40px' }}>
+        <p className="font-body" style={{ fontSize: 16, lineHeight: 1.7, color: 'rgba(255,255,255,0.78)', maxWidth: 380, margin: '0 auto 40px', textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}>
           {t.hero.description}
         </p>
 
@@ -37,9 +37,9 @@ export default function Hero() {
           <a
             href="#servicios"
             className="font-body"
-            style={{ fontSize: 14, color: '#8B9AB5', textDecoration: 'none', transition: 'color 0.2s', pointerEvents: 'auto' }}
-            onMouseEnter={e => (e.currentTarget.style.color = '#EAECF4')}
-            onMouseLeave={e => (e.currentTarget.style.color = '#8B9AB5')}
+            style={{ fontSize: 14, color: 'rgba(255,255,255,0.65)', textDecoration: 'none', transition: 'color 0.2s', pointerEvents: 'auto', textShadow: '0 1px 8px rgba(0,0,0,0.6)' }}
+            onMouseEnter={e => (e.currentTarget.style.color = '#fff')}
+            onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.65)')}
           >
             {t.hero.secondary}
           </a>
