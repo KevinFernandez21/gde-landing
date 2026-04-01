@@ -3,7 +3,7 @@
 import { motion, AnimatePresence, useInView, useReducedMotion } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { Bot, Workflow, Cpu, Zap, LineChart, Code2, Volume2, VolumeX, X } from 'lucide-react'
+import { Bot, Workflow, Cpu, Zap, LineChart, Code2, Volume2, VolumeX, X, Globe } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { useLanguage } from '@/lib/language-context'
 import { useExpertModal } from '@/lib/expert-modal-context'
@@ -25,8 +25,8 @@ type Service = ServiceMeta & {
   tags: readonly string[]
 }
 
-const VIDEO_NAMES = ['chatbots', 'flujos', 'agentes', 'automatizacion', 'consultoria', 'software']
-const VIDEO_ICONS = [Bot, Workflow, Cpu, Zap, LineChart, Code2]
+const VIDEO_NAMES = ['chatbots', 'flujos', 'agentes', 'automatizacion', 'consultoria', 'software', 'landing']
+const VIDEO_ICONS = [Bot, Workflow, Cpu, Zap, LineChart, Code2, Globe]
 
 function buildServicesMeta(lang: string): ServiceMeta[] {
   const folder = lang === 'en' ? 'ingles' : 'español'
@@ -255,12 +255,14 @@ function ServiceCard({
   inView,
   reduce,
   onOpen,
+  featured = false,
 }: {
   service: Service
   delay: number
   inView: boolean
   reduce: boolean | null
   onOpen: () => void
+  featured?: boolean
 }) {
   const [hovered, setHovered] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -343,7 +345,7 @@ function ServiceCard({
 
       {/* ── Desktop card ── */}
       <motion.div
-        className="hidden md:flex"
+        className={`hidden md:flex${featured ? ' lg:col-span-3' : ''}`}
         initial={reduce ? {} : { opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.4, delay }}
@@ -352,27 +354,26 @@ function ServiceCard({
         onClick={onOpen}
         style={{
           background: hovered ? '#111722' : '#07090F',
-          padding: 28,
-          flexDirection: 'column',
-          gap: 20,
+          padding: featured ? '28px 40px' : 28,
+          flexDirection: featured ? 'row' : 'column',
+          alignItems: featured ? 'center' : undefined,
+          gap: featured ? 32 : 20,
           cursor: 'pointer',
           transition: 'background 0.25s',
           position: 'relative',
         }}
       >
-        <div style={{ width: 36, height: 36, borderRadius: 8, background: hovered ? 'rgba(79,126,255,0.2)' : 'rgba(79,126,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.25s' }}>
-          <Icon size={17} style={{ color: '#4F7EFF' }} />
+        <div style={{ width: 40, height: 40, borderRadius: 10, background: hovered ? 'rgba(79,126,255,0.2)' : 'rgba(79,126,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.25s', flexShrink: 0 }}>
+          <Icon size={featured ? 20 : 17} style={{ color: '#4F7EFF' }} />
         </div>
-        <div>
-          <h3 className="font-display" style={{ fontSize: 16, fontWeight: 600, color: '#EAECF4', marginBottom: 8, lineHeight: 1.3 }}>{service.title}</h3>
-          <p className="font-body" style={{ fontSize: 14, color: '#8B9AB5', lineHeight: 1.65 }}>{service.description}</p>
+        <div style={{ flex: featured ? 1 : undefined }}>
+          <h3 className="font-display" style={{ fontSize: featured ? 18 : 16, fontWeight: 600, color: '#EAECF4', marginBottom: 8, lineHeight: 1.3 }}>{service.title}</h3>
+          <p className="font-body" style={{ fontSize: 14, color: '#8B9AB5', lineHeight: 1.65, maxWidth: featured ? 480 : undefined }}>{service.description}</p>
         </div>
-        {/* Hint */}
-        <span className="font-body" style={{ fontSize: 11, color: hovered ? '#4F7EFF' : 'rgba(255,255,255,0.18)', transition: 'color 0.25s', marginTop: 'auto' }}>
+        <span className="font-body" style={{ fontSize: 11, color: hovered ? '#4F7EFF' : 'rgba(255,255,255,0.18)', transition: 'color 0.25s', marginTop: featured ? 0 : 'auto', flexShrink: 0 }}>
           Ver detalles →
         </span>
 
-        {/* Video popup on hover (feature flagged) */}
         <AnimatePresence>
           {VIDEOS_ENABLED && hovered && <VideoPopup service={service} />}
         </AnimatePresence>
@@ -427,11 +428,11 @@ export default function Services() {
             <ServiceCard
               key={s.title}
               service={s}
-
               delay={0.1 + i * 0.06}
               inView={inView}
               reduce={reduce}
               onOpen={() => setActiveIndex(i)}
+              featured={services.length % 3 !== 0 && i === services.length - 1}
             />
           ))}
         </div>

@@ -37,6 +37,7 @@ export const translations = {
         { title: 'Automatización Empresarial', description: 'Integración de IA en tus sistemas actuales para optimizar operaciones.',   detail: 'Integramos inteligencia artificial en tu CRM, ERP y BI actuales para optimizar operaciones sin reemplazar tu stack.',    tags: ['Python', 'APIs', 'CRM', 'ERP', 'Power BI'] },
         { title: 'Consultoría en IA',          description: 'Diagnóstico, estrategia e implementación de IA adaptada a tu negocio.',    detail: 'Analizamos tus procesos, identificamos oportunidades de IA y te entregamos una hoja de ruta clara con acompañamiento.',  tags: ['Auditoría', 'Roadmap', 'Workshops', 'Estrategia'] },
         { title: 'Software a la Medida',       description: 'Desarrollo personalizado con IA integrada desde el día uno.',              detail: 'Diseñamos y construimos plataformas o aplicaciones con IA embebida adaptadas exactamente a tus procesos y objetivos.',    tags: ['Next.js', 'FastAPI', 'Docker', 'PostgreSQL', 'GPT-4'] },
+        { title: 'Creación de Landing Page',   description: 'Impulsamos tu empresa con una landing page de alto impacto construida con tus datos y marca.', detail: 'Diseñamos y desarrollamos tu landing page optimizada para convertir visitas en clientes, usando tu identidad de marca, datos reales y las mejores prácticas de conversión.', tags: ['Next.js', 'Diseño UX', 'SEO', 'Conversión', 'Analytics'] },
       ],
     },
     howItWorks: {
@@ -73,11 +74,12 @@ export const translations = {
       ],
       servicesTitle: 'Servicios',
       services: [
-        { label: 'Chatbots',    href: '#servicios' },
-        { label: 'Flujos',      href: '#servicios' },
-        { label: 'Agentes',     href: '#servicios' },
-        { label: 'Consultoría', href: '#servicios' },
-        { label: 'Software',    href: '#servicios' },
+        { label: 'Chatbots',      href: '#servicios' },
+        { label: 'Flujos',        href: '#servicios' },
+        { label: 'Agentes',       href: '#servicios' },
+        { label: 'Consultoría',   href: '#servicios' },
+        { label: 'Software',      href: '#servicios' },
+        { label: 'Landing Pages', href: '#servicios' },
       ],
       companyTitle: 'Compañía',
       company: [
@@ -129,6 +131,7 @@ export const translations = {
         { title: 'Business Automation', description: 'AI integration into your current systems to optimize operations.',   detail: 'We embed AI into your existing CRM, ERP, and BI systems to optimize operations without replacing your current stack.',  tags: ['Python', 'APIs', 'CRM', 'ERP', 'Power BI'] },
         { title: 'AI Consulting',       description: 'Diagnosis, strategy, and AI implementation tailored to your business.', detail: 'We analyze your processes, spot AI opportunities, and deliver a clear roadmap with hands-on support throughout.',      tags: ['Audit', 'Roadmap', 'Workshops', 'Strategy'] },
         { title: 'Custom Software',     description: 'Personalized development with AI integrated from day one.',          detail: 'We design and build platforms or apps with embedded AI, tailored exactly to your processes and business goals.',        tags: ['Next.js', 'FastAPI', 'Docker', 'PostgreSQL', 'GPT-4'] },
+        { title: 'Landing Page Creation', description: 'We boost your business with a high-impact landing page built with your data and brand.', detail: 'We design and develop your landing page optimized to convert visitors into customers, using your brand identity, real data, and conversion best practices.', tags: ['Next.js', 'UX Design', 'SEO', 'Conversion', 'Analytics'] },
       ],
     },
     howItWorks: {
@@ -165,11 +168,12 @@ export const translations = {
       ],
       servicesTitle: 'Services',
       services: [
-        { label: 'Chatbots',   href: '#servicios' },
-        { label: 'Flows',      href: '#servicios' },
-        { label: 'Agents',     href: '#servicios' },
-        { label: 'Consulting', href: '#servicios' },
-        { label: 'Software',   href: '#servicios' },
+        { label: 'Chatbots',      href: '#servicios' },
+        { label: 'Flows',         href: '#servicios' },
+        { label: 'Agents',        href: '#servicios' },
+        { label: 'Consulting',    href: '#servicios' },
+        { label: 'Software',      href: '#servicios' },
+        { label: 'Landing Pages', href: '#servicios' },
       ],
       companyTitle: 'Company',
       company: [
