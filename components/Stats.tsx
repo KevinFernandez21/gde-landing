@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from 'react'
 import { useInView, useReducedMotion } from 'framer-motion'
 import { useLanguage } from '@/lib/language-context'
 
-const statValues: (number | string)[] = [6, '100%', '24/7']
-
 function Counter({ value }: { value: number | string }) {
   const [display, setDisplay] = useState<number | string>(
     typeof value === 'number' ? 0 : value
@@ -32,6 +30,9 @@ function Counter({ value }: { value: number | string }) {
 
 export default function Stats() {
   const { t } = useLanguage()
+  const numServices = t.services?.items?.length || 7
+  const statValues: (number | string)[] = [numServices, '100%', '24/7']
+  
   return (
     <section style={{ borderBottom: '1px solid rgba(255,255,255,0.08)', padding: '0 24px' }}>
       <div className="grid grid-cols-1 md:grid-cols-3" style={{ maxWidth: 896, margin: '0 auto' }}>

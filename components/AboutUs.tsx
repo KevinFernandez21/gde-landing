@@ -21,46 +21,46 @@ export default function AboutUs() {
 
   return (
     <section id="nosotros" className="py-14 md:py-20 lg:py-24 px-6" ref={ref}>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center" style={{ maxWidth: 1152, margin: '0 auto' }}>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center" style={{ maxWidth: 1152, margin: '0 auto' }}>
 
         {/* Text */}
-        <div>
+        <div className="lg:col-span-7 pr-0 lg:pr-8">
           <motion.p
             className="font-display"
             {...anim(0)}
-            style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#4F7EFF', marginBottom: 20 }}
+            style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#4F7EFF', marginBottom: 24 }}
           >
             {t.about.eyebrow}
           </motion.p>
           <motion.h2
             className="font-display"
             {...anim(0.08)}
-            style={{ fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.03em', color: '#FFFFFF', marginBottom: 24, lineHeight: 1.15 }}
+            style={{ fontSize: 'clamp(2rem, 3.5vw, 2.75rem)', fontWeight: 700, letterSpacing: '-0.02em', color: '#FFFFFF', marginBottom: 28, lineHeight: 1.25 }}
           >
             {t.about.title}
           </motion.h2>
           <motion.p
             className="font-body"
             {...anim(0.16)}
-            style={{ fontSize: 14, color: '#8B9AB5', lineHeight: 1.75 }}
+            style={{ fontSize: 17, color: 'rgba(255,255,255,0.75)', lineHeight: 1.8 }}
           >
             {t.about.body}
           </motion.p>
         </div>
 
         {/* Cards */}
-        <motion.div {...anim(0.24)} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+        <motion.div className="lg:col-span-5" {...anim(0.24)} style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
           {t.about.cards.map((label, i) => {
             const Icon = miniCardIcons[i]
             return (
               <div
                 key={label}
-                style={{ background: '#0D1018', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 12, padding: 20, display: 'flex', flexDirection: 'column', gap: 12, transition: 'background 0.2s, border-color 0.2s', cursor: 'default' }}
-                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = '#141924'; el.style.borderColor = 'rgba(79,126,255,0.25)' }}
-                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = '#0D1018'; el.style.borderColor = 'rgba(255,255,255,0.08)' }}
+                style={{ background: '#0D1018', border: '1px solid rgba(255,255,255,0.08)', borderRadius: 16, padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: 16, transition: 'all 0.3s', cursor: 'default' }}
+                onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = '#141924'; el.style.borderColor = 'rgba(79,126,255,0.3)'; el.style.transform = 'translateY(-4px)' }}
+                onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = '#0D1018'; el.style.borderColor = 'rgba(255,255,255,0.08)'; el.style.transform = 'translateY(0)' }}
               >
-                <Icon size={18} style={{ color: '#4F7EFF' }} />
-                <p className="font-display" style={{ fontSize: 12, fontWeight: 600, color: '#EAECF4', lineHeight: 1.3 }}>{label}</p>
+                <Icon size={24} style={{ color: '#4F7EFF' }} />
+                <p className="font-display" style={{ fontSize: 14, fontWeight: 600, color: '#EAECF4', lineHeight: 1.4 }}>{label}</p>
               </div>
             )
           })}

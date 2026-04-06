@@ -8,8 +8,8 @@ export const translations = {
       cta:        'Hablar con un experto',
     },
     hero: {
-      lines:       ['Automatiza.', 'Escala.', 'Transforma.'],
-      description: 'Construimos soluciones de IA que reemplazan trabajo manual y aceleran tu negocio.',
+      lines:       ['Si tu empresa ', 'sigue operando igual,', 'ya va tarde.'],
+      description: 'Diseñamos e implementamos inteligencia artificial que reemplaza procesos, optimiza decisiones y convierte tu operación en una ventaja competitiva real.',
       cta:         'Hablar con un experto',
       secondary:   'Ver servicios →',
     },
@@ -20,8 +20,8 @@ export const translations = {
     ],
     about: {
       eyebrow: 'Quiénes Somos',
-      title:   'Impulsamos negocios con Inteligencia Artificial',
-      body:    'Somos un equipo especializado en soluciones de IA para empresas y emprendedores de Latinoamérica. Diseñamos, construimos y desplegamos tecnología que automatiza, escala y transforma negocios reales.',
+      title:   'Las empresas que no evolucionan desaparecen. Nosotros construimos las que crean el futuro.',
+      body:    'No trabajamos sobre la superficie. Rediseñamos cómo funciona tu empresa desde dentro. Convertimos procesos en sistemas inteligentes, datos en decisiones y operaciones en estructuras que aprenden, se adaptan y escalan. No implementamos herramientas. Construimos la inteligencia que define cómo tu empresa compite y crece.',
       cards:   ['Chatbots & Agentes', 'Flujos Inteligentes', 'Automatización', 'Software a la Medida'],
     },
     services: {
@@ -31,13 +31,13 @@ export const translations = {
       drawerStack: 'Herramientas & Tecnología',
       drawerCta:   'Hablar con un experto',
       items: [
-        { title: 'Chatbots con IA',           description: 'Agentes conversacionales entrenados con tu información empresarial.',       detail: 'Asistente virtual que responde, vende y atiende a tus clientes las 24 horas entrenado con tu información real.',      tags: ['ChatGPT', 'RAG', 'WhatsApp', 'Web', 'Telegram'] },
-        { title: 'Flujos Automatizados',       description: 'Automatiza procesos repetitivos con flujos inteligentes conectados a tus herramientas.', detail: 'Conectamos tus aplicaciones y eliminamos tareas manuales repetitivas con flujos inteligentes sin necesidad de código.',  tags: ['n8n', 'Make', 'Zapier', 'Webhooks', 'API REST'] },
-        { title: 'Agentes de IA',              description: 'Agentes autónomos que ejecutan tareas complejas sin intervención humana.',  detail: 'Agentes que navegan sistemas, toman decisiones y completan objetivos de negocio complejos de forma autónoma.',          tags: ['LangChain', 'OpenAI', 'Pipelines', 'Tools', 'Memory'] },
-        { title: 'Automatización Empresarial', description: 'Integración de IA en tus sistemas actuales para optimizar operaciones.',   detail: 'Integramos inteligencia artificial en tu CRM, ERP y BI actuales para optimizar operaciones sin reemplazar tu stack.',    tags: ['Python', 'APIs', 'CRM', 'ERP', 'Power BI'] },
-        { title: 'Consultoría en IA',          description: 'Diagnóstico, estrategia e implementación de IA adaptada a tu negocio.',    detail: 'Analizamos tus procesos, identificamos oportunidades de IA y te entregamos una hoja de ruta clara con acompañamiento.',  tags: ['Auditoría', 'Roadmap', 'Workshops', 'Estrategia'] },
-        { title: 'Software a la Medida',       description: 'Desarrollo personalizado con IA integrada desde el día uno.',              detail: 'Diseñamos y construimos plataformas o aplicaciones con IA embebida adaptadas exactamente a tus procesos y objetivos.',    tags: ['Next.js', 'FastAPI', 'Docker', 'PostgreSQL', 'GPT-4'] },
-        { title: 'Creación de Landing Page',   description: 'Impulsamos tu empresa con una landing page de alto impacto construida con tus datos y marca.', detail: 'Diseñamos y desarrollamos tu landing page optimizada para convertir visitas en clientes, usando tu identidad de marca, datos reales y las mejores prácticas de conversión.', tags: ['Next.js', 'Diseño UX', 'SEO', 'Conversión', 'Analytics'] },
+        { title: 'Chatbots con IA',           description: 'Convierte cada conversación en una oportunidad de negocio', detail: 'Sistemas conversacionales que entienden tu empresa, responden con precisión y generan valor en cada interacción.', tags: ['ChatGPT', 'RAG', 'WhatsApp', 'Web', 'Telegram'] },
+        { title: 'Flujos Automatizados',       description: 'Elimina el trabajo repetitivo de tu operación', detail: 'Diseñamos flujos inteligentes que conectan tus herramientas y ejecutan procesos sin fricción.', tags: ['n8n', 'Make', 'Zapier', 'Webhooks', 'API REST'] },
+        { title: 'Agentes de IA',              description: 'Sistemas que trabajan por tu empresa, no solo contigo', detail: 'Agentes capaces de ejecutar tareas complejas, tomar decisiones y operar de forma continua.', tags: ['LangChain', 'OpenAI', 'Pipelines', 'Tools', 'Memory'] },
+        { title: 'Automatización Empresarial', description: 'Transforma tu operación en un sistema inteligente', detail: 'Integramos IA en el núcleo de tu empresa para optimizar cada proceso y reducir costos operativos.', tags: ['Python', 'APIs', 'CRM', 'ERP', 'Power BI'] },
+        { title: 'Consultoría en IA',          description: 'Rediseñamos cómo funciona tu negocio', detail: 'No es asesoría. Es entender tu empresa y construir la estrategia de IA que realmente la hace escalar.', tags: ['Auditoría', 'Roadmap', 'Workshops', 'Estrategia'] },
+        { title: 'Software a la Medida',       description: 'Construimos lo que tu empresa realmente necesita', detail: 'Software diseñado desde cero, alineado a tus procesos, datos y forma de operar.', tags: ['Next.js', 'FastAPI', 'Docker', 'PostgreSQL', 'GPT-4'] },
+        { title: 'Creación de Landing Page',   description: 'Convierte tráfico en resultados reales', detail: 'Diseñamos experiencias digitales que no solo se ven bien, sino que convierten.', tags: ['Next.js', 'Diseño UX', 'SEO', 'Conversión', 'Analytics'] },
       ],
     },
     howItWorks: {
@@ -102,7 +102,7 @@ export const translations = {
       cta:        'Talk to an expert',
     },
     hero: {
-      lines:       ['Automate.', 'Scale.', 'Transform.'],
+      lines:       ['If your business is still', 'operating the same way,', "you're already behind."],
       description: 'We build AI solutions that replace manual work and accelerate your business.',
       cta:         'Talk to an expert',
       secondary:   'View services →',
@@ -114,8 +114,8 @@ export const translations = {
     ],
     about: {
       eyebrow: 'Who We Are',
-      title:   'We power businesses with Artificial Intelligence',
-      body:    'We are a team specialized in AI solutions for companies and entrepreneurs across Latin America. We design, build, and deploy technology that automates, scales, and transforms real businesses.',
+      title:   'Companies that don\'t evolve disappear. We build the ones that create the future.',
+      body:    'We don\'t work on the surface. We redesign how your company works from the inside. We turn processes into intelligent systems, data into decisions, and operations into structures that learn, adapt, and scale. We don\'t just implement tools. We build the intelligence that defines how your company competes and grows.',
       cards:   ['Chatbots & Agents', 'Intelligent Flows', 'Automation', 'Custom Software'],
     },
     services: {
@@ -125,13 +125,13 @@ export const translations = {
       drawerStack: 'Tools & Technology',
       drawerCta:   'Talk to an expert',
       items: [
-        { title: 'AI Chatbots',         description: 'Conversational agents trained on your business information.',        detail: 'Virtual assistant that responds, sells, and serves your customers 24/7, trained on your actual business data.',          tags: ['ChatGPT', 'RAG', 'WhatsApp', 'Web', 'Telegram'] },
-        { title: 'Automated Flows',     description: 'Automate repetitive processes with intelligent flows connected to your tools.', detail: 'Connect your apps and eliminate repetitive manual tasks with intelligent flows — no code required.',                    tags: ['n8n', 'Make', 'Zapier', 'Webhooks', 'REST API'] },
-        { title: 'AI Agents',           description: 'Autonomous agents that execute complex tasks without human intervention.', detail: 'Agents that navigate systems, make decisions, and complete complex business goals autonomously.',                     tags: ['LangChain', 'OpenAI', 'Pipelines', 'Tools', 'Memory'] },
-        { title: 'Business Automation', description: 'AI integration into your current systems to optimize operations.',   detail: 'We embed AI into your existing CRM, ERP, and BI systems to optimize operations without replacing your current stack.',  tags: ['Python', 'APIs', 'CRM', 'ERP', 'Power BI'] },
-        { title: 'AI Consulting',       description: 'Diagnosis, strategy, and AI implementation tailored to your business.', detail: 'We analyze your processes, spot AI opportunities, and deliver a clear roadmap with hands-on support throughout.',      tags: ['Audit', 'Roadmap', 'Workshops', 'Strategy'] },
-        { title: 'Custom Software',     description: 'Personalized development with AI integrated from day one.',          detail: 'We design and build platforms or apps with embedded AI, tailored exactly to your processes and business goals.',        tags: ['Next.js', 'FastAPI', 'Docker', 'PostgreSQL', 'GPT-4'] },
-        { title: 'Landing Page Creation', description: 'We boost your business with a high-impact landing page built with your data and brand.', detail: 'We design and develop your landing page optimized to convert visitors into customers, using your brand identity, real data, and conversion best practices.', tags: ['Next.js', 'UX Design', 'SEO', 'Conversion', 'Analytics'] },
+        { title: 'AI Chatbots',         description: 'Turn every conversation into a business opportunity', detail: 'Conversational systems that understand your business, respond accurately, and generate value in every interaction.', tags: ['ChatGPT', 'RAG', 'WhatsApp', 'Web', 'Telegram'] },
+        { title: 'Automated Flows',     description: 'Eliminate repetitive work from your operation', detail: 'We design intelligent flows that connect your tools and execute processes frictionlessly.', tags: ['n8n', 'Make', 'Zapier', 'Webhooks', 'REST API'] },
+        { title: 'AI Agents',           description: 'Systems that work for your business, not just with you', detail: 'Agents capable of executing complex tasks, making decisions, and operating continuously.', tags: ['LangChain', 'OpenAI', 'Pipelines', 'Tools', 'Memory'] },
+        { title: 'Business Automation', description: 'Transform your operation into an intelligent system', detail: 'We integrate AI at the core of your business to optimize every process and reduce operational costs.', tags: ['Python', 'APIs', 'CRM', 'ERP', 'Power BI'] },
+        { title: 'AI Consulting',       description: 'We redesign how your business works', detail: 'It\'s not just advice. It\'s understanding your business and building the AI strategy that truly makes it scale.', tags: ['Audit', 'Roadmap', 'Workshops', 'Strategy'] },
+        { title: 'Custom Software',     description: 'We build what your business truly needs', detail: 'Software designed from scratch, aligned with your processes, data, and way of operating.', tags: ['Next.js', 'FastAPI', 'Docker', 'PostgreSQL', 'GPT-4'] },
+        { title: 'Landing Page Creation', description: 'Convert traffic into real results', detail: 'We design digital experiences that not only look good, but convert.', tags: ['Next.js', 'UX Design', 'SEO', 'Conversion', 'Analytics'] },
       ],
     },
     howItWorks: {
