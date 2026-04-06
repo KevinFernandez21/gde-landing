@@ -37,7 +37,7 @@ export const translations = {
         { title: 'Automatización Empresarial', description: 'Transforma tu operación en un sistema inteligente', detail: 'Integramos IA en el núcleo de tu empresa para optimizar cada proceso y reducir costos operativos.', tags: ['Python', 'APIs', 'CRM', 'ERP', 'Power BI'] },
         { title: 'Consultoría en IA',          description: 'Rediseñamos cómo funciona tu negocio', detail: 'No es asesoría. Es entender tu empresa y construir la estrategia de IA que realmente la hace escalar.', tags: ['Auditoría', 'Roadmap', 'Workshops', 'Estrategia'] },
         { title: 'Software a la Medida',       description: 'Construimos lo que tu empresa realmente necesita', detail: 'Software diseñado desde cero, alineado a tus procesos, datos y forma de operar.', tags: ['Next.js', 'FastAPI', 'Docker', 'PostgreSQL', 'GPT-4'] },
-        { title: 'Creación de Landing Page',   description: 'Convierte tráfico en resultados reales', detail: 'Diseñamos experiencias digitales que no solo se ven bien, sino que convierten.', tags: ['Next.js', 'Diseño UX', 'SEO', 'Conversión', 'Analytics'] },
+        { title: 'Creación de Landing Page',   description: 'Diseñamos experiencias que convierten interés en negocio', detail: 'Diseñamos experiencias digitales que no solo se ven bien, sino que convierten.', tags: ['Next.js', 'Diseño UX', 'SEO', 'Conversión', 'Analytics'] },
       ],
     },
     howItWorks: {
@@ -131,7 +131,7 @@ export const translations = {
         { title: 'Business Automation', description: 'Transform your operation into an intelligent system', detail: 'We integrate AI at the core of your business to optimize every process and reduce operational costs.', tags: ['Python', 'APIs', 'CRM', 'ERP', 'Power BI'] },
         { title: 'AI Consulting',       description: 'We redesign how your business works', detail: 'It\'s not just advice. It\'s understanding your business and building the AI strategy that truly makes it scale.', tags: ['Audit', 'Roadmap', 'Workshops', 'Strategy'] },
         { title: 'Custom Software',     description: 'We build what your business truly needs', detail: 'Software designed from scratch, aligned with your processes, data, and way of operating.', tags: ['Next.js', 'FastAPI', 'Docker', 'PostgreSQL', 'GPT-4'] },
-        { title: 'Landing Page Creation', description: 'Convert traffic into real results', detail: 'We design digital experiences that not only look good, but convert.', tags: ['Next.js', 'UX Design', 'SEO', 'Conversion', 'Analytics'] },
+        { title: 'Landing Page Creation', description: 'We design experiences that convert interest into business', detail: 'We design digital experiences that not only look good, but convert.', tags: ['Next.js', 'UX Design', 'SEO', 'Conversion', 'Analytics'] },
       ],
     },
     howItWorks: {
