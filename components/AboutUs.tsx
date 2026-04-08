@@ -59,7 +59,7 @@ export default function AboutUs() {
                 onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = '#141924'; el.style.borderColor = 'rgba(79,126,255,0.3)'; el.style.transform = 'translateY(-4px)' }}
                 onMouseLeave={e => { const el = e.currentTarget as HTMLElement; el.style.background = '#0D1018'; el.style.borderColor = 'rgba(255,255,255,0.08)'; el.style.transform = 'translateY(0)' }}
               >
-                <Icon size={24} style={{ color: '#4F7EFF' }} />
+                <Icon size={36} style={{ color: '#FFFFFF' }} />
                 <p className="font-display" style={{ fontSize: 14, fontWeight: 600, color: '#EAECF4', lineHeight: 1.4 }}>{label}</p>
               </div>
             )

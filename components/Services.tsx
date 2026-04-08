@@ -111,8 +111,8 @@ function ServiceDrawer({
 
         {/* Icon + Title */}
         <div style={{ padding: '20px 24px 24px', display: 'flex', alignItems: 'center', gap: 16, borderBottom: '1px solid rgba(255,255,255,0.07)' }}>
-          <div style={{ width: 48, height: 48, borderRadius: 12, background: 'rgba(79,126,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-            <Icon size={22} style={{ color: '#4F7EFF' }} />
+          <div style={{ width: 56, height: 56, borderRadius: 12, background: 'rgba(79,126,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+            <Icon size={32} style={{ color: '#FFFFFF' }} />
           </div>
           <h2 className="font-display" style={{ fontSize: 20, fontWeight: 700, color: '#EAECF4', lineHeight: 1.2 }}>
             {service.title}
@@ -234,8 +234,8 @@ function VideoPopup({ service }: { service: Service }) {
           )}
         </div>
         <div style={{ padding: '18px 24px 22px', display: 'flex', alignItems: 'flex-start', gap: 14 }}>
-          <div style={{ width: 32, height: 32, borderRadius: 8, background: 'rgba(79,126,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 2 }}>
-            <Icon size={15} style={{ color: '#4F7EFF' }} />
+          <div style={{ width: 44, height: 44, borderRadius: 10, background: 'rgba(79,126,255,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 2 }}>
+            <Icon size={24} style={{ color: '#FFFFFF' }} />
           </div>
           <div>
             <h3 className="font-display" style={{ fontSize: 14, fontWeight: 600, color: '#EAECF4', marginBottom: 5 }}>{service.title}</h3>
@@ -316,8 +316,8 @@ function ServiceCard({
           )}
           <div style={{ position: 'absolute', inset: 0, opacity: isCardInView ? 0 : 1, background: '#07090F', transition: 'opacity 0.7s ease', pointerEvents: 'none' }} />
           <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '64px 24px 28px', background: 'linear-gradient(to top, rgba(7,9,15,0.96) 0%, rgba(7,9,15,0.6) 60%, transparent 100%)' }}>
-            <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 32, height: 32, borderRadius: 8, background: 'rgba(79,126,255,0.15)', marginBottom: 12 }}>
-              <Icon size={15} style={{ color: '#4F7EFF' }} />
+            <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 48, height: 48, borderRadius: 10, background: 'rgba(79,126,255,0.15)', marginBottom: 14 }}>
+              <Icon size={28} style={{ color: '#FFFFFF' }} />
             </div>
             <h3 className="font-display" style={{ fontSize: 16, fontWeight: 700, color: '#EAECF4', marginBottom: 6, lineHeight: 1.2 }}>{service.title}</h3>
             <p className="font-body" style={{ fontSize: 13, color: '#8B9AB5', lineHeight: 1.6 }}>{service.description}</p>
@@ -332,8 +332,8 @@ function ServiceCard({
           onClick={onOpen}
           style={{ background: '#07090F', padding: 24, gap: 16, cursor: 'pointer' }}
         >
-          <div style={{ width: 36, height: 36, borderRadius: 8, background: 'rgba(79,126,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Icon size={17} style={{ color: '#4F7EFF' }} />
+          <div style={{ width: 56, height: 56, borderRadius: 12, background: 'rgba(79,126,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Icon size={32} style={{ color: '#FFFFFF' }} />
           </div>
           <div>
             <h3 className="font-display" style={{ fontSize: 16, fontWeight: 600, color: '#EAECF4', marginBottom: 6, lineHeight: 1.3 }}>{service.title}</h3>
@@ -363,8 +363,8 @@ function ServiceCard({
           position: 'relative',
         }}
       >
-        <div style={{ width: 40, height: 40, borderRadius: 10, background: hovered ? 'rgba(79,126,255,0.2)' : 'rgba(79,126,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.25s', flexShrink: 0 }}>
-          <Icon size={featured ? 20 : 17} style={{ color: '#4F7EFF' }} />
+        <div style={{ width: 56, height: 56, borderRadius: 12, background: hovered ? 'rgba(79,126,255,0.2)' : 'rgba(79,126,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.25s', flexShrink: 0 }}>
+          <Icon size={featured ? 32 : 28} style={{ color: '#FFFFFF' }} />
         </div>
         <div style={{ flex: featured ? 1 : undefined }}>
           <h3 className="font-display" style={{ fontSize: featured ? 18 : 16, fontWeight: 600, color: '#EAECF4', marginBottom: 8, lineHeight: 1.3 }}>{service.title}</h3>

@@ -25,12 +25,12 @@ export default function CtaFinal() {
       style={{ textAlign: 'center', borderTop: '1px solid rgba(255,255,255,0.08)' }}
       ref={ref}
     >
-      <div style={{ maxWidth: 600, margin: '0 auto' }}>
+      <div style={{ maxWidth: 700, margin: '0 auto' }}>
 
         <motion.p
           className="font-display"
           {...anim(0)}
-          style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#4F7EFF', marginBottom: 24 }}
+          style={{ fontSize: 13, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#4F7EFF', marginBottom: 24 }}
         >
           {t.cta.eyebrow}
         </motion.p>
@@ -38,7 +38,7 @@ export default function CtaFinal() {
         <motion.h2
           className="font-display"
           {...anim(0.08)}
-          style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, letterSpacing: '-0.04em', color: '#FFFFFF', marginBottom: 24, lineHeight: 1.05 }}
+          style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', fontWeight: 800, letterSpacing: '-0.04em', color: '#FFFFFF', marginBottom: 32, lineHeight: 1.05 }}
         >
           {t.cta.title}
         </motion.h2>
@@ -46,7 +46,7 @@ export default function CtaFinal() {
         <motion.p
           className="font-body"
           {...anim(0.16)}
-          style={{ fontSize: 14, color: '#8B9AB5', lineHeight: 1.75, marginBottom: 40, maxWidth: 420, margin: '0 auto 40px' }}
+          style={{ fontSize: 18, color: '#8B9AB5', lineHeight: 1.75, marginBottom: 40, maxWidth: 500, margin: '0 auto 40px' }}
         >
           {t.cta.description}
         </motion.p>
@@ -55,7 +55,7 @@ export default function CtaFinal() {
           <button
             onClick={openModal}
             className="font-body"
-            style={{ display: 'inline-flex', alignItems: 'center', padding: '14px 32px', borderRadius: 999, backgroundColor: '#4F7EFF', color: '#fff', fontSize: 14, fontWeight: 500, border: 'none', cursor: 'pointer', transition: 'background-color 0.2s' }}
+            style={{ display: 'inline-flex', alignItems: 'center', padding: '16px 40px', borderRadius: 999, backgroundColor: '#4F7EFF', color: '#fff', fontSize: 16, fontWeight: 500, border: 'none', cursor: 'pointer', transition: 'background-color 0.2s' }}
             onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#3560E8')}
             onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4F7EFF')}
           >

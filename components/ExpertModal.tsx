@@ -279,6 +279,7 @@ export default function ExpertModal() {
   const [dir, setDir]         = useState<Direction>(1)
   const [answers, setAnswers] = useState<Answers>({})
   const [done, setDone]       = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const total   = FORM_QUESTIONS.length
   const current = FORM_QUESTIONS[step - 1]
@@ -290,16 +291,36 @@ export default function ExpertModal() {
     setAnswers(prev => ({ ...prev, [current.id]: v }))
   }
 
-  const handleContinue = useCallback(() => {
-    if (!canContinue) return
+  const handleContinue = useCallback(async () => {
+    if (!canContinue || isSubmitting) return
     if (step < total) {
       setDir(1)
       setStep(s => s + 1)
     } else {
+      setIsSubmitting(true)
       console.log('Lead captured:', answers)
-      setDone(true)
+
+      try {
+        const webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || 'REEMPLAZA_CON_TU_WEBHOOK_DE_N8N'
+        if (webhookUrl !== 'REEMPLAZA_CON_TU_WEBHOOK_DE_N8N') {
+          await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              event: 'lead_submitted',
+              data: answers,
+              submittedAt: new Date().toISOString()
+            })
+          })
+        }
+      } catch (error) {
+        console.error('Error enviando a n8n:', error)
+      } finally {
+        setIsSubmitting(false)
+        setDone(true)
+      }
     }
-  }, [canContinue, step, total, answers])
+  }, [canContinue, step, total, answers, isSubmitting])
 
   function handleBack() {
     if (step > 1) { setDir(-1); setStep(s => s - 1) }
@@ -307,7 +328,7 @@ export default function ExpertModal() {
 
   function handleClose() {
     closeModal()
-    setTimeout(() => { setStep(1); setAnswers({}); setDone(false); setDir(1) }, 350)
+    setTimeout(() => { setStep(1); setAnswers({}); setDone(false); setDir(1); setIsSubmitting(false) }, 350)
   }
 
   // Keyboard: Enter = continue
@@ -456,23 +477,23 @@ export default function ExpertModal() {
 
                 <button
                   onClick={handleContinue}
-                  disabled={!canContinue}
+                  disabled={!canContinue || isSubmitting}
                   style={{
                     display: 'flex', alignItems: 'center', gap: 8,
                     padding: '12px 28px', borderRadius: 999,
-                    background: canContinue ? '#4F7EFF' : 'rgba(79,126,255,0.25)',
+                    background: (canContinue && !isSubmitting) ? '#4F7EFF' : 'rgba(79,126,255,0.25)',
                     border: 'none',
-                    color: canContinue ? '#fff' : 'rgba(255,255,255,0.3)',
+                    color: (canContinue && !isSubmitting) ? '#fff' : 'rgba(255,255,255,0.3)',
                     fontSize: 14, fontWeight: 600,
-                    cursor: canContinue ? 'pointer' : 'not-allowed',
+                    cursor: (canContinue && !isSubmitting) ? 'pointer' : 'not-allowed',
                     transition: 'all 0.2s',
-                    boxShadow: canContinue ? '0 4px 20px rgba(79,126,255,0.35)' : 'none',
+                    boxShadow: (canContinue && !isSubmitting) ? '0 4px 20px rgba(79,126,255,0.35)' : 'none',
                   }}
-                  onMouseEnter={e => { if (canContinue) e.currentTarget.style.background = '#3560E8' }}
-                  onMouseLeave={e => { if (canContinue) e.currentTarget.style.background = '#4F7EFF' }}
+                  onMouseEnter={e => { if (canContinue && !isSubmitting) e.currentTarget.style.background = '#3560E8' }}
+                  onMouseLeave={e => { if (canContinue && !isSubmitting) e.currentTarget.style.background = '#4F7EFF' }}
                 >
-                  {step === total ? 'Enviar' : 'Continuar'}
-                  {step === total ? <Check size={15} /> : <ArrowRight size={15} />}
+                  {isSubmitting ? 'Enviando...' : (step === total ? 'Enviar' : 'Continuar')}
+                  {!isSubmitting && (step === total ? <Check size={15} /> : <ArrowRight size={15} />)}
                 </button>
               </div>
             </>

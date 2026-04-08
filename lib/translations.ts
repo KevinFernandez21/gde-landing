@@ -8,7 +8,7 @@ export const translations = {
       cta:        'Hablar con un experto',
     },
     hero: {
-      lines:       ['Si tu empresa ', 'sigue operando igual,', 'ya va tarde.'],
+      lines:       ['El futuro pertenece ', 'a las empresas ', 'que evolucionan.'],
       description: 'Diseñamos e implementamos inteligencia artificial que reemplaza procesos, optimiza decisiones y convierte tu operación en una ventaja competitiva real.',
       cta:         'Hablar con un experto',
       secondary:   'Ver servicios →',
@@ -20,8 +20,8 @@ export const translations = {
     ],
     about: {
       eyebrow: 'Quiénes Somos',
-      title:   'Las empresas que no evolucionan desaparecen. Nosotros construimos las que crean el futuro.',
-      body:    'No trabajamos sobre la superficie. Rediseñamos cómo funciona tu empresa desde dentro. Convertimos procesos en sistemas inteligentes, datos en decisiones y operaciones en estructuras que aprenden, se adaptan y escalan. No implementamos herramientas. Construimos la inteligencia que define cómo tu empresa compite y crece.',
+      title:   'Implementamos inteligencia artificial donde realmente genera impacto.',
+      body:    'Rediseñamos procesos, conectamos tus sistemas y convertimos datos en decisiones que crean ventaja competitiva.',
       cards:   ['Chatbots & Agentes', 'Flujos Inteligentes', 'Automatización', 'Software a la Medida'],
     },
     services: {
@@ -102,7 +102,7 @@ export const translations = {
       cta:        'Talk to an expert',
     },
     hero: {
-      lines:       ['If your business is still', 'operating the same way,', "you're already behind."],
+      lines:       ['The future belongs ', 'to companies ', 'that evolve.'],
       description: 'We build AI solutions that replace manual work and accelerate your business.',
       cta:         'Talk to an expert',
       secondary:   'View services →',
@@ -114,8 +114,8 @@ export const translations = {
     ],
     about: {
       eyebrow: 'Who We Are',
-      title:   'Companies that don\'t evolve disappear. We build the ones that create the future.',
-      body:    'We don\'t work on the surface. We redesign how your company works from the inside. We turn processes into intelligent systems, data into decisions, and operations into structures that learn, adapt, and scale. We don\'t just implement tools. We build the intelligence that defines how your company competes and grows.',
+      title:   'We implement artificial intelligence where it truly generates impact.',
+      body:    'We redesign processes, connect your systems, and turn data into decisions that create a competitive advantage.',
       cards:   ['Chatbots & Agents', 'Intelligent Flows', 'Automation', 'Custom Software'],
     },
     services: {
