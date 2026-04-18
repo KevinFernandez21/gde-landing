@@ -71,7 +71,7 @@ const CATEGORIES: Category[] = [
 
 // ─── Orbital Diagram ───────────────────────────────────────────────
 
-function OrbitalIcon({ abbr, color }: { abbr: string; color: string }) {
+function OrbitalIcon({ abbr, color, reduced }: { abbr: string; color: string; reduced: boolean | null }) {
   return (
     <div
       style={{
@@ -87,7 +87,7 @@ function OrbitalIcon({ abbr, color }: { abbr: string; color: string }) {
         fontWeight: 800,
         color: '#fff',
         letterSpacing: '-0.01em',
-        animation: 'counter-spin var(--orbit-duration) linear infinite',
+        animation: reduced ? 'none' : 'counter-spin var(--orbit-duration) linear infinite',
       }}
     >
       {abbr}
@@ -143,7 +143,7 @@ function Ring({
                 left: `calc(50% - ${iconSize / 2}px)`,
               }}
             >
-              <OrbitalIcon abbr={tech.abbr} color={color} />
+              <OrbitalIcon abbr={tech.abbr} color={color} reduced={reduced} />
             </div>
           </div>
         )
