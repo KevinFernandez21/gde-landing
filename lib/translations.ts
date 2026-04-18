@@ -40,6 +40,10 @@ export const translations = {
         { title: 'Creación de Landing Page',   description: 'Diseñamos experiencias que convierten interés en negocio', detail: 'Diseñamos experiencias digitales que no solo se ven bien, sino que convierten.', tags: ['Next.js', 'Diseño UX', 'SEO', 'Conversión', 'Analytics'] },
       ],
     },
+    techStack: {
+      eyebrow: 'Nuestro Stack',
+      title:   'Tecnologías que dominamos',
+    },
     howItWorks: {
       eyebrow: 'Metodología',
       title:   'Cómo Trabajamos',
@@ -133,6 +137,10 @@ export const translations = {
         { title: 'Custom Software',     description: 'We build what your business truly needs', detail: 'Software designed from scratch, aligned with your processes, data, and way of operating.', tags: ['Next.js', 'FastAPI', 'Docker', 'PostgreSQL', 'GPT-4'] },
         { title: 'Landing Page Creation', description: 'We design experiences that convert interest into business', detail: 'We design digital experiences that not only look good, but convert.', tags: ['Next.js', 'UX Design', 'SEO', 'Conversion', 'Analytics'] },
       ],
+    },
+    techStack: {
+      eyebrow: 'Our Stack',
+      title:   'Technologies we master',
     },
     howItWorks: {
       eyebrow: 'Methodology',
