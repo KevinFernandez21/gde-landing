@@ -301,18 +301,22 @@ export default function ExpertModal() {
       console.log('Lead captured:', answers)
 
       try {
-        const webhookUrl = process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL || 'REEMPLAZA_CON_TU_WEBHOOK_DE_N8N'
-        if (webhookUrl !== 'REEMPLAZA_CON_TU_WEBHOOK_DE_N8N') {
-          await fetch(webhookUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              event: 'lead_submitted',
-              data: answers,
-              submittedAt: new Date().toISOString()
-            })
+        const formattedData = FORM_QUESTIONS.map(q => ({
+          id: q.id,
+          pregunta: q.question,
+          respuesta: answers[q.id] || ''
+        })).filter(item => item.respuesta !== '')
+
+        await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            event: 'lead_submitted',
+            detalles: formattedData,
+            datos: answers,
+            submittedAt: new Date().toISOString()
           })
-        }
+        })
       } catch (error) {
         console.error('Error enviando a n8n:', error)
       } finally {

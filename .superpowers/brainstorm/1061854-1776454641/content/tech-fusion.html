@@ -1,0 +1,116 @@
+<h2>Fusión: Órbita + Glow + Categorías</h2>
+<p class="subtitle">Diseño que no repite ningún patrón existente en el sitio</p>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px;">
+
+  <!-- Opción Fusión A: Órbita izquierda + categorías derecha (split layout) -->
+  <div class="card" data-choice="split" onclick="toggleSelect(this)" style="grid-column:1/-1;">
+    <div class="card-image">
+      <div style="background:#07090F;border-radius:10px;padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center;">
+
+        <!-- LEFT: Órbita con glow -->
+        <div style="position:relative;display:flex;align-items:center;justify-content:center;height:200px;">
+          <!-- Anillos con color diferente por categoría -->
+          <div style="position:absolute;width:180px;height:180px;border-radius:50%;border:1px solid #0ea5e920;"></div>
+          <div style="position:absolute;width:130px;height:130px;border-radius:50%;border:1px solid #8b5cf920;"></div>
+          <div style="position:absolute;width:80px;height:80px;border-radius:50%;border:1px solid #10b98120;"></div>
+
+          <!-- Centro: logo/marca -->
+          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#4F7EFF,#6366f1);box-shadow:0 0 30px #4F7EFF40;display:flex;align-items:center;justify-content:center;z-index:2;">
+            <span style="color:white;font-size:7px;font-weight:800;">GDE</span>
+          </div>
+
+          <!-- Órbita exterior — Frontend (azul) -->
+          <div style="position:absolute;width:180px;height:180px;border-radius:50%;animation:orbit-a 14s linear infinite;">
+            <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:28px;height:28px;background:linear-gradient(135deg,#0ea5e9,#3b82f6);border-radius:6px;box-shadow:0 0 14px #0ea5e970;display:flex;align-items:center;justify-content:center;">
+              <span style="color:white;font-size:6px;font-weight:700;">Re</span>
+            </div>
+          </div>
+          <div style="position:absolute;width:180px;height:180px;border-radius:50%;animation:orbit-a 14s linear infinite;animation-delay:-7s;">
+            <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);width:28px;height:28px;background:linear-gradient(135deg,#3b82f6,#6366f1);border-radius:6px;box-shadow:0 0 14px #3b82f670;display:flex;align-items:center;justify-content:center;">
+              <span style="color:white;font-size:6px;font-weight:700;">Nx</span>
+            </div>
+          </div>
+
+          <!-- Órbita media — Backend (violeta) -->
+          <div style="position:absolute;width:130px;height:130px;border-radius:50%;animation:orbit-b 10s linear infinite;">
+            <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);width:26px;height:26px;background:linear-gradient(135deg,#8b5cf6,#a855f7);border-radius:6px;box-shadow:0 0 14px #8b5cf670;display:flex;align-items:center;justify-content:center;">
+              <span style="color:white;font-size:6px;font-weight:700;">No</span>
+            </div>
+          </div>
+          <div style="position:absolute;width:130px;height:130px;border-radius:50%;animation:orbit-b 10s linear infinite;animation-delay:-5s;">
+            <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%);width:26px;height:26px;background:linear-gradient(135deg,#a855f7,#d946ef);border-radius:6px;box-shadow:0 0 14px #a855f770;display:flex;align-items:center;justify-content:center;">
+              <span style="color:white;font-size:6px;font-weight:700;">Go</span>
+            </div>
+          </div>
+
+          <!-- Órbita interna — Cloud (verde) -->
+          <div style="position:absolute;width:80px;height:80px;border-radius:50%;animation:orbit-c 7s linear infinite;">
+            <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);width:24px;height:24px;background:linear-gradient(135deg,#10b981,#059669);border-radius:5px;box-shadow:0 0 14px #10b98170;display:flex;align-items:center;justify-content:center;">
+              <span style="color:white;font-size:6px;font-weight:700;">AW</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: Categorías con acento de color (de C) -->
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <div style="width:8px;height:8px;border-radius:50%;background:#0ea5e9;box-shadow:0 0 6px #0ea5e9;flex-shrink:0;"></div>
+              <span style="color:#0ea5e9;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;">Frontend</span>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;padding-left:16px;">
+              <span style="background:#0ea5e915;border:1px solid #0ea5e930;color:#94a3b8;font-size:8px;padding:3px 8px;border-radius:4px;">React</span>
+              <span style="background:#0ea5e915;border:1px solid #0ea5e930;color:#94a3b8;font-size:8px;padding:3px 8px;border-radius:4px;">Next.js</span>
+              <span style="background:#0ea5e915;border:1px solid #0ea5e930;color:#94a3b8;font-size:8px;padding:3px 8px;border-radius:4px;">Tailwind</span>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <div style="width:8px;height:8px;border-radius:50%;background:#8b5cf6;box-shadow:0 0 6px #8b5cf6;flex-shrink:0;"></div>
+              <span style="color:#8b5cf6;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;">Backend</span>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;padding-left:16px;">
+              <span style="background:#8b5cf615;border:1px solid #8b5cf630;color:#94a3b8;font-size:8px;padding:3px 8px;border-radius:4px;">Node.js</span>
+              <span style="background:#8b5cf615;border:1px solid #8b5cf630;color:#94a3b8;font-size:8px;padding:3px 8px;border-radius:4px;">Go</span>
+              <span style="background:#8b5cf615;border:1px solid #8b5cf630;color:#94a3b8;font-size:8px;padding:3px 8px;border-radius:4px;">GraphQL</span>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <div style="width:8px;height:8px;border-radius:50%;background:#10b981;box-shadow:0 0 6px #10b981;flex-shrink:0;"></div>
+              <span style="color:#10b981;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;">Cloud & DevOps</span>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;padding-left:16px;">
+              <span style="background:#10b98115;border:1px solid #10b98130;color:#94a3b8;font-size:8px;padding:3px 8px;border-radius:4px;">AWS</span>
+              <span style="background:#10b98115;border:1px solid #10b98130;color:#94a3b8;font-size:8px;padding:3px 8px;border-radius:4px;">Docker</span>
+              <span style="background:#10b98115;border:1px solid #10b98130;color:#94a3b8;font-size:8px;padding:3px 8px;border-radius:4px;">Terraform</span>
+            </div>
+          </div>
+          <div>
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+              <div style="width:8px;height:8px;border-radius:50%;background:#f59e0b;box-shadow:0 0 6px #f59e0b;flex-shrink:0;"></div>
+              <span style="color:#f59e0b;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;">Mobile & AI</span>
+            </div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap;padding-left:16px;">
+              <span style="background:#f59e0b15;border:1px solid #f59e0b30;color:#94a3b8;font-size:8px;padding:3px 8px;border-radius:4px;">React Native</span>
+              <span style="background:#f59e0b15;border:1px solid #f59e0b30;color:#94a3b8;font-size:8px;padding:3px 8px;border-radius:4px;">OpenAI</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Fusión — Split: Órbita + Categorías</h3>
+      <p>Órbita animada a la izquierda (cada anillo = una categoría, cada color = una tech). Derecha: listado organizado con color matching. <strong>No repite ningún patrón del sitio.</strong></p>
+    </div>
+  </div>
+
+</div>
+
+<style>
+@keyframes orbit-a { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes orbit-b { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes orbit-c { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+</style>

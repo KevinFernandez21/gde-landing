@@ -4,19 +4,11 @@ import { useEffect, useRef } from "react"
 import * as THREE from "three"
 
 export function ShaderAnimation() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const sceneRef = useRef<{
-    camera: THREE.Camera
-    scene: THREE.Scene
-    renderer: THREE.WebGLRenderer
-    uniforms: { time: { value: number }; resolution: { value: THREE.Vector2 } }
-    animationId: number
-  } | null>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    if (!containerRef.current) return
-
-    const container = containerRef.current
+    const canvas = canvasRef.current
+    if (!canvas) return
 
     const vertexShader = `
       void main() {
@@ -68,13 +60,15 @@ export function ShaderAnimation() {
     const mesh = new THREE.Mesh(geometry, material)
     scene.add(mesh)
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true })
+    // Pass the canvas from JSX — Three.js reuses the existing WebGL context
+    // instead of creating a new one, which avoids the StrictMode double-mount
+    // error ("Error creating WebGL context").
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
     renderer.setPixelRatio(window.devicePixelRatio)
-    container.appendChild(renderer.domElement)
 
     const onWindowResize = () => {
-      const width = container.clientWidth
-      const height = container.clientHeight
+      const width = canvas.parentElement?.clientWidth ?? canvas.clientWidth
+      const height = canvas.parentElement?.clientHeight ?? canvas.clientHeight
       renderer.setSize(width, height)
       uniforms.resolution.value.x = renderer.domElement.width
       uniforms.resolution.value.y = renderer.domElement.height
@@ -88,20 +82,16 @@ export function ShaderAnimation() {
       animationId = requestAnimationFrame(animate)
       uniforms.time.value += 0.05
       renderer.render(scene, camera)
-      if (sceneRef.current) {
-        sceneRef.current.animationId = animationId
-      }
     }
 
-    sceneRef.current = { camera, scene, renderer, uniforms, animationId: 0 }
     animate()
 
     return () => {
       window.removeEventListener("resize", onWindowResize)
       cancelAnimationFrame(animationId)
-      if (sceneRef.current?.renderer.domElement && container.contains(sceneRef.current.renderer.domElement)) {
-        container.removeChild(sceneRef.current.renderer.domElement)
-      }
+      // Do NOT call forceContextLoss() here — the canvas comes from JSX so its
+      // WebGL context must stay alive for StrictMode's second mount to reuse it.
+      // dispose() cleans up Three.js GPU resources without destroying the context.
       renderer.dispose()
       geometry.dispose()
       material.dispose()
@@ -109,8 +99,8 @@ export function ShaderAnimation() {
   }, [])
 
   return (
-    <div
-      ref={containerRef}
+    <canvas
+      ref={canvasRef}
       className="absolute inset-0 w-full h-full"
     />
   )

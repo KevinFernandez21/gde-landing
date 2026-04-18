@@ -1,0 +1,4 @@
+{"type":"server-started","port":52160,"host":"127.0.0.1","url_host":"localhost","url":"http://localhost:52160","screen_dir":"/home/hombrenaranja/Desktop/project/gde-landing/.superpowers/brainstorm/1061854-1776454641/content","state_dir":"/home/hombrenaranja/Desktop/project/gde-landing/.superpowers/brainstorm/1061854-1776454641/state"}
+{"type":"screen-added","file":"/home/hombrenaranja/Desktop/project/gde-landing/.superpowers/brainstorm/1061854-1776454641/content/tech-layout.html"}
+{"type":"screen-added","file":"/home/hombrenaranja/Desktop/project/gde-landing/.superpowers/brainstorm/1061854-1776454641/content/tech-distinctive.html"}
+{"type":"server-stopped","reason":"idle timeout"}

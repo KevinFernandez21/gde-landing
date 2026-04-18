@@ -1,0 +1,134 @@
+<h2>¿Cómo querés mostrar las tecnologías?</h2>
+<p class="subtitle">Elegí el estilo que mejor encaja con la sección</p>
+
+<div class="cards">
+
+  <!-- Opción A -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#0d1117;border-radius:8px;padding:20px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+        <div style="background:#1a2230;border-radius:6px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div style="width:28px;height:28px;background:#0ea5e9;border-radius:4px;"></div>
+          <span style="color:#94a3b8;font-size:9px;">React</span>
+        </div>
+        <div style="background:#1a2230;border-radius:6px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div style="width:28px;height:28px;background:#8b5cf6;border-radius:4px;"></div>
+          <span style="color:#94a3b8;font-size:9px;">Next.js</span>
+        </div>
+        <div style="background:#1a2230;border-radius:6px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div style="width:28px;height:28px;background:#f59e0b;border-radius:4px;"></div>
+          <span style="color:#94a3b8;font-size:9px;">Node.js</span>
+        </div>
+        <div style="background:#1a2230;border-radius:6px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div style="width:28px;height:28px;background:#10b981;border-radius:4px;"></div>
+          <span style="color:#94a3b8;font-size:9px;">AWS</span>
+        </div>
+        <div style="background:#1a2230;border-radius:6px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div style="width:28px;height:28px;background:#ef4444;border-radius:4px;"></div>
+          <span style="color:#94a3b8;font-size:9px;">Docker</span>
+        </div>
+        <div style="background:#1a2230;border-radius:6px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div style="width:28px;height:28px;background:#3b82f6;border-radius:4px;"></div>
+          <span style="color:#94a3b8;font-size:9px;">TypeScript</span>
+        </div>
+        <div style="background:#1a2230;border-radius:6px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div style="width:28px;height:28px;background:#ec4899;border-radius:4px;"></div>
+          <span style="color:#94a3b8;font-size:9px;">Tailwind</span>
+        </div>
+        <div style="background:#1a2230;border-radius:6px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:6px;">
+          <div style="width:28px;height:28px;background:#a855f7;border-radius:4px;"></div>
+          <span style="color:#94a3b8;font-size:9px;">GraphQL</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Grid de íconos</h3>
+      <p>Cuadrícula estática con ícono + nombre. Simple, directo, fácil de escanear. Ideal para mostrar muchas tecnologías a la vez.</p>
+    </div>
+  </div>
+
+  <!-- Opción B -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#0d1117;border-radius:8px;padding:20px;">
+        <div style="margin-bottom:14px;">
+          <span style="color:#475569;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;">Frontend</span>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+            <span style="background:#0ea5e920;border:1px solid #0ea5e940;color:#0ea5e9;font-size:9px;padding:4px 10px;border-radius:20px;">React</span>
+            <span style="background:#8b5cf620;border:1px solid #8b5cf640;color:#8b5cf6;font-size:9px;padding:4px 10px;border-radius:20px;">Next.js</span>
+            <span style="background:#ec489920;border:1px solid #ec489940;color:#ec4899;font-size:9px;padding:4px 10px;border-radius:20px;">Tailwind</span>
+          </div>
+        </div>
+        <div style="margin-bottom:14px;">
+          <span style="color:#475569;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;">Backend</span>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+            <span style="background:#f59e0b20;border:1px solid #f59e0b40;color:#f59e0b;font-size:9px;padding:4px 10px;border-radius:20px;">Node.js</span>
+            <span style="background:#3b82f620;border:1px solid #3b82f640;color:#3b82f6;font-size:9px;padding:4px 10px;border-radius:20px;">TypeScript</span>
+          </div>
+        </div>
+        <div>
+          <span style="color:#475569;font-size:9px;letter-spacing:0.12em;text-transform:uppercase;">Cloud & DevOps</span>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+            <span style="background:#10b98120;border:1px solid #10b98140;color:#10b981;font-size:9px;padding:4px 10px;border-radius:20px;">AWS</span>
+            <span style="background:#ef444420;border:1px solid #ef444440;color:#ef4444;font-size:9px;padding:4px 10px;border-radius:20px;">Docker</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Agrupado por categoría</h3>
+      <p>Tecnologías organizadas por área (Frontend, Backend, Cloud…). Comunica expertise organizado y profesional.</p>
+    </div>
+  </div>
+
+  <!-- Opción C -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#0d1117;border-radius:8px;padding:16px;overflow:hidden;position:relative;">
+        <div style="display:flex;gap:20px;white-space:nowrap;animation:scroll-demo 4s linear infinite;width:max-content;">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:50px;">
+            <div style="width:32px;height:32px;background:#0ea5e9;border-radius:6px;opacity:0.8;"></div>
+            <span style="color:#94a3b8;font-size:8px;">React</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:50px;">
+            <div style="width:32px;height:32px;background:#8b5cf6;border-radius:6px;opacity:0.8;"></div>
+            <span style="color:#94a3b8;font-size:8px;">Next.js</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:50px;">
+            <div style="width:32px;height:32px;background:#f59e0b;border-radius:6px;opacity:0.8;"></div>
+            <span style="color:#94a3b8;font-size:8px;">Node.js</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:50px;">
+            <div style="width:32px;height:32px;background:#10b981;border-radius:6px;opacity:0.8;"></div>
+            <span style="color:#94a3b8;font-size:8px;">AWS</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:50px;">
+            <div style="width:32px;height:32px;background:#ef4444;border-radius:6px;opacity:0.8;"></div>
+            <span style="color:#94a3b8;font-size:8px;">Docker</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:50px;">
+            <div style="width:32px;height:32px;background:#3b82f6;border-radius:6px;opacity:0.8;"></div>
+            <span style="color:#94a3b8;font-size:8px;">TypeScript</span>
+          </div>
+          <!-- duplicado para loop -->
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:50px;">
+            <div style="width:32px;height:32px;background:#0ea5e9;border-radius:6px;opacity:0.8;"></div>
+            <span style="color:#94a3b8;font-size:8px;">React</span>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:50px;">
+            <div style="width:32px;height:32px;background:#8b5cf6;border-radius:6px;opacity:0.8;"></div>
+            <span style="color:#94a3b8;font-size:8px;">Next.js</span>
+          </div>
+        </div>
+        <div style="position:absolute;left:0;top:0;bottom:0;width:30px;background:linear-gradient(to right,#0d1117,transparent);"></div>
+        <div style="position:absolute;right:0;top:0;bottom:0;width:30px;background:linear-gradient(to left,#0d1117,transparent);"></div>
+      </div>
+      <style>@keyframes scroll-demo{from{transform:translateX(0)}to{transform:translateX(-50%)}}</style>
+    </div>
+    <div class="card-body">
+      <h3>C — Marquee / scroll infinito</h3>
+      <p>Misma mecánica que la sección de clientes (BrandsBar). Continuo, animado. Funciona si las tecnologías son muchas y no necesitan contexto.</p>
+    </div>
+  </div>
+
+</div>
