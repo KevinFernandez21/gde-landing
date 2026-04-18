@@ -256,6 +256,7 @@ function ServiceCard({
   reduce,
   onOpen,
   featured = false,
+  spanTwo = false,
 }: {
   service: Service
   delay: number
@@ -346,7 +347,7 @@ function ServiceCard({
 
       {/* ── Desktop card ── */}
       <motion.div
-        className={`hidden md:flex${featured ? ' lg:col-span-3' : ''}${spanTwo ? ' lg:col-span-2' : ''}`}
+        className={`hidden md:flex${featured ? ' lg:col-span-6' : spanTwo ? ' lg:col-span-3' : ' lg:col-span-2'}`}
         initial={reduce ? {} : { opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.4, delay }}
@@ -424,7 +425,7 @@ export default function Services() {
           {t.services.title}
         </motion.h2>
 
-        <div className="grid grid-cols-1 gap-3 rounded-2xl overflow-hidden md:grid-cols-2 md:gap-px md:bg-[rgba(255,255,255,0.08)] lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 rounded-2xl overflow-hidden md:grid-cols-2 md:gap-px md:bg-[rgba(255,255,255,0.08)] lg:grid-cols-6">
           {services.map((s, i) => (
             <ServiceCard
               key={s.title}
@@ -434,7 +435,7 @@ export default function Services() {
               reduce={reduce}
               onOpen={() => setActiveIndex(i)}
               featured={services.length % 3 === 1 && i === services.length - 1}
-              spanTwo={services.length % 3 === 2 && i === services.length - 1}
+              spanTwo={services.length % 3 === 2 && i >= services.length - 2}
             />
           ))}
         </div>
