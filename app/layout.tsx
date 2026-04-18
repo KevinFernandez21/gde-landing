@@ -20,17 +20,17 @@ const dm = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'GDE — Grupo Digital Ecommerce',
+  title: 'Turboia',
   description: 'Automatiza, escala y transforma tu empresa con chatbots, flujos inteligentes y agentes de IA.',
   icons: {
-    icon: '/Logo/logo.jpeg',
-    apple: '/Logo/logo.jpeg',
+    icon: '/Logo/Logo-T-removebg-preview.png',
+    apple: '/Logo/Logo-T-removebg-preview.png',
   },
   openGraph: {
-    title: 'GDE — Grupo Digital Ecommerce',
+    title: 'Turboia',
     description: 'Automatiza, escala y transforma tu empresa con chatbots, flujos inteligentes y agentes de IA.',
     url: 'https://gptfy.biz',
-    siteName: 'GDE',
+    siteName: 'Turboia',
     locale: 'es_LA',
     type: 'website',
   },

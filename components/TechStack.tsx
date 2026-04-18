@@ -4,26 +4,61 @@ import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
 import { useLanguage } from '@/lib/language-context'
 
+import { SiNextdotjs, SiAngular, SiVuedotjs, SiTypescript, SiVite, SiFastapi, SiExpress, SiDjango, SiPython, SiDeno, SiGooglecloud, SiFirebase, SiSupabase, SiFlutter, SiKotlin, SiTensorflow, SiPytorch, SiReact, SiSwift, SiOpenai, SiHuggingface } from 'react-icons/si'
+import { FaAmazon } from 'react-icons/fa'
+
 const CATEGORIES = [
   {
     name: 'Frontend',
     color: '#0ea5e9',
-    techs: ['Next.js', 'Angular', 'Vue.js', 'TypeScript', 'Vite'],
+    techs: [
+      { name: 'Next.js', icon: SiNextdotjs },
+      { name: 'Angular', icon: SiAngular },
+      { name: 'Vue.js', icon: SiVuedotjs },
+      { name: 'TypeScript', icon: SiTypescript },
+      { name: 'Vite', icon: SiVite }
+    ],
   },
   {
     name: 'Backend',
     color: '#8b5cf6',
-    techs: ['FastAPI', 'Express.js', 'Django', 'Python', 'Deno'],
+    techs: [
+      { name: 'FastAPI', icon: SiFastapi },
+      { name: 'Express.js', icon: SiExpress },
+      { name: 'Django', icon: SiDjango },
+      { name: 'Python', icon: SiPython },
+      { name: 'Deno', icon: SiDeno }
+    ],
   },
   {
     name: 'Cloud & DevOps',
     color: '#10b981',
-    techs: ['AWS', 'Google Cloud', 'Firebase', 'Supabase'],
+    techs: [
+      { name: 'AWS', icon: FaAmazon },
+      { name: 'Google Cloud', icon: SiGooglecloud },
+      { name: 'Firebase', icon: SiFirebase },
+      { name: 'Supabase', icon: SiSupabase }
+    ],
   },
   {
-    name: 'Mobile & AI',
+    name: 'Mobile',
+    color: '#ec4899',
+    techs: [
+      { name: 'Flutter', icon: SiFlutter },
+      { name: 'React Native', icon: SiReact },
+      { name: 'Kotlin', icon: SiKotlin },
+      { name: 'Swift', icon: SiSwift }
+    ],
+  },
+  {
+    name: 'Inteligencia Artificial',
     color: '#f59e0b',
-    techs: ['Flutter', 'Kotlin', 'TensorFlow', 'PyTorch'],
+    techs: [
+      { name: 'OpenAI', icon: SiOpenai },
+      { name: 'TensorFlow', icon: SiTensorflow },
+      { name: 'PyTorch', icon: SiPytorch },
+      { name: 'Hugging Face', icon: SiHuggingface }
+    ],
   },
 ]
 
@@ -56,39 +91,63 @@ export default function TechStack() {
           {t.techStack.title}
         </motion.h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="flex flex-wrap justify-center gap-6">
           {CATEGORIES.map((cat, i) => (
             <motion.div
               key={cat.name}
               initial={reduced ? {} : { opacity: 0, y: 16 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.4, delay: 0.1 + i * 0.08 }}
+              className="w-full md:w-[calc(50%-12px)] lg:w-[calc(33.33%-16px)] flex-grow-0"
               style={{
                 background: '#0D1018',
-                border: `1px solid ${cat.color}25`,
-                borderRadius: 14,
-                padding: '24px 20px',
+                border: `1px solid ${cat.color}30`,
+                borderRadius: 16,
+                padding: '28px 24px',
+                boxShadow: `0 4px 20px -10px ${cat.color}20`
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16 }}>
-                <div style={{ width: 8, height: 8, borderRadius: '50%', background: cat.color, boxShadow: `0 0 6px ${cat.color}`, flexShrink: 0 }} />
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginBottom: 20 }}>
+                <div style={{ width: 10, height: 10, borderRadius: '50%', background: cat.color, boxShadow: `0 0 8px ${cat.color}`, flexShrink: 0 }} />
                 <span
                   className="font-display"
-                  style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: cat.color }}
+                  style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', color: cat.color }}
                 >
                   {cat.name}
                 </span>
               </div>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12 }}>
                 {cat.techs.map(tech => (
-                  <span
-                    key={tech}
-                    className="font-body"
-                    style={{ fontSize: 12, color: '#94a3b8', background: `${cat.color}12`, border: `1px solid ${cat.color}30`, borderRadius: 5, padding: '4px 10px' }}
+                  <div
+                    key={tech.name}
+                    className="font-body flex flex-col items-center justify-center gap-2 transition-all duration-300"
+                    style={{ 
+                      fontSize: 12, 
+                      color: '#cbd5e1', 
+                      background: 'rgba(255, 255, 255, 0.03)', 
+                      border: `1px solid rgba(255, 255, 255, 0.08)`, 
+                      borderRadius: 12, 
+                      padding: '14px 10px',
+                      minWidth: '85px',
+                      cursor: 'default'
+                    }}
+                    onMouseEnter={(e) => { 
+                      e.currentTarget.style.background = `${cat.color}15`
+                      e.currentTarget.style.borderColor = `${cat.color}40`
+                      e.currentTarget.style.color = '#ffffff'
+                      e.currentTarget.style.transform = 'translateY(-2px)'
+                    }}
+                    onMouseLeave={(e) => { 
+                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)'
+                      e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.08)'
+                      e.currentTarget.style.color = '#cbd5e1'
+                      e.currentTarget.style.transform = 'translateY(0)'
+                    }}
                   >
-                    {tech}
-                  </span>
+                    <tech.icon style={{ color: cat.color, fontSize: 28, filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' }} />
+                    <span style={{ fontWeight: 500, textAlign: 'center', lineHeight: 1.2 }}>{tech.name}</span>
+                  </div>
                 ))}
               </div>
             </motion.div>

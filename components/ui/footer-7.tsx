@@ -40,10 +40,10 @@ export function Footer7() {
             {/* Logo */}
             <div style={{ position: 'relative', width: 190, height: 76 }}>
               <Image
-                src="/Logo/logofooter_inv.png"
+                src="/Logo/logo-completo-removebg-preview.png"
                 alt="GDE Grupo Digital Ecommerce"
                 fill
-                style={{ objectFit: 'contain', objectPosition: 'left', filter: 'brightness(0) invert(1)' }}
+                style={{ objectFit: 'contain', objectPosition: 'left' }}
               />
             </div>
 

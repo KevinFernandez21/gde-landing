@@ -1,5 +1,6 @@
 'use client'
 import React from 'react'
+import Image from 'next/image'
 import { Button, buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon'
@@ -67,10 +68,13 @@ export function Header() {
         )}
       >
         {/* Logo */}
-        <a href="#" className="flex items-center">
-          <span style={{ fontSize: 18, fontWeight: 700, color: 'rgb(var(--foreground))', letterSpacing: '0.1em', fontFamily: 'Georgia, serif' }}>
-            GDE
-          </span>
+        <a href="#" className="flex items-center" style={{ position: 'relative', width: 40, height: 20 }}>
+          <Image
+            src="/Logo/Logo-T-removebg-preview.png"
+            alt="GDE"
+            fill
+            style={{ objectFit: 'contain', objectPosition: 'left' }}
+          />
         </a>
 
         {/* Desktop nav */}
