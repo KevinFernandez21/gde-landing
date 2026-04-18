@@ -63,8 +63,8 @@ export function Header() {
     >
       <nav
         className={cn(
-          'flex h-14 w-full items-center justify-between px-4 md:h-12 md:transition-all md:ease-out',
-          { 'md:px-2': scrolled },
+          'flex h-16 w-full items-center justify-between px-6 md:h-20 md:px-8 md:transition-all md:ease-out',
+          { 'md:h-16 md:px-6': scrolled },
         )}
       >
         {/* Logo */}

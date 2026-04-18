@@ -4,7 +4,7 @@ import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useRef } from 'react'
 import { useLanguage } from '@/lib/language-context'
 
-import { SiNextdotjs, SiAngular, SiVuedotjs, SiTypescript, SiVite, SiFastapi, SiExpress, SiDjango, SiPython, SiDeno, SiGooglecloud, SiFirebase, SiSupabase, SiFlutter, SiKotlin, SiTensorflow, SiPytorch, SiReact, SiSwift, SiOpenai, SiHuggingface } from 'react-icons/si'
+import { SiNextdotjs, SiAngular, SiVuedotjs, SiTypescript, SiVite, SiFastapi, SiExpress, SiDjango, SiPython, SiDeno, SiGooglecloud, SiFirebase, SiSupabase, SiFlutter, SiKotlin, SiTensorflow, SiPytorch, SiReact, SiSwift, SiOpenai, SiHuggingface, SiGoogle, SiGooglesearchconsole, SiSemrush, SiWordpress, SiGoogletagmanager } from 'react-icons/si'
 import { FaAmazon } from 'react-icons/fa'
 
 const CATEGORIES = [
@@ -58,6 +58,17 @@ const CATEGORIES = [
       { name: 'TensorFlow', icon: SiTensorflow },
       { name: 'PyTorch', icon: SiPytorch },
       { name: 'Hugging Face', icon: SiHuggingface }
+    ],
+  },
+  {
+    name: 'Marketing & SEO',
+    color: '#14b8a6',
+    techs: [
+      { name: 'Google', icon: SiGoogle },
+      { name: 'Search Console', icon: SiGooglesearchconsole },
+      { name: 'Semrush', icon: SiSemrush },
+      { name: 'Tag Manager', icon: SiGoogletagmanager },
+      { name: 'WordPress', icon: SiWordpress }
     ],
   },
 ]

@@ -38,6 +38,7 @@ export const translations = {
         { title: 'Consultoría en IA',          description: 'Rediseñamos cómo funciona tu negocio', detail: 'No es asesoría. Es entender tu empresa y construir la estrategia de IA que realmente la hace escalar.', tags: ['Auditoría', 'Roadmap', 'Workshops', 'Estrategia'] },
         { title: 'Software a la Medida',       description: 'Construimos lo que tu empresa realmente necesita', detail: 'Software diseñado desde cero, alineado a tus procesos, datos y forma de operar.', tags: ['Next.js', 'FastAPI', 'Docker', 'PostgreSQL', 'GPT-4'] },
         { title: 'Creación de Landing Page',   description: 'Diseñamos experiencias que convierten interés en negocio', detail: 'Diseñamos experiencias digitales que no solo se ven bien, sino que convierten.', tags: ['Next.js', 'Diseño UX', 'SEO', 'Conversión', 'Analytics'] },
+        { title: 'Posicionamiento SEO',   description: 'Domina los motores de búsqueda y atrae tráfico orgánico', detail: 'Optimizamos tu presencia digital para que tu proyecto aparezca primero y consigas clientes de calidad sin pagar por clics.', tags: ['Google Search', 'Ahrefs', 'Semrush', 'Keywords', 'Analytics'] },
       ],
     },
     techStack: {
@@ -136,6 +137,7 @@ export const translations = {
         { title: 'AI Consulting',       description: 'We redesign how your business works', detail: 'It\'s not just advice. It\'s understanding your business and building the AI strategy that truly makes it scale.', tags: ['Audit', 'Roadmap', 'Workshops', 'Strategy'] },
         { title: 'Custom Software',     description: 'We build what your business truly needs', detail: 'Software designed from scratch, aligned with your processes, data, and way of operating.', tags: ['Next.js', 'FastAPI', 'Docker', 'PostgreSQL', 'GPT-4'] },
         { title: 'Landing Page Creation', description: 'We design experiences that convert interest into business', detail: 'We design digital experiences that not only look good, but convert.', tags: ['Next.js', 'UX Design', 'SEO', 'Conversion', 'Analytics'] },
+        { title: 'SEO Optimization', description: 'Dominate search engines and attract organic traffic', detail: 'We optimize your digital presence so your project ranks first and gets quality customers without paying for clicks.', tags: ['Google Search', 'Ahrefs', 'Semrush', 'Keywords', 'Analytics'] },
       ],
     },
     techStack: {

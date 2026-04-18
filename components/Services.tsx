@@ -3,7 +3,7 @@
 import { motion, AnimatePresence, useInView, useReducedMotion } from 'framer-motion'
 import { useRef, useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { Bot, Workflow, Cpu, Zap, LineChart, Code2, Volume2, VolumeX, X, Globe } from 'lucide-react'
+import { Bot, Workflow, Cpu, Zap, LineChart, Code2, Volume2, VolumeX, X, Globe, Search } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { useLanguage } from '@/lib/language-context'
 import { useExpertModal } from '@/lib/expert-modal-context'
@@ -25,8 +25,8 @@ type Service = ServiceMeta & {
   tags: readonly string[]
 }
 
-const VIDEO_NAMES = ['chatbots', 'flujos', 'agentes', 'automatizacion', 'consultoria', 'software', 'landing']
-const VIDEO_ICONS = [Bot, Workflow, Cpu, Zap, LineChart, Code2, Globe]
+const VIDEO_NAMES = ['chatbots', 'flujos', 'agentes', 'automatizacion', 'consultoria', 'software', 'landing', 'seo']
+const VIDEO_ICONS = [Bot, Workflow, Cpu, Zap, LineChart, Code2, Globe, Search]
 
 function buildServicesMeta(lang: string): ServiceMeta[] {
   const folder = lang === 'en' ? 'ingles' : 'español'
@@ -263,6 +263,7 @@ function ServiceCard({
   reduce: boolean | null
   onOpen: () => void
   featured?: boolean
+  spanTwo?: boolean
 }) {
   const [hovered, setHovered] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -345,7 +346,7 @@ function ServiceCard({
 
       {/* ── Desktop card ── */}
       <motion.div
-        className={`hidden md:flex${featured ? ' lg:col-span-3' : ''}`}
+        className={`hidden md:flex${featured ? ' lg:col-span-3' : ''}${spanTwo ? ' lg:col-span-2' : ''}`}
         initial={reduce ? {} : { opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.4, delay }}
@@ -354,23 +355,23 @@ function ServiceCard({
         onClick={onOpen}
         style={{
           background: hovered ? '#111722' : '#07090F',
-          padding: featured ? '28px 40px' : 28,
-          flexDirection: featured ? 'row' : 'column',
-          alignItems: featured ? 'center' : undefined,
-          gap: featured ? 32 : 20,
+          padding: featured || spanTwo ? '28px 40px' : 28,
+          flexDirection: featured || spanTwo ? 'row' : 'column',
+          alignItems: featured || spanTwo ? 'center' : undefined,
+          gap: featured || spanTwo ? 32 : 20,
           cursor: 'pointer',
           transition: 'background 0.25s',
           position: 'relative',
         }}
       >
         <div style={{ width: 56, height: 56, borderRadius: 12, background: hovered ? 'rgba(79,126,255,0.2)' : 'rgba(79,126,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.25s', flexShrink: 0 }}>
-          <Icon size={featured ? 32 : 28} style={{ color: '#FFFFFF' }} />
+          <Icon size={featured || spanTwo ? 32 : 28} style={{ color: '#FFFFFF' }} />
         </div>
-        <div style={{ flex: featured ? 1 : undefined }}>
-          <h3 className="font-display" style={{ fontSize: featured ? 18 : 16, fontWeight: 600, color: '#EAECF4', marginBottom: 8, lineHeight: 1.3 }}>{service.title}</h3>
-          <p className="font-body" style={{ fontSize: 14, color: '#8B9AB5', lineHeight: 1.65, maxWidth: featured ? 480 : undefined }}>{service.description}</p>
+        <div style={{ flex: featured || spanTwo ? 1 : undefined }}>
+          <h3 className="font-display" style={{ fontSize: featured || spanTwo ? 18 : 16, fontWeight: 600, color: '#EAECF4', marginBottom: 8, lineHeight: 1.3 }}>{service.title}</h3>
+          <p className="font-body" style={{ fontSize: 14, color: '#8B9AB5', lineHeight: 1.65, maxWidth: featured || spanTwo ? 480 : undefined }}>{service.description}</p>
         </div>
-        <span className="font-body" style={{ fontSize: 11, color: hovered ? '#4F7EFF' : 'rgba(255,255,255,0.18)', transition: 'color 0.25s', marginTop: featured ? 0 : 'auto', flexShrink: 0 }}>
+        <span className="font-body" style={{ fontSize: 11, color: hovered ? '#4F7EFF' : 'rgba(255,255,255,0.18)', transition: 'color 0.25s', marginTop: featured || spanTwo ? 0 : 'auto', flexShrink: 0 }}>
           Ver detalles →
         </span>
 
@@ -432,7 +433,8 @@ export default function Services() {
               inView={inView}
               reduce={reduce}
               onOpen={() => setActiveIndex(i)}
-              featured={services.length % 3 !== 0 && i === services.length - 1}
+              featured={services.length % 3 === 1 && i === services.length - 1}
+              spanTwo={services.length % 3 === 2 && i === services.length - 1}
             />
           ))}
         </div>
