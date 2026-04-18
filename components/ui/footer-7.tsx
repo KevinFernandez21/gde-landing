@@ -2,13 +2,13 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'
+import { FaInstagram, FaLinkedin } from 'react-icons/fa'
+import { FaXTwitter } from 'react-icons/fa6'
 import { useLanguage } from '@/lib/language-context'
 
 const SOCIAL_LINKS = [
   { icon: <FaInstagram className="size-5" />, href: '#', label: 'Instagram' },
-  { icon: <FaFacebook  className="size-5" />, href: '#', label: 'Facebook'  },
-  { icon: <FaTwitter   className="size-5" />, href: '#', label: 'Twitter'   },
+  { icon: <FaXTwitter  className="size-5" />, href: '#', label: 'X (Twitter)' },
   { icon: <FaLinkedin  className="size-5" />, href: '#', label: 'LinkedIn'  },
 ]
 
@@ -40,8 +40,8 @@ export function Footer7() {
             {/* Logo */}
             <div style={{ position: 'relative', width: 190, height: 76 }}>
               <Image
-                src="/Logo/logo-completo-removebg-preview.png"
-                alt="GDE Grupo Digital Ecommerce"
+                src="/Logo/Gemini_Generated_Image_nos0dunos0dunos0__1_-removebg-preview.png"
+                alt="Turboia"
                 fill
                 style={{ objectFit: 'contain', objectPosition: 'left' }}
               />

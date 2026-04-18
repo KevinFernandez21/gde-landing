@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   title: 'Turboia',
   description: 'Automatiza, escala y transforma tu empresa con chatbots, flujos inteligentes y agentes de IA.',
   icons: {
-    icon: '/Logo/Logo-T-removebg-preview.png',
-    apple: '/Logo/Logo-T-removebg-preview.png',
+    icon: '/Logo/Gemini_Generated_Image_t2724lt2724lt272__2___2_-removebg-preview.png',
+    apple: '/Logo/Gemini_Generated_Image_t2724lt2724lt272__2___2_-removebg-preview.png',
   },
   openGraph: {
     title: 'Turboia',
