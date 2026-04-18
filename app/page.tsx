@@ -8,6 +8,7 @@ const Stats         = dynamic(() => import('@/components/Stats'))
 const AboutUs       = dynamic(() => import('@/components/AboutUs'))
 const GlobalPresence = dynamic(() => import('@/components/GlobalPresence'), { ssr: false })
 const Services      = dynamic(() => import('@/components/Services'),       { ssr: false })
+const TechStack     = dynamic(() => import('@/components/TechStack'))
 const HowItWorks    = dynamic(() => import('@/components/HowItWorks'))
 const CtaFinal      = dynamic(() => import('@/components/CtaFinal'))
 const Footer        = dynamic(() => import('@/components/Footer'))
@@ -22,6 +23,7 @@ export default function Home() {
       <AboutUs />
       <GlobalPresence />
       <Services />
+      <TechStack />
       <HowItWorks />
       <CtaFinal />
       <Footer />
