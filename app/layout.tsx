@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   title: 'Turboia',
   description: 'Automatiza, escala y transforma tu empresa con chatbots, flujos inteligentes y agentes de IA.',
   icons: {
-    icon: '/Logo/Gemini_Generated_Image_t2724lt2724lt272__2___2_-removebg-preview.png',
-    apple: '/Logo/Gemini_Generated_Image_t2724lt2724lt272__2___2_-removebg-preview.png',
+    icon: '/Logo/Logo-T.webp',
+    apple: '/Logo/Logo-T.webp',
   },
   openGraph: {
     title: 'Turboia',
@@ -33,6 +33,14 @@ export const metadata: Metadata = {
     siteName: 'Turboia',
     locale: 'es_LA',
     type: 'website',
+    images: [
+      {
+        url: '/opengraph-image.png', // Pon tu imagen en la carpeta `public` con este nombre (o cámbialo a .jpg)
+        width: 1200,
+        height: 630,
+        alt: 'Turboia - Inteligencia Artificial',
+      },
+    ],
   },
 }
 

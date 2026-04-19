@@ -70,7 +70,7 @@ export function Header() {
         {/* Logo */}
         <a href="#" className="flex items-center" style={{ position: 'relative', width: 40, height: 40 }}>
           <Image
-            src="/Logo/Gemini_Generated_Image_t2724lt2724lt272__2___2_-removebg-preview.png"
+            src="/Logo/Logo-T.webp"
             alt="Turboia"
             fill
             style={{ objectFit: 'contain', objectPosition: 'left' }}

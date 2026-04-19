@@ -40,7 +40,7 @@ export function Footer7() {
             {/* Logo */}
             <div style={{ position: 'relative', width: 190, height: 76 }}>
               <Image
-                src="/Logo/Gemini_Generated_Image_nos0dunos0dunos0__1_-removebg-preview.png"
+                src="/Logo/Logo-principal.webp"
                 alt="Turboia"
                 fill
                 style={{ objectFit: 'contain', objectPosition: 'left' }}

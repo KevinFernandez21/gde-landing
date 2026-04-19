@@ -13,6 +13,7 @@
     "@types/d3": "^7.4.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "critters": "^0.0.25",
     "d3": "^7.9.0",
     "dotted-map": "^3.1.0",
     "framer-motion": "^12.38.0",
