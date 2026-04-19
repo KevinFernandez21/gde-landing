@@ -35,7 +35,7 @@ function BrandItem({ brand }: { brand: typeof BRANDS[0] }) {
             src={brand.src}
             alt={brand.name}
             fill
-            sizes="200px"
+            sizes="(max-width: 640px) 100px, 200px"
             style={{ objectFit: 'contain', filter: 'brightness(0) invert(1)', opacity: 0.35 }}
           />
         </div>

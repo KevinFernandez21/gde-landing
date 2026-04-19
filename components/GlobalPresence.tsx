@@ -1,9 +1,11 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { LazyMotion, m, useInView } from 'framer-motion'
 import { WorldMap, type MapMarker } from '@/components/ui/map'
 import { useLanguage } from '@/lib/language-context'
+
+const loadFeatures = () => import('framer-motion').then(mod => mod.domAnimation)
 
 // labelOffset: dx/dy in SVG units (viewBox 800×400) to avoid overlaps
 const OFFICE_MARKERS: MapMarker[] = [
@@ -27,20 +29,21 @@ export default function GlobalPresence() {
     : { eyebrow: 'Presencia Global', title: 'Nuestras oficinas', sub: '9 ubicaciones · 5 países' }
 
   return (
+    <LazyMotion features={loadFeatures} strict>
     <section className="py-14 hidden lg:block md:py-20 lg:py-2 px-6" ref={ref}>
       <div style={{ maxWidth: 1152, margin: '0 auto' }}>
 
         {/* Heading */}
-        <motion.p
+        <m.p
           className="font-display"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: '#4F7EFF', textAlign: 'center', marginBottom: 16 }}
         >
           {copy.eyebrow}
-        </motion.p>
+        </m.p>
 
-        <motion.h2
+        <m.h2
           className="font-display"
           initial={{ opacity: 0, y: 12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -48,9 +51,9 @@ export default function GlobalPresence() {
           style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 700, letterSpacing: '-0.03em', color: '#FFFFFF', textAlign: 'center', marginBottom: 8, lineHeight: 1.1 }}
         >
           {copy.title}
-        </motion.h2>
+        </m.h2>
 
-        <motion.p
+        <m.p
           className="font-body"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
@@ -58,19 +61,19 @@ export default function GlobalPresence() {
           style={{ fontSize: 14, color: '#8B9AB5', textAlign: 'center', marginBottom: 40 }}
         >
           {copy.sub}
-        </motion.p>
+        </m.p>
 
         {/* Map */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.22 }}
         >
           <WorldMap markers={OFFICE_MARKERS} />
-        </motion.div>
+        </m.div>
 
         {/* Office pills */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 8 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4, delay: 0.4 }}
@@ -96,9 +99,10 @@ export default function GlobalPresence() {
               </span>
             </div>
           ))}
-        </motion.div>
+        </m.div>
 
       </div>
     </section>
+    </LazyMotion>
   )
 }
