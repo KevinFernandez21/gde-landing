@@ -70,9 +70,11 @@ export function Header() {
         {/* Logo */}
         <a href="#" className="flex items-center" style={{ position: 'relative', width: 40, height: 40 }}>
           <Image
-            src="/Logo/Logo-T.webp"
+            src="/Logo/logo-T.webp"
             alt="Turboia"
             fill
+            sizes="40px"
+            priority
             style={{ objectFit: 'contain', objectPosition: 'left' }}
           />
         </a>

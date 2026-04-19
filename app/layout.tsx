@@ -23,8 +23,8 @@ export const metadata: Metadata = {
   title: 'Turboia',
   description: 'Automatiza, escala y transforma tu empresa con chatbots, flujos inteligentes y agentes de IA.',
   icons: {
-    icon: '/Logo/Logo-T.webp',
-    apple: '/Logo/Logo-T.webp',
+    icon: '/Logo/logo-T.webp',
+    apple: '/Logo/logo-T.webp',
   },
   openGraph: {
     title: 'Turboia',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/opengraph-image.png', // Pon tu imagen en la carpeta `public` con este nombre (o cámbialo a .jpg)
+        url: '/opengraph-image.webp', // Pon tu imagen en la carpeta `public` con este nombre (o cámbialo a .jpg)
         width: 1200,
         height: 630,
         alt: 'Turboia - Inteligencia Artificial',
@@ -47,6 +47,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${syne.variable} ${dm.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+      </head>
       <body className="bg-base font-body text-fore antialiased">
         <LanguageProvider>
           <ExpertModalProvider>

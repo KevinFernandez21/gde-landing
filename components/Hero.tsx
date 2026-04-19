@@ -1,7 +1,13 @@
 'use client'
 
-import { ShaderAnimation } from '@/components/ui/shader-animation'
+import dynamic from 'next/dynamic'
 import { useLanguage } from '@/lib/language-context'
+
+// Three.js is large — load it after the initial render so it doesn't block LCP
+const ShaderAnimation = dynamic(
+  () => import('@/components/ui/shader-animation').then(m => ({ default: m.ShaderAnimation })),
+  { ssr: false }
+)
 import { useExpertModal } from '@/lib/expert-modal-context'
 
 interface HeroProps {

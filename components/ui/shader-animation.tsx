@@ -20,7 +20,7 @@ export function ShaderAnimation() {
       #define TWO_PI 6.2831853072
       #define PI 3.14159265359
 
-      precision highp float;
+      precision mediump float;
       uniform vec2 resolution;
       uniform float time;
 
@@ -60,11 +60,9 @@ export function ShaderAnimation() {
     const mesh = new THREE.Mesh(geometry, material)
     scene.add(mesh)
 
-    // Pass the canvas from JSX — Three.js reuses the existing WebGL context
-    // instead of creating a new one, which avoids the StrictMode double-mount
-    // error ("Error creating WebGL context").
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true })
-    renderer.setPixelRatio(window.devicePixelRatio)
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: false })
+    // Cap at 1.5x — retina at 2x/3x renders 4–9x more pixels for no visible gain
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
 
     const onWindowResize = () => {
       const width = canvas.parentElement?.clientWidth ?? canvas.clientWidth
@@ -78,20 +76,31 @@ export function ShaderAnimation() {
     window.addEventListener("resize", onWindowResize, false)
 
     let animationId = 0
+    let visible = true
+
     const animate = () => {
+      if (!visible) return
       animationId = requestAnimationFrame(animate)
       uniforms.time.value += 0.05
       renderer.render(scene, camera)
     }
 
+    // Pause the render loop when hero scrolls off screen
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting
+        if (visible) animate()
+      },
+      { threshold: 0.01 }
+    )
+    observer.observe(canvas)
+
     animate()
 
     return () => {
+      observer.disconnect()
       window.removeEventListener("resize", onWindowResize)
       cancelAnimationFrame(animationId)
-      // Do NOT call forceContextLoss() here — the canvas comes from JSX so its
-      // WebGL context must stay alive for StrictMode's second mount to reuse it.
-      // dispose() cleans up Three.js GPU resources without destroying the context.
       renderer.dispose()
       geometry.dispose()
       material.dispose()
