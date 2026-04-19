@@ -20,6 +20,7 @@ const dm = DM_Sans({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.turboia.app'),
   title: 'Turboia',
   description: 'Automatiza, escala y transforma tu empresa con chatbots, flujos inteligentes y agentes de IA.',
   icons: {
@@ -29,13 +30,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Turboia',
     description: 'Automatiza, escala y transforma tu empresa con chatbots, flujos inteligentes y agentes de IA.',
-    url: 'https://gptfy.biz',
+    url: 'https://www.turboia.app',
     siteName: 'Turboia',
     locale: 'es_LA',
     type: 'website',
     images: [
       {
-        url: '/opengraph-image.webp', // Pon tu imagen en la carpeta `public` con este nombre (o cámbialo a .jpg)
+        // IMPORTANTE: WhatsApp casi NUNCA soporta .webp. Siempre usa .png o .jpg para OpenGraph
+        url: '/Logo/opengraph-image.png', 
         width: 1200,
         height: 630,
         alt: 'Turboia - Inteligencia Artificial',
