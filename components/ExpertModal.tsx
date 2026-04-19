@@ -330,10 +330,10 @@ export default function ExpertModal() {
     if (step > 1) { setDir(-1); setStep(s => s - 1) }
   }
 
-  function handleClose() {
+  const handleClose = useCallback(() => {
     closeModal()
     setTimeout(() => { setStep(1); setAnswers({}); setDone(false); setDir(1); setIsSubmitting(false) }, 350)
-  }
+  }, [closeModal])
 
   // Keyboard: Enter = continue
   useEffect(() => {
@@ -344,7 +344,7 @@ export default function ExpertModal() {
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
-  }, [isOpen, canContinue, current, done, handleContinue])
+  }, [isOpen, canContinue, current, done, handleContinue, handleClose])
 
   if (!isOpen) return null
 

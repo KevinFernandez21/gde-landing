@@ -48,7 +48,7 @@ export function Footer7() {
             </div>
 
             {/* Description */}
-            <p className="font-body max-w-[70%] text-sm" style={{ color: '#8B9AB5', lineHeight: 1.6 }}>
+            <p className="font-body w-full max-w-full sm:max-w-[80%] text-sm" style={{ color: '#8B9AB5', lineHeight: 1.6 }}>
               {f.description}
             </p>
 
@@ -71,7 +71,7 @@ export function Footer7() {
           </div>
 
           {/* Nav columns */}
-          <div className="grid w-full gap-6 md:grid-cols-3 lg:gap-20">
+          <div className="grid w-full grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:gap-20 pt-2 lg:pt-0">
             {sections.map((section, idx) => (
               <div key={idx}>
                 <h3 className="font-display mb-4 font-bold" style={{ fontSize: 14, color: '#EAECF4' }}>
@@ -100,13 +100,13 @@ export function Footer7() {
 
         {/* Bottom bar */}
         <div
-          className="mt-8 flex flex-col justify-between gap-4 py-8 text-xs font-medium md:flex-row md:items-center"
+          className="mt-8 flex flex-col justify-between gap-6 py-8 text-xs font-medium md:flex-row md:items-center"
           style={{ borderTop: '1px solid rgba(255,255,255,0.07)', color: '#56647E' }}
         >
           <p className="order-2 md:order-1 font-body">
             © 2026 GDE · {f.copyright}
           </p>
-          <ul className="order-1 flex flex-col gap-2 md:order-2 md:flex-row md:gap-6">
+          <ul className="order-1 flex flex-row flex-wrap gap-4 md:order-2 md:gap-6">
             {legalLinks.map((link, idx) => (
               <li key={idx}>
                 <a

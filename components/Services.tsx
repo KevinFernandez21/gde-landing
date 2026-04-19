@@ -433,7 +433,9 @@ export default function Services() {
               delay={0.1 + i * 0.06}
               inView={inView}
               reduce={reduce}
-              onOpen={() => setActiveIndex(i)}
+              onOpen={() => {
+                if (!VIDEOS_ENABLED) setActiveIndex(i)
+              }}
               featured={services.length % 3 === 1 && i === services.length - 1}
               spanTwo={services.length % 3 === 2 && i >= services.length - 2}
             />
