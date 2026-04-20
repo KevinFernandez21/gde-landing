@@ -61,7 +61,7 @@ export default function BrandsBar() {
       {/* Label */}
       <p
         className="font-display"
-        style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)', textAlign: 'center', marginBottom: 32 }}
+        style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.16em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.55)', textAlign: 'center', marginBottom: 32 }}
       >
         {label}
       </p>

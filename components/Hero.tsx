@@ -72,9 +72,9 @@ export default function Hero({
           <button
             onClick={handleCtaClick}
             className="font-body"
-            style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', borderRadius: 999, backgroundColor: '#4F7EFF', color: '#fff', fontSize: 14, fontWeight: 500, border: 'none', cursor: 'pointer', transition: 'background-color 0.2s', pointerEvents: 'auto' }}
-            onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#3560E8')}
-            onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4F7EFF')}
+            style={{ display: 'inline-flex', alignItems: 'center', padding: '12px 28px', borderRadius: 999, backgroundColor: '#3560E8', color: '#fff', fontSize: 14, fontWeight: 500, border: 'none', cursor: 'pointer', transition: 'background-color 0.2s', pointerEvents: 'auto' }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#2B4FCC')}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#3560E8')}
           >
             {heroCtaText}
           </button>

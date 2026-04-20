@@ -401,6 +401,7 @@ export default function ExpertModal() {
           <div style={{ marginLeft: 'auto' }}>
             <button
               onClick={handleClose}
+              aria-label="Cerrar"
               style={{
                 width: 32, height: 32, borderRadius: '50%',
                 background: 'rgba(255,255,255,0.05)',

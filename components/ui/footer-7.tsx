@@ -101,7 +101,7 @@ export function Footer7() {
         {/* Bottom bar */}
         <div
           className="mt-8 flex flex-col justify-between gap-6 py-8 text-xs font-medium md:flex-row md:items-center"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.07)', color: '#56647E' }}
+          style={{ borderTop: '1px solid rgba(255,255,255,0.07)', color: '#8B9AB5' }}
         >
           <p className="order-2 md:order-1 font-body">
             © 2026 GDE · {f.copyright}
@@ -112,9 +112,9 @@ export function Footer7() {
                 <a
                   href={link.href}
                   className="font-body"
-                  style={{ color: '#56647E', textDecoration: 'none', transition: 'color 0.2s' }}
-                  onMouseEnter={e => (e.currentTarget.style.color = '#8B9AB5')}
-                  onMouseLeave={e => (e.currentTarget.style.color = '#56647E')}
+                  style={{ color: '#8B9AB5', textDecoration: 'none', transition: 'color 0.2s' }}
+                  onMouseEnter={e => (e.currentTarget.style.color = '#EAECF4')}
+                  onMouseLeave={e => (e.currentTarget.style.color = '#8B9AB5')}
                 >
                   {link.name}
                 </a>

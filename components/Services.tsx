@@ -103,6 +103,7 @@ function ServiceDrawer({
           </span>
           <button
             onClick={onClose}
+            aria-label="Cerrar"
             style={{ width: 30, height: 30, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
           >
             <X size={14} style={{ color: '#8B9AB5' }} />
@@ -307,6 +308,7 @@ function ServiceCard({
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
           <button
             onClick={e => { e.stopPropagation(); setMuted(m => !m) }}
+            aria-label={muted ? 'Activar sonido' : 'Silenciar'}
             style={{ position: 'absolute', top: 14, right: 14, width: 34, height: 34, borderRadius: '50%', background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', zIndex: 10 }}
           >
             {muted ? <VolumeX size={15} style={{ color: 'rgba(255,255,255,0.7)' }} /> : <Volume2 size={15} style={{ color: '#fff' }} />}
