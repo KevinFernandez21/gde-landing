@@ -8,8 +8,8 @@ export const translations = {
       cta:        'Hablar con un experto',
     },
     hero: {
-      lines:       ['Implementamos agentes de IA ', 'a la medida que automatizan ', 'tu operación.'],
-      description: 'Analizamos tus procesos o ventas y diseñamos un agente de IA que integramos en tu negocio para automatizar tareas clave.',
+      lines:       ['Implementamos agentes ', 'de IA a la medida que', ' automatizan tu operación.'],
+      description: 'Analizamos tus procesos y ventas, diseñamos un agente de IA a la medida y lo integramos en tu negocio para automatizar tareas clave.',
       cta:         'Hablar con un experto',
       secondary:   'Ver servicios →',
     },

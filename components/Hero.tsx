@@ -1,10 +1,11 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { useLanguage } from '@/lib/language-context'
 import { useExpertModal } from '@/lib/expert-modal-context'
 
-// Three.js shader — loaded only on desktop; mobile never downloads this chunk
+// Three.js shader — loaded only on desktop after mount; mobile never downloads this chunk
 const ShaderAnimation = dynamic(
   () => import('@/components/ui/shader-animation').then(m => ({ default: m.ShaderAnimation })),
   { ssr: false }
@@ -48,7 +49,6 @@ function MobileBackground() {
 }
 
 interface HeroProps {
-  isMobile?: boolean
   lines?: string[]
   description?: string
   ctaText?: string
@@ -58,7 +58,6 @@ interface HeroProps {
 }
 
 export default function Hero({
-  isMobile = false,
   lines,
   description,
   ctaText,
@@ -68,19 +67,23 @@ export default function Hero({
 }: HeroProps = {}) {
   const { t } = useLanguage()
   const { openModal } = useExpertModal()
+  const [showShader, setShowShader] = useState(false)
 
-  const heroLines       = lines       || t.hero.lines
-  const heroDescription = description || t.hero.description
-  const heroCtaText     = ctaText     || t.hero.cta
+  useEffect(() => {
+    const isMobileDevice = /mobile|android|iphone|ipad|ipod|phone/i.test(navigator.userAgent)
+    if (!isMobileDevice) setShowShader(true)
+  }, [])
+
+  const heroLines         = lines       || t.hero.lines
+  const heroDescription   = description || t.hero.description
+  const heroCtaText       = ctaText     || t.hero.cta
   const heroSecondaryText = secondaryText || t.hero.secondary
-  const handleCtaClick  = onCtaClick  || openModal
-
-  console.log("🚀 HERO LINES FRONTEND:", heroLines)
+  const handleCtaClick    = onCtaClick  || openModal
 
   return (
-    <section suppressHydrationWarning style={{ position: 'relative', minHeight: '100vh', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: '#000' }}>
+    <section style={{ position: 'relative', minHeight: '100vh', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: '#000' }}>
 
-      {isMobile ? <MobileBackground /> : <ShaderAnimation />}
+      {showShader ? <ShaderAnimation /> : <MobileBackground />}
 
       <div style={{ position: 'absolute', inset: 0, zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 24px', textAlign: 'center' }}>
 

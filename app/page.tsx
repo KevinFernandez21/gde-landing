@@ -1,4 +1,3 @@
-import { headers } from 'next/headers'
 import dynamic from 'next/dynamic'
 import { Header } from '@/components/ui/header-2'
 import Hero from '@/components/Hero'
@@ -15,14 +14,10 @@ const CtaFinal       = dynamic(() => import('@/components/CtaFinal'),       { ss
 const Footer         = dynamic(() => import('@/components/Footer'),         { ssr: false })
 
 export default function Home() {
-  // Server-side mobile detection — prevents Three.js bundle from being sent to mobile devices
-  const ua = headers().get('user-agent') ?? ''
-  const isMobile = /mobile|android|iphone|ipad|ipod|phone/i.test(ua)
-
   return (
     <main>
       <Header />
-      <Hero isMobile={isMobile} />
+      <Hero />
       <Stats />
       <BrandsBar />
       <AboutUs />
@@ -32,6 +27,7 @@ export default function Home() {
       <HowItWorks />
       <CtaFinal />
       <Footer />
+      {/* Force recompilation */}
     </main>
   )
 }
