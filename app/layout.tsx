@@ -28,10 +28,10 @@ export const metadata: Metadata = {
     apple: '/Logo/logo-T.webp',
   },
   openGraph: {
-    title: 'Turboia',
+    title: 'TurboIA',
     description: 'Automatiza, escala y transforma tu empresa con chatbots, flujos inteligentes y agentes de IA.',
     url: 'https://www.turboia.app',
-    siteName: 'Turboia',
+    siteName: 'TurboIA',
     locale: 'es_LA',
     type: 'website',
     images: [
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={`${syne.variable} ${dm.variable}`}>
-      <body className="bg-base font-body text-fore antialiased">
+      <body className="bg-base font-body text-fore antialiased" suppressHydrationWarning>
         <LanguageProvider>
           <ExpertModalProvider>
             {children}

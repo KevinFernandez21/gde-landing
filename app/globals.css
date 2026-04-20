@@ -18,7 +18,7 @@
   /* ── shadcn/ui tokens (mapeados al sistema de colores del proyecto) ── */
   --background:         7 9 15;      /* #07090F */
   --foreground:         234 236 244; /* #EAECF4 */
-  --primary:            79 126 255;  /* #4F7EFF */
+  --primary:            53 96 232;   /* #3560E8 — WCAG AA (4.86:1 on white) */
   --primary-foreground: 255 255 255;
   --secondary:          13 16 24;    /* #0D1018 */
   --secondary-foreground: 234 236 244;
