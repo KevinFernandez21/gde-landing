@@ -63,3 +63,21 @@ html { scroll-behavior: smooth; background-color: var(--c-base); }
 .hover\:bg-brand-d:hover  { background-color: var(--c-brand-d) !important; }
 .hover\:text-fore:hover   { color: var(--c-fore) !important; }
 
+/* ─── Hero mobile background animation ──────────────────────────── */
+@keyframes hero-orb-pulse {
+  0%,100% { transform: scale(1)    rotate(0deg);   opacity: 0.75; }
+  50%     { transform: scale(1.18) rotate(180deg); opacity: 1; }
+}
+@keyframes hero-orb-drift {
+  0%   { transform: translate(0px,    0px); }
+  33%  { transform: translate(22px,  -18px); }
+  66%  { transform: translate(-18px,  12px); }
+  100% { transform: translate(0px,    0px); }
+}
+@keyframes hero-orb-drift-r {
+  0%   { transform: translate(0px,   0px); }
+  33%  { transform: translate(-20px, 14px); }
+  66%  { transform: translate(16px, -10px); }
+  100% { transform: translate(0px,   0px); }
+}
+

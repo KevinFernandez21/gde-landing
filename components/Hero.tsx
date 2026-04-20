@@ -12,14 +12,38 @@ const ShaderAnimation = dynamic(
 
 function MobileBackground() {
   return (
-    <div
-      aria-hidden
-      style={{
-        position: 'absolute',
-        inset: 0,
-        background: 'radial-gradient(ellipse 90% 70% at 50% 30%, #1a0840 0%, #0a051f 45%, #000 100%)',
-      }}
-    />
+    <div aria-hidden style={{ position: 'absolute', inset: 0, background: '#000', overflow: 'hidden' }}>
+      {/* Purple nebula core */}
+      <div style={{
+        position: 'absolute', width: '160%', height: '160%', top: '-30%', left: '-30%',
+        background: 'radial-gradient(ellipse 55% 55% at 50% 40%, rgba(90,30,180,0.85) 0%, transparent 68%)',
+        animation: 'hero-orb-pulse 9s ease-in-out infinite',
+        transformOrigin: 'center center',
+      }} />
+      {/* Blue orb left */}
+      <div style={{
+        position: 'absolute', width: '130%', height: '130%', top: '-15%', left: '-15%',
+        background: 'radial-gradient(ellipse 45% 40% at 25% 65%, rgba(30,70,220,0.65) 0%, transparent 65%)',
+        animation: 'hero-orb-drift 13s ease-in-out infinite',
+      }} />
+      {/* Red/pink orb right */}
+      <div style={{
+        position: 'absolute', width: '130%', height: '130%', top: '-15%', left: '-15%',
+        background: 'radial-gradient(ellipse 40% 35% at 75% 35%, rgba(190,30,110,0.45) 0%, transparent 62%)',
+        animation: 'hero-orb-drift-r 11s ease-in-out infinite',
+      }} />
+      {/* Green hint */}
+      <div style={{
+        position: 'absolute', width: '120%', height: '120%', top: '-10%', left: '-10%',
+        background: 'radial-gradient(ellipse 35% 30% at 60% 75%, rgba(20,180,120,0.25) 0%, transparent 60%)',
+        animation: 'hero-orb-drift 17s ease-in-out infinite reverse',
+      }} />
+      {/* Edge darken vignette */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'radial-gradient(ellipse 100% 100% at 50% 50%, transparent 38%, rgba(0,0,0,0.82) 100%)',
+      }} />
+    </div>
   )
 }
 
@@ -51,8 +75,10 @@ export default function Hero({
   const heroSecondaryText = secondaryText || t.hero.secondary
   const handleCtaClick  = onCtaClick  || openModal
 
+  console.log("🚀 HERO LINES FRONTEND:", heroLines)
+
   return (
-    <section style={{ position: 'relative', minHeight: '100vh', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: '#000' }}>
+    <section suppressHydrationWarning style={{ position: 'relative', minHeight: '100vh', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: '#000' }}>
 
       {isMobile ? <MobileBackground /> : <ShaderAnimation />}
 
@@ -64,7 +90,7 @@ export default function Hero({
           ))}
         </h1>
 
-        <p className="font-body" style={{ fontSize: 18, lineHeight: 1.6, color: 'rgba(255,255,255,0.78)', maxWidth: 600, margin: '0 auto 40px', textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}>
+        <p className="font-body" style={{ fontSize: 22, lineHeight: 1.6, color: 'rgba(255,255,255,0.78)', maxWidth: 650, margin: '0 auto 40px', textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}>
           {heroDescription}
         </p>
 

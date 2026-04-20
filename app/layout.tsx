@@ -104,7 +104,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${syne.variable} ${dm.variable}`}>
+    <html lang="es" className={`${syne.variable} ${dm.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"

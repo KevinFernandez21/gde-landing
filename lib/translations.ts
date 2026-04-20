@@ -8,8 +8,8 @@ export const translations = {
       cta:        'Hablar con un experto',
     },
     hero: {
-      lines:       ['El futuro pertenece ', 'a las empresas ', 'que evolucionan.'],
-      description: 'Diseñamos e implementamos inteligencia artificial que reemplaza procesos, optimiza decisiones y convierte tu operación en una ventaja competitiva real.',
+      lines:       ['Implementamos agentes de IA ', 'a la medida que automatizan ', 'tu operación.'],
+      description: 'Analizamos tus procesos o ventas y diseñamos un agente de IA que integramos en tu negocio para automatizar tareas clave.',
       cta:         'Hablar con un experto',
       secondary:   'Ver servicios →',
     },
@@ -107,8 +107,8 @@ export const translations = {
       cta:        'Talk to an expert',
     },
     hero: {
-      lines:       ['The future belongs ', 'to companies ', 'that evolve.'],
-      description: 'We build AI solutions that replace manual work and accelerate your business.',
+      lines:       ['We implement custom ', 'AI agents that automate ', 'your operation.'],
+      description: 'We analyze your processes or sales and design an AI agent that we integrate into your business to automate key tasks.',
       cta:         'Talk to an expert',
       secondary:   'View services →',
     },
