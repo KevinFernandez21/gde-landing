@@ -2,15 +2,29 @@
 
 import dynamic from 'next/dynamic'
 import { useLanguage } from '@/lib/language-context'
+import { useExpertModal } from '@/lib/expert-modal-context'
 
-// Three.js is large — load it after the initial render so it doesn't block LCP
+// Three.js shader — loaded only on desktop; mobile never downloads this chunk
 const ShaderAnimation = dynamic(
   () => import('@/components/ui/shader-animation').then(m => ({ default: m.ShaderAnimation })),
   { ssr: false }
 )
-import { useExpertModal } from '@/lib/expert-modal-context'
+
+function MobileBackground() {
+  return (
+    <div
+      aria-hidden
+      style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'radial-gradient(ellipse 90% 70% at 50% 30%, #1a0840 0%, #0a051f 45%, #000 100%)',
+      }}
+    />
+  )
+}
 
 interface HeroProps {
+  isMobile?: boolean
   lines?: string[]
   description?: string
   ctaText?: string
@@ -20,6 +34,7 @@ interface HeroProps {
 }
 
 export default function Hero({
+  isMobile = false,
   lines,
   description,
   ctaText,
@@ -30,15 +45,16 @@ export default function Hero({
   const { t } = useLanguage()
   const { openModal } = useExpertModal()
 
-  const heroLines = lines || t.hero.lines
+  const heroLines       = lines       || t.hero.lines
   const heroDescription = description || t.hero.description
-  const heroCtaText = ctaText || t.hero.cta
+  const heroCtaText     = ctaText     || t.hero.cta
   const heroSecondaryText = secondaryText || t.hero.secondary
-  const handleCtaClick = onCtaClick || openModal
+  const handleCtaClick  = onCtaClick  || openModal
 
   return (
     <section style={{ position: 'relative', minHeight: '100vh', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', background: '#000' }}>
-      <ShaderAnimation />
+
+      {isMobile ? <MobileBackground /> : <ShaderAnimation />}
 
       <div style={{ position: 'absolute', inset: 0, zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 24px', textAlign: 'center' }}>
 

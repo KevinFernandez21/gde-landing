@@ -1,23 +1,28 @@
+import { headers } from 'next/headers'
 import dynamic from 'next/dynamic'
 import { Header } from '@/components/ui/header-2'
 import Hero from '@/components/Hero'
 
-// Heavy components — loaded as separate JS chunks, only when needed
-const BrandsBar     = dynamic(() => import('@/components/BrandsBar'))
-const Stats         = dynamic(() => import('@/components/Stats'))
-const AboutUs       = dynamic(() => import('@/components/AboutUs'))
+// Below-the-fold components — separate JS chunks, client-only
+const Stats          = dynamic(() => import('@/components/Stats'),          { ssr: false })
+const BrandsBar      = dynamic(() => import('@/components/BrandsBar'),      { ssr: false })
+const AboutUs        = dynamic(() => import('@/components/AboutUs'),        { ssr: false })
 const GlobalPresence = dynamic(() => import('@/components/GlobalPresence'), { ssr: false })
-const Services      = dynamic(() => import('@/components/Services'),       { ssr: false })
-const TechStack     = dynamic(() => import('@/components/TechStack'))
-const HowItWorks    = dynamic(() => import('@/components/HowItWorks'))
-const CtaFinal      = dynamic(() => import('@/components/CtaFinal'))
-const Footer        = dynamic(() => import('@/components/Footer'))
+const Services       = dynamic(() => import('@/components/Services'),       { ssr: false })
+const TechStack      = dynamic(() => import('@/components/TechStack'),      { ssr: false })
+const HowItWorks     = dynamic(() => import('@/components/HowItWorks'),     { ssr: false })
+const CtaFinal       = dynamic(() => import('@/components/CtaFinal'),       { ssr: false })
+const Footer         = dynamic(() => import('@/components/Footer'),         { ssr: false })
 
 export default function Home() {
+  // Server-side mobile detection — prevents Three.js bundle from being sent to mobile devices
+  const ua = headers().get('user-agent') ?? ''
+  const isMobile = /mobile|android|iphone|ipad|ipod|phone/i.test(ua)
+
   return (
     <main>
       <Header />
-      <Hero />
+      <Hero isMobile={isMobile} />
       <Stats />
       <BrandsBar />
       <AboutUs />

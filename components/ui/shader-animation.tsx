@@ -101,6 +101,9 @@ export function ShaderAnimation() {
       observer.disconnect()
       window.removeEventListener("resize", onWindowResize)
       cancelAnimationFrame(animationId)
+      // Explicitly release WebGL context so React Strict Mode's double-invoke
+      // can create a fresh one on the second mount without hitting context limits
+      renderer.forceContextLoss()
       renderer.dispose()
       geometry.dispose()
       material.dispose()
