@@ -9,7 +9,7 @@ import { useLanguage } from '@/lib/language-context'
 import { useExpertModal } from '@/lib/expert-modal-context'
 
 // ─── Feature flag ──────────────────────────────────────────────────
-const VIDEOS_ENABLED = true
+const VIDEOS_ENABLED = false
 
 // ─── Data ──────────────────────────────────────────────────────────
 type ServiceMeta = {

@@ -72,7 +72,7 @@ export default function Hero({
 
       <div style={{ position: 'absolute', inset: 0, zIndex: 10, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '0 24px', textAlign: 'center' }}>
 
-        <h1 className="font-display" style={{ fontSize: 'clamp(3rem, 9vw, 6.5rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 0.95, color: '#FFFFFF', maxWidth: 1000, margin: '0 auto 32px' }}>
+        <h1 className="font-display" style={{ fontSize: 'clamp(2.5rem, min(8vw, 10.5vh), 5.5rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 0.95, color: '#FFFFFF', maxWidth: 1000, margin: '0 auto 32px' }}>
           {heroLines.map((line, i) => (
             <span key={i}>{line}{i < heroLines.length - 1 && <br />}</span>
           ))}

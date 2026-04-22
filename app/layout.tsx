@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Syne, DM_Sans } from 'next/font/google'
+import { Suspense } from 'react'
 import './globals.css'
 import { LanguageProvider } from '@/lib/language-context'
 import { ExpertModalProvider } from '@/lib/expert-modal-context'
@@ -104,7 +105,7 @@ const jsonLd = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${syne.variable} ${dm.variable}`} suppressHydrationWarning>
+    <html lang="es" translate="no" className={`${syne.variable} ${dm.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -112,12 +113,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body className="bg-base font-body text-fore antialiased" suppressHydrationWarning>
-        <LanguageProvider>
-          <ExpertModalProvider>
-            {children}
-            <ExpertModal />
-          </ExpertModalProvider>
-        </LanguageProvider>
+        <Suspense>
+          <LanguageProvider>
+            <ExpertModalProvider>
+              {children}
+              <ExpertModal />
+            </ExpertModalProvider>
+          </LanguageProvider>
+        </Suspense>
       </body>
     </html>
   )
