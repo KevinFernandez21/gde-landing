@@ -322,46 +322,29 @@ function MobileWorkflowSheet({ index, onClose }: { index: number; onClose: () =>
 
   return createPortal(
     <>
-      {/* Backdrop — no bloquea el scroll (pointerEvents none) */}
+      {/* Full-screen overlay */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.22 }}
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 40 }}
+        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
         style={{
-          position: 'fixed', inset: 0, zIndex: 9998,
-          background: 'rgba(0,0,0,0.5)',
-          backdropFilter: 'blur(4px)',
-          WebkitBackdropFilter: 'blur(4px)',
-          pointerEvents: 'none',
-        }}
-      />
-
-      {/* Sheet */}
-      <motion.div
-        initial={{ y: '100%' }}
-        animate={{ y: 0 }}
-        exit={{ y: '100%' }}
-        transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-        style={{
-          position: 'fixed', bottom: 0, left: 0, right: 0,
+          position: 'fixed',
+          top: 0, left: 0, right: 0, bottom: 0,
+          width: '100%',
+          height: '100%',
           zIndex: 9999,
           background: '#0C0F18',
-          borderRadius: '18px 18px 0 0',
-          maxHeight: '75vh',
           overflowY: 'auto',
           WebkitOverflowScrolling: 'touch',
+          display: 'flex', flexDirection: 'column',
+          paddingBottom: 'env(safe-area-inset-bottom, 0px)',
         }}
       >
-        {/* Drag handle */}
-        <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 10 }}>
-          <div style={{ width: 32, height: 3, borderRadius: 2, background: 'rgba(255,255,255,0.12)' }} />
-        </div>
-
         {/* Header */}
         <div style={{
           position: 'sticky', top: 0, zIndex: 2,
-          padding: '10px 16px',
+          padding: '14px 16px',
           background: '#0C0F18',
           borderBottom: '1px solid rgba(255,255,255,0.06)',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
@@ -372,8 +355,8 @@ function MobileWorkflowSheet({ index, onClose }: { index: number; onClose: () =>
               {wf.title}
             </span>
           </div>
-          <button onClick={onClose} style={{ width: 26, height: 26, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-            <X size={12} style={{ color: '#8B9AB5' }} />
+          <button onClick={onClose} style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+            <X size={16} style={{ color: '#EAECF4' }} />
           </button>
         </div>
 
@@ -387,7 +370,7 @@ function MobileWorkflowSheet({ index, onClose }: { index: number; onClose: () =>
         </div>
 
         {/* Vertical flow */}
-        <div style={{ padding: '12px 14px 28px' }}>
+        <div style={{ padding: '12px 16px 48px', flex: 1 }}>
           {wf.steps.map((step, si) => (
             <div key={si}>
 
@@ -642,7 +625,7 @@ function ServiceCard({
     else { videoRef.current.pause() }
   }, [isCardInView, isMobile])
 
-  // Scroll-triggered workflow on mobile
+  // Scroll-triggered workflow on mobile — open when card enters view
   const onWorkflowOpenRef = useRef(onWorkflowOpen)
   useEffect(() => { onWorkflowOpenRef.current = onWorkflowOpen })
   useEffect(() => {
@@ -751,9 +734,15 @@ export default function Services() {
   const { t, lang } = useLanguage()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const sectionVisible = useInView(ref, { once: false, amount: 0.01 })
   const reduce = useReducedMotion()
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [mobileWorkflowIndex, setMobileWorkflowIndex] = useState<number | null>(null)
+
+  // Close mobile sheet when user scrolls completely out of the services section
+  useEffect(() => {
+    if (!sectionVisible) setMobileWorkflowIndex(null)
+  }, [sectionVisible])
 
   const services: Service[] = buildServicesMeta(lang).map((meta, i) => ({
     ...meta,
