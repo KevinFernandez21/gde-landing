@@ -11,6 +11,133 @@ import { useExpertModal } from '@/lib/expert-modal-context'
 // ─── Feature flag ──────────────────────────────────────────────────
 const VIDEOS_ENABLED = false
 
+// ─── Workflow types & data ─────────────────────────────────────────
+type WFTag  = { label: string; color?: 'green' | 'yellow' | 'blue' }
+type WFCard = { icon: string; title: string; sub?: string; tags?: WFTag[] }
+type WFStep = { num: number; label: string; cards: WFCard[] }
+type WFDef  = { title: string; platforms: string[]; steps: WFStep[] }
+
+const SERVICE_WORKFLOWS: WFDef[] = [
+  // 0 – Chatbots
+  {
+    title: 'CHATBOT AUTOMATIZADO · FLUJO COMPLETO',
+    platforms: ['WhatsApp', 'Web', 'Instagram'],
+    steps: [
+      { num: 1, label: 'TRIGGER',         cards: [{ icon: '💬', title: 'Cliente escribe',       sub: 'WhatsApp · Web · Instagram' }] },
+      { num: 2, label: 'EN < 1 SEGUNDO',  cards: [{ icon: '🤖', title: 'IA responde',            sub: 'GPT · Llama · Claude' }] },
+      { num: 3, label: 'CALIFICACIÓN',    cards: [{ icon: '❓', title: 'Preguntas clave',        sub: 'Scoring automático' }] },
+      { num: 4, label: 'SEGMENTACIÓN',    cards: [
+        { icon: '🔥', title: 'Lead caliente', tags: [{ label: '+Empresa',    color: 'green' }] },
+        { icon: '⚡', title: 'Lead tibio',    tags: [{ label: 'Particular',  color: 'yellow' }] },
+      ]},
+      { num: 5, label: 'RESULTADO',       cards: [
+        { icon: '✅', title: 'Lead en tu CRM',      sub: 'Nombre · Empresa · Necesidad' },
+        { icon: '📅', title: 'Reunión agendada',    sub: 'Calendly automático' },
+      ]},
+    ],
+  },
+  // 1 – Flujos de trabajo
+  {
+    title: 'FLUJO AUTOMATIZADO · NUEVO CLIENTE REGISTRADO',
+    platforms: ['Make', 'n8n', 'Zapier'],
+    steps: [
+      { num: 1, label: 'TRIGGER', cards: [
+        { icon: '🎯', title: 'Acción detectada',   sub: 'Nuevo cliente · Formulario · CRM' },
+        { icon: '⚡', title: 'Trigger activado',   sub: 'Carlos Vega · MiPyme S.A.', tags: [{ label: 'Nuevo', color: 'green' }] },
+      ]},
+      { num: 2, label: 'NOTIFICACIÓN', cards: [
+        { icon: '💬', title: 'Mensaje de bienvenida', sub: 'WhatsApp · Email' },
+        { icon: '🤖', title: 'TurboIA Bot',            sub: '¡Hola Carlos! Bienvenido a MiPyme S.A.' },
+      ]},
+      { num: 3, label: 'SINCRONIZACIÓN', cards: [
+        { icon: '🔄', title: 'Sistema actualizado',    sub: 'CRM · Google Sheets · ERP' },
+        { icon: '📊', title: 'Fila en Google Sheets' },
+        { icon: '🔗', title: 'Contacto en HubSpot' },
+        { icon: '🔑', title: 'Acceso generado' },
+      ]},
+      { num: 4, label: 'ALERTA INTERNA', cards: [
+        { icon: '🔔', title: 'Equipo notificado',      sub: 'Slack · Email · Teams' },
+        { icon: '💬', title: '#ventas · Slack',        sub: 'Carlos Vega de MiPyme S.A. — asignado a ventas' },
+      ]},
+      { num: 5, label: 'LISTO', cards: [
+        { icon: '✅', title: 'Registro completo',      sub: 'CRM · Notificado · Acceso activo' },
+      ]},
+    ],
+  },
+  // 2 – Agentes IA
+  {
+    title: 'AGENTE DE IA · CICLO DE EJECUCIÓN',
+    platforms: ['GPT-4o', 'Claude', 'Llama 3'],
+    steps: [
+      { num: 1, label: 'SOLICITUD',       cards: [{ icon: '📥', title: 'Tarea recibida',        sub: 'Usuario · Sistema · Evento' }] },
+      { num: 2, label: 'ANÁLISIS',        cards: [{ icon: '🧠', title: 'Razonamiento',          sub: 'Context · Memory · Tools' }] },
+      { num: 3, label: 'DECISIÓN',        cards: [{ icon: '🔎', title: 'Selección de tool',     sub: 'Search · Code · API' }] },
+      { num: 4, label: 'EJECUCIÓN',       cards: [{ icon: '🚀', title: 'Acción ejecutada',      sub: 'Resultado obtenido' }] },
+      { num: 5, label: 'REPORTE',         cards: [{ icon: '📊', title: 'Respuesta final',       sub: 'Estructurada · Verificada' }] },
+    ],
+  },
+  // 3 – Automatización
+  {
+    title: 'PIPELINE DE AUTOMATIZACIÓN · END TO END',
+    platforms: ['API', 'Webhook', 'Cron'],
+    steps: [
+      { num: 1, label: 'FUENTE',          cards: [{ icon: '📡', title: 'Entrada de datos',      sub: 'API · CSV · Webhook' }] },
+      { num: 2, label: 'PROCESAMIENTO',   cards: [{ icon: '⚙️', title: 'Transformación',        sub: 'Map · Filter · Reduce' }] },
+      { num: 3, label: 'VALIDACIÓN',      cards: [{ icon: '🛡️', title: 'Control de calidad',   sub: 'Schema · Rules · Logs' }] },
+      { num: 4, label: 'DISTRIBUCIÓN',    cards: [{ icon: '📤', title: 'Envío automático',      sub: 'CRM · DB · Email · Slack' }] },
+      { num: 5, label: 'MONITOREO',       cards: [{ icon: '📈', title: 'Dashboard live',        sub: 'Alertas · KPIs · Auditoría' }] },
+    ],
+  },
+  // 4 – Consultoría
+  {
+    title: 'PROCESO DE CONSULTORÍA · DE INICIO A FIN',
+    platforms: ['Zoom', 'Meet', 'Presencial'],
+    steps: [
+      { num: 1, label: 'DIAGNÓSTICO',     cards: [{ icon: '🔍', title: 'Análisis inicial',      sub: 'Procesos · Herramientas · Equipo' }] },
+      { num: 2, label: 'ESTRATEGIA',      cards: [{ icon: '🗺️', title: 'Hoja de ruta',          sub: 'Prioridades · ROI · Timeline' }] },
+      { num: 3, label: 'DISEÑO',          cards: [{ icon: '✏️', title: 'Solución a medida',     sub: 'Arquitectura · Stack · Flujos' }] },
+      { num: 4, label: 'IMPLEMENTACIÓN',  cards: [{ icon: '🏗️', title: 'Ejecución guiada',      sub: 'Sprint · QA · Capacitación' }] },
+      { num: 5, label: 'SEGUIMIENTO',     cards: [{ icon: '📊', title: 'Métricas y mejoras',    sub: 'KPIs · Ajustes · Escala' }] },
+    ],
+  },
+  // 5 – Software a medida
+  {
+    title: 'CICLO DE DESARROLLO · SOFTWARE A MEDIDA',
+    platforms: ['Web', 'Mobile', 'API'],
+    steps: [
+      { num: 1, label: 'REQUERIMIENTOS',  cards: [{ icon: '📋', title: 'Backlog definido',       sub: 'User stories · Criterios' }] },
+      { num: 2, label: 'DISEÑO',          cards: [{ icon: '🎨', title: 'UI/UX + Arquitectura',  sub: 'Figma · Diagram · Stack' }] },
+      { num: 3, label: 'DESARROLLO',      cards: [{ icon: '💻', title: 'Sprints de código',      sub: 'TDD · Code review · CI' }] },
+      { num: 4, label: 'QA',              cards: [{ icon: '🧪', title: 'Testing completo',       sub: 'Unit · Integration · E2E' }] },
+      { num: 5, label: 'ENTREGA',         cards: [{ icon: '🚀', title: 'Deploy & handoff',       sub: 'Docs · Capacitación · Soporte' }] },
+    ],
+  },
+  // 6 – Landing pages
+  {
+    title: 'LANDING PAGE · DE BRIEF A LIVE',
+    platforms: ['Next.js', 'React', 'Webflow'],
+    steps: [
+      { num: 1, label: 'BRIEFING',        cards: [{ icon: '📝', title: 'Objetivos y audiencia', sub: 'Goal · CTA · Mensaje' }] },
+      { num: 2, label: 'DISEÑO',          cards: [{ icon: '🎨', title: 'Mockup aprobado',        sub: 'Figma · Branding · UX' }] },
+      { num: 3, label: 'DESARROLLO',      cards: [{ icon: '⚡', title: 'Código optimizado',      sub: 'Performance · Responsive' }] },
+      { num: 4, label: 'SEO TÉCNICO',     cards: [{ icon: '🔍', title: 'Optimización on-page',  sub: 'Meta · Schema · Speed' }] },
+      { num: 5, label: 'PUBLICACIÓN',     cards: [{ icon: '✅', title: 'Live & midiendo',        sub: 'Analytics · Conversiones' }] },
+    ],
+  },
+  // 7 – SEO
+  {
+    title: 'ESTRATEGIA SEO · POSICIONAMIENTO ORGÁNICO',
+    platforms: ['Google', 'Bing', 'Analytics'],
+    steps: [
+      { num: 1, label: 'AUDITORÍA',       cards: [{ icon: '🔍', title: 'Estado actual',          sub: 'Técnico · On-page · Links' }] },
+      { num: 2, label: 'KEYWORDS',        cards: [{ icon: '🎯', title: 'Palabras clave',          sub: 'Volumen · Competencia · Intent' }] },
+      { num: 3, label: 'OPTIMIZACIÓN',    cards: [{ icon: '⚙️', title: 'Mejoras técnicas',       sub: 'Core Web Vitals · Schema' }] },
+      { num: 4, label: 'CONTENIDO',       cards: [{ icon: '✍️', title: 'Plan editorial',         sub: 'Clústers · E-E-A-T · Backlinks' }] },
+      { num: 5, label: 'RESULTADOS',      cards: [{ icon: '📈', title: 'Ranking creciente',      sub: 'Tráfico · Leads · ROI' }] },
+    ],
+  },
+]
+
 // ─── Data ──────────────────────────────────────────────────────────
 type ServiceMeta = {
   icon: LucideIcon
@@ -249,21 +376,313 @@ function VideoPopup({ service }: { service: Service }) {
   )
 }
 
+// ─── Workflow popup (desktop hover) ───────────────────────────────
+function tagColor(color?: string) {
+  if (color === 'green')  return { bg: 'rgba(34,197,94,0.15)',  border: 'rgba(34,197,94,0.3)',  text: '#22c55e' }
+  if (color === 'yellow') return { bg: 'rgba(234,179,8,0.15)', border: 'rgba(234,179,8,0.3)', text: '#eab308' }
+  return                         { bg: 'rgba(79,126,255,0.15)', border: 'rgba(79,126,255,0.3)', text: '#4F7EFF' }
+}
+
+// ─── Mobile workflow sheet ──────────────────────────────────────────
+function MobileWorkflowSheet({ index, onClose }: { index: number; onClose: () => void }) {
+  const wf = SERVICE_WORKFLOWS[index] ?? SERVICE_WORKFLOWS[0]
+
+  return createPortal(
+    <>
+      {/* Backdrop — no bloquea el scroll (pointerEvents none) */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.22 }}
+        style={{
+          position: 'fixed', inset: 0, zIndex: 9998,
+          background: 'rgba(0,0,0,0.5)',
+          backdropFilter: 'blur(4px)',
+          WebkitBackdropFilter: 'blur(4px)',
+          pointerEvents: 'none',
+        }}
+      />
+
+      {/* Sheet */}
+      <motion.div
+        initial={{ y: '100%' }}
+        animate={{ y: 0 }}
+        exit={{ y: '100%' }}
+        transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          position: 'fixed', bottom: 0, left: 0, right: 0,
+          zIndex: 9999,
+          background: '#0C0F18',
+          borderRadius: '18px 18px 0 0',
+          maxHeight: '75vh',
+          overflowY: 'auto',
+          WebkitOverflowScrolling: 'touch',
+        }}
+      >
+        {/* Drag handle */}
+        <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 10 }}>
+          <div style={{ width: 32, height: 3, borderRadius: 2, background: 'rgba(255,255,255,0.12)' }} />
+        </div>
+
+        {/* Header */}
+        <div style={{
+          position: 'sticky', top: 0, zIndex: 2,
+          padding: '10px 16px',
+          background: '#0C0F18',
+          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+            <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e' }} />
+            <span className="font-display" style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase' }}>
+              {wf.title}
+            </span>
+          </div>
+          <button onClick={onClose} style={{ width: 26, height: 26, borderRadius: '50%', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
+            <X size={12} style={{ color: '#8B9AB5' }} />
+          </button>
+        </div>
+
+        {/* Platform pills */}
+        <div style={{ display: 'flex', gap: 5, padding: '10px 16px 0' }}>
+          {wf.platforms.map(p => (
+            <span key={p} style={{ fontSize: 10, fontWeight: 500, padding: '2px 9px', borderRadius: 5, background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.45)', border: '1px solid rgba(255,255,255,0.09)' }}>
+              {p}
+            </span>
+          ))}
+        </div>
+
+        {/* Vertical flow */}
+        <div style={{ padding: '12px 14px 28px' }}>
+          {wf.steps.map((step, si) => (
+            <div key={si}>
+
+              {/* Step card */}
+              <div style={{
+                display: 'flex', alignItems: 'flex-start', gap: 10,
+                background: '#111622',
+                border: '1px solid rgba(255,255,255,0.07)',
+                borderRadius: 10,
+                padding: '10px 12px',
+              }}>
+                {/* Number bubble */}
+                <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#4F7EFF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
+                  <span className="font-display" style={{ fontSize: 10, fontWeight: 700, color: '#fff' }}>{step.num}</span>
+                </div>
+
+                {/* Cards content */}
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {step.cards.map((card, ci) => (
+                    <div key={ci}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: (card.sub || card.tags) ? 2 : 0 }}>
+                        <span style={{ fontSize: 13 }}>{card.icon}</span>
+                        <span className="font-display" style={{ fontSize: 12, fontWeight: 600, color: '#EAECF4' }}>{card.title}</span>
+                      </div>
+                      {card.sub && (
+                        <p className="font-body" style={{ fontSize: 10, color: '#8B9AB5', lineHeight: 1.4, paddingLeft: 19 }}>{card.sub}</p>
+                      )}
+                      {card.tags && (
+                        <div style={{ display: 'flex', gap: 4, paddingLeft: 19, flexWrap: 'wrap', marginTop: 2 }}>
+                          {card.tags.map((tag, ti) => {
+                            const c = tagColor(tag.color)
+                            return <span key={ti} style={{ fontSize: 9, fontWeight: 600, padding: '2px 6px', borderRadius: 4, background: c.bg, color: c.text, border: `1px solid ${c.border}` }}>{tag.label}</span>
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Connector */}
+              {si < wf.steps.length - 1 && (
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '4px 0 3px', gap: 2 }}>
+                  <div style={{ width: 1, height: 10, background: 'rgba(79,126,255,0.4)' }} />
+                  <span className="font-display" style={{ fontSize: 8, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.28)' }}>
+                    {step.label}
+                  </span>
+                  <svg width="8" height="6" viewBox="0 0 8 6" fill="none">
+                    <path d="M1 1L4 4.5L7 1" stroke="rgba(79,126,255,0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              )}
+            </div>
+          ))}
+
+          {/* Final label */}
+          <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 8 }}>
+            <span className="font-display" style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#22c55e' }}>
+              ✓ {wf.steps[wf.steps.length - 1].label}
+            </span>
+          </div>
+        </div>
+      </motion.div>
+    </>,
+    document.body
+  )
+}
+
+// ─── Desktop workflow popup ─────────────────────────────────────────
+function WorkflowPopup({ index }: { index: number }) {
+  const wf = SERVICE_WORKFLOWS[index] ?? SERVICE_WORKFLOWS[0]
+
+  return createPortal(
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      style={{
+        position: 'fixed', inset: 0, zIndex: 9999,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: 'rgba(0,0,0,0.6)',
+        backdropFilter: 'blur(14px)',
+        WebkitBackdropFilter: 'blur(14px)',
+        pointerEvents: 'none',
+      }}
+    >
+      <motion.div
+        initial={{ scale: 0.88, y: 24, opacity: 0 }}
+        animate={{ scale: 1,    y: 0,  opacity: 1 }}
+        exit={{    scale: 0.94, y: 12, opacity: 0 }}
+        transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          width: 'min(96vw, 1020px)',
+          borderRadius: 16,
+          overflow: 'hidden',
+          background: '#0D1018',
+          border: '1px solid rgba(255,255,255,0.1)',
+          boxShadow: '0 48px 100px rgba(0,0,0,0.7)',
+        }}
+      >
+        {/* ── Header ── */}
+        <div style={{
+          padding: '13px 20px',
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16,
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{ width: 8, height: 8, borderRadius: '50%', background: '#22c55e', flexShrink: 0 }} />
+            <span className="font-display" style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.65)', whiteSpace: 'nowrap' }}>
+              {wf.title}
+            </span>
+          </div>
+          <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
+            {wf.platforms.map(p => (
+              <span key={p} style={{
+                fontSize: 11, fontWeight: 500, padding: '3px 10px', borderRadius: 6,
+                background: 'rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.55)',
+                border: '1px solid rgba(255,255,255,0.1)',
+              }}>{p}</span>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Flow ── */}
+        <div style={{ padding: '20px 20px 12px' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+            {wf.steps.map((step, si) => (
+              <div key={si} style={{ display: 'flex', alignItems: 'flex-start' }}>
+
+                {/* Step column */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 152 }}>
+
+                  {/* Number bubble */}
+                  <div style={{
+                    width: 26, height: 26, borderRadius: '50%', flexShrink: 0,
+                    background: '#4F7EFF',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    marginBottom: 12,
+                  }}>
+                    <span className="font-display" style={{ fontSize: 11, fontWeight: 700, color: '#fff' }}>{step.num}</span>
+                  </div>
+
+                  {/* Cards */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: '100%', padding: '0 8px' }}>
+                    {step.cards.map((card, ci) => (
+                      <div key={ci} style={{
+                        background: '#131821',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                        borderRadius: 10,
+                        padding: '10px 12px',
+                      }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: card.sub || card.tags ? 5 : 0 }}>
+                          <span style={{ fontSize: 15, lineHeight: 1 }}>{card.icon}</span>
+                          <span className="font-display" style={{ fontSize: 12, fontWeight: 600, color: '#EAECF4', lineHeight: 1.2 }}>{card.title}</span>
+                        </div>
+                        {card.sub && (
+                          <p className="font-body" style={{ fontSize: 11, color: '#8B9AB5', lineHeight: 1.4, paddingLeft: 22 }}>{card.sub}</p>
+                        )}
+                        {card.tags && (
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, paddingLeft: 22 }}>
+                            {card.tags.map((tag, ti) => {
+                              const c = tagColor(tag.color)
+                              return (
+                                <span key={ti} style={{
+                                  fontSize: 10, fontWeight: 600, padding: '2px 7px', borderRadius: 4,
+                                  background: c.bg, color: c.text, border: `1px solid ${c.border}`,
+                                }}>{tag.label}</span>
+                              )
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Step label */}
+                  <p className="font-display" style={{
+                    fontSize: 9, fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase',
+                    color: 'rgba(255,255,255,0.28)', marginTop: 12,
+                  }}>{step.label}</p>
+                </div>
+
+                {/* Arrow connector — aligned to number bubble row */}
+                {si < wf.steps.length - 1 && (
+                  <div style={{ display: 'flex', alignItems: 'center', height: 26, flexShrink: 0, padding: '0 2px' }}>
+                    <svg width="28" height="2" viewBox="0 0 28 2"><line x1="0" y1="1" x2="28" y2="1" stroke="rgba(255,255,255,0.18)" strokeWidth="1.5" strokeDasharray="3 2"/></svg>
+                    <svg width="8" height="12" viewBox="0 0 8 12" style={{ marginLeft: -1 }}>
+                      <path d="M1 1L7 6L1 11" stroke="rgba(255,255,255,0.28)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* ── Hint ── */}
+        <div style={{ padding: '0 20px 14px', textAlign: 'center' }}>
+          <p className="font-body" style={{ fontSize: 11, color: 'rgba(255,255,255,0.18)' }}>
+            — desliza para ver el flujo completo —
+          </p>
+        </div>
+      </motion.div>
+    </motion.div>,
+    document.body
+  )
+}
+
 // ─── Individual card ───────────────────────────────────────────────
 function ServiceCard({
   service,
+  index,
   delay,
   inView,
   reduce,
   onOpen,
+  onWorkflowOpen,
   featured = false,
   spanTwo = false,
 }: {
   service: Service
+  index: number
   delay: number
   inView: boolean
   reduce: boolean | null
   onOpen: () => void
+  onWorkflowOpen: () => void
   featured?: boolean
   spanTwo?: boolean
 }) {
@@ -288,6 +707,14 @@ function ServiceCard({
     if (!VIDEOS_ENABLED || !isMobile || !videoRef.current) return
     if (isCardInView) { videoRef.current.play().catch(() => {}) }
     else { videoRef.current.pause() }
+  }, [isCardInView, isMobile])
+
+  // Scroll-triggered workflow on mobile
+  const onWorkflowOpenRef = useRef(onWorkflowOpen)
+  useEffect(() => { onWorkflowOpenRef.current = onWorkflowOpen })
+  useEffect(() => {
+    if (!isMobile || !isCardInView) return
+    onWorkflowOpenRef.current()
   }, [isCardInView, isMobile])
 
   return (
@@ -329,11 +756,12 @@ function ServiceCard({
         </motion.div>
       ) : (
         <motion.div
+          ref={cardRef}
           className="md:hidden flex flex-col"
           initial={reduce ? {} : { opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.4, delay }}
-          onClick={onOpen}
+          onClick={onWorkflowOpen}
           style={{ background: '#07090F', padding: 24, gap: 16, cursor: 'pointer' }}
         >
           <div style={{ width: 56, height: 56, borderRadius: 12, background: 'rgba(79,126,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -378,9 +806,8 @@ function ServiceCard({
           Ver detalles →
         </span>
 
-        <AnimatePresence>
-          {VIDEOS_ENABLED && hovered && <VideoPopup service={service} />}
-        </AnimatePresence>
+        {hovered && <WorkflowPopup index={index} />}
+
       </motion.div>
     </>
   )
@@ -393,6 +820,7 @@ export default function Services() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const reduce = useReducedMotion()
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [mobileWorkflowIndex, setMobileWorkflowIndex] = useState<number | null>(null)
 
   const services: Service[] = buildServicesMeta(lang).map((meta, i) => ({
     ...meta,
@@ -432,12 +860,14 @@ export default function Services() {
             <ServiceCard
               key={s.title}
               service={s}
+              index={i}
               delay={0.1 + i * 0.06}
               inView={inView}
               reduce={reduce}
               onOpen={() => {
                 if (!VIDEOS_ENABLED) setActiveIndex(i)
               }}
+              onWorkflowOpen={() => setMobileWorkflowIndex(i)}
               featured={services.length % 3 === 1 && i === services.length - 1}
               spanTwo={services.length % 3 === 2 && i >= services.length - 2}
             />
@@ -445,6 +875,17 @@ export default function Services() {
         </div>
 
       </div>
+
+      {/* Mobile workflow sheet */}
+      <AnimatePresence>
+        {mobileWorkflowIndex !== null && (
+          <MobileWorkflowSheet
+            key={mobileWorkflowIndex}
+            index={mobileWorkflowIndex}
+            onClose={() => setMobileWorkflowIndex(null)}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Drawer */}
       <AnimatePresence>

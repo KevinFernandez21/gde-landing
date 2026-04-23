@@ -21,7 +21,6 @@ export default function Home() {
       <Stats />
       <BrandsBar />
       <AboutUs />
-      <GlobalPresence />
       <Services />
       <TechStack />
       <HowItWorks />
