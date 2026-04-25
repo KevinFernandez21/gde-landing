@@ -317,121 +317,294 @@ function tagColor(color?: string) {
 }
 
 // ─── Mobile workflow sheet ──────────────────────────────────────────
-function MobileWorkflowSheet({ index, onClose }: { index: number; onClose: () => void }) {
+function MobileWorkflowSheet({
+  index,
+  onClose,
+  total,
+  onNavigate,
+}: {
+  index: number
+  onClose: () => void
+  total: number
+  onNavigate: (i: number) => void
+}) {
+  const [direction, setDirection] = useState(0)
+  const prevIndexRef = useRef(index)
+  const touchStartX = useRef(0)
+  const touchStartY = useRef(0)
+
+  useEffect(() => {
+    if (index !== prevIndexRef.current) {
+      setDirection(index > prevIndexRef.current ? 1 : -1)
+      prevIndexRef.current = index
+    }
+  }, [index])
+
   const wf = SERVICE_WORKFLOWS[index] ?? SERVICE_WORKFLOWS[0]
+
+  const slideVariants = {
+    enter:  (dir: number) => ({ x: dir >= 0 ? '28%' : '-28%', opacity: 0 }),
+    center: { x: 0, opacity: 1 },
+    exit:   (dir: number) => ({ x: dir >= 0 ? '-28%' : '28%', opacity: 0 }),
+  }
 
   return createPortal(
     <>
-      {/* Full-screen overlay */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 44 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 40 }}
-        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+        exit={{ opacity: 0, y: 44 }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         style={{
-          position: 'fixed',
-          top: 0, left: 0, right: 0, bottom: 0,
-          width: '100%',
-          height: '100%',
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
           zIndex: 9999,
-          background: '#0C0F18',
-          overflowY: 'auto',
-          WebkitOverflowScrolling: 'touch',
+          background: '#07090F',
           display: 'flex', flexDirection: 'column',
-          paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+          overflow: 'hidden',
         }}
       >
-        {/* Header */}
+        {/* ── Top bar ── */}
         <div style={{
-          position: 'sticky', top: 0, zIndex: 2,
-          padding: '14px 16px',
-          background: '#0C0F18',
-          borderBottom: '1px solid rgba(255,255,255,0.06)',
+          padding: '14px 20px',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          borderBottom: '1px solid rgba(255,255,255,0.05)',
+          flexShrink: 0,
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-            <div style={{ width: 7, height: 7, borderRadius: '50%', background: '#22c55e' }} />
-            <span className="font-display" style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase' }}>
-              {wf.title}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{
+              width: 7, height: 7, borderRadius: '50%', background: '#22c55e',
+              boxShadow: '0 0 8px rgba(34,197,94,0.5)',
+            }} />
+            <span className="font-display" style={{
+              fontSize: 9, fontWeight: 700, letterSpacing: '0.13em',
+              color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase',
+            }}>
+              Flujo de trabajo
             </span>
           </div>
-          <button onClick={onClose} style={{ width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.14)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}>
-            <X size={16} style={{ color: '#EAECF4' }} />
+          <button
+            onClick={onClose}
+            style={{
+              width: 32, height: 32, borderRadius: '50%',
+              background: 'rgba(255,255,255,0.06)',
+              border: '1px solid rgba(255,255,255,0.1)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer',
+            }}
+          >
+            <X size={14} style={{ color: '#8B9AB5' }} />
           </button>
         </div>
 
-        {/* Platform pills */}
-        <div style={{ display: 'flex', gap: 5, padding: '10px 16px 0' }}>
-          {wf.platforms.map(p => (
-            <span key={p} style={{ fontSize: 10, fontWeight: 500, padding: '2px 9px', borderRadius: 5, background: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.45)', border: '1px solid rgba(255,255,255,0.09)' }}>
-              {p}
-            </span>
-          ))}
-        </div>
-
-        {/* Vertical flow */}
-        <div style={{ padding: '12px 16px 48px', flex: 1 }}>
-          {wf.steps.map((step, si) => (
-            <div key={si}>
-
-              {/* Step card */}
-              <div style={{
-                display: 'flex', alignItems: 'flex-start', gap: 10,
-                background: '#111622',
-                border: '1px solid rgba(255,255,255,0.07)',
-                borderRadius: 10,
-                padding: '10px 12px',
-              }}>
-                {/* Number bubble */}
-                <div style={{ width: 22, height: 22, borderRadius: '50%', background: '#4F7EFF', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>
-                  <span className="font-display" style={{ fontSize: 10, fontWeight: 700, color: '#fff' }}>{step.num}</span>
-                </div>
-
-                {/* Cards content */}
-                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
-                  {step.cards.map((card, ci) => (
-                    <div key={ci}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: (card.sub || card.tags) ? 2 : 0 }}>
-                        <span style={{ fontSize: 13 }}>{card.icon}</span>
-                        <span className="font-display" style={{ fontSize: 12, fontWeight: 600, color: '#EAECF4' }}>{card.title}</span>
-                      </div>
-                      {card.sub && (
-                        <p className="font-body" style={{ fontSize: 10, color: '#8B9AB5', lineHeight: 1.4, paddingLeft: 19 }}>{card.sub}</p>
-                      )}
-                      {card.tags && (
-                        <div style={{ display: 'flex', gap: 4, paddingLeft: 19, flexWrap: 'wrap', marginTop: 2 }}>
-                          {card.tags.map((tag, ti) => {
-                            const c = tagColor(tag.color)
-                            return <span key={ti} style={{ fontSize: 9, fontWeight: 600, padding: '2px 6px', borderRadius: 4, background: c.bg, color: c.text, border: `1px solid ${c.border}` }}>{tag.label}</span>
-                          })}
-                        </div>
-                      )}
-                    </div>
+        {/* ── Swipeable area ── */}
+        <div
+          style={{ flex: 1, overflow: 'hidden', position: 'relative' }}
+          onTouchStart={e => {
+            touchStartX.current = e.touches[0].clientX
+            touchStartY.current = e.touches[0].clientY
+          }}
+          onTouchEnd={e => {
+            const dx = e.changedTouches[0].clientX - touchStartX.current
+            const dy = Math.abs(e.changedTouches[0].clientY - touchStartY.current)
+            if (Math.abs(dx) > 60 && Math.abs(dx) > dy) {
+              if (dx < 0) onNavigate(Math.min(index + 1, total - 1))
+              else        onNavigate(Math.max(index - 1, 0))
+            }
+          }}
+        >
+          <AnimatePresence mode="wait" custom={direction}>
+            <motion.div
+              key={index}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{ duration: 0.26, ease: [0.32, 0.72, 0, 1] }}
+              style={{
+                position: 'absolute', inset: 0,
+                overflowY: 'auto', WebkitOverflowScrolling: 'touch',
+              }}
+            >
+              {/* Service title + platforms */}
+              <div style={{ padding: '22px 20px 16px' }}>
+                <p className="font-display" style={{
+                  fontSize: 9, fontWeight: 700, letterSpacing: '0.15em',
+                  textTransform: 'uppercase', color: '#4F7EFF', marginBottom: 6,
+                }}>
+                  Paso a paso
+                </p>
+                <h2 className="font-display" style={{
+                  fontSize: 17, fontWeight: 700, color: '#EAECF4',
+                  lineHeight: 1.25, marginBottom: 12,
+                }}>
+                  {wf.title.includes('·') ? wf.title.split('·').slice(1).join('·').trim() : wf.title}
+                </h2>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                  {wf.platforms.map(p => (
+                    <span key={p} style={{
+                      fontSize: 10, padding: '3px 11px', borderRadius: 20,
+                      background: 'rgba(255,255,255,0.05)',
+                      color: 'rgba(255,255,255,0.4)',
+                      border: '1px solid rgba(255,255,255,0.07)',
+                    }}>
+                      {p}
+                    </span>
                   ))}
                 </div>
               </div>
 
-              {/* Connector */}
-              {si < wf.steps.length - 1 && (
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '4px 0 3px', gap: 2 }}>
-                  <div style={{ width: 1, height: 10, background: 'rgba(79,126,255,0.4)' }} />
-                  <span className="font-display" style={{ fontSize: 8, fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.28)' }}>
-                    {step.label}
-                  </span>
-                  <svg width="8" height="6" viewBox="0 0 8 6" fill="none">
-                    <path d="M1 1L4 4.5L7 1" stroke="rgba(79,126,255,0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                </div>
-              )}
-            </div>
-          ))}
+              {/* Steps */}
+              <div style={{ padding: '0 16px 120px' }}>
+                {wf.steps.map((step, si) => (
+                  <motion.div
+                    key={si}
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.38, delay: 0.06 + si * 0.07, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    {/* Card */}
+                    <div style={{
+                      background: 'rgba(255,255,255,0.03)',
+                      border: '1px solid rgba(255,255,255,0.07)',
+                      borderRadius: 20,
+                      padding: '18px 18px',
+                      position: 'relative',
+                      overflow: 'hidden',
+                    }}>
+                      {/* Watermark number */}
+                      <span className="font-display" style={{
+                        position: 'absolute', top: 0, right: 14,
+                        fontSize: 72, fontWeight: 800,
+                        color: 'rgba(255,255,255,0.025)',
+                        lineHeight: 1, userSelect: 'none', pointerEvents: 'none',
+                      }}>
+                        {step.num}
+                      </span>
 
-          {/* Final label */}
-          <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 8 }}>
-            <span className="font-display" style={{ fontSize: 8, fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: '#22c55e' }}>
-              ✓ {wf.steps[wf.steps.length - 1].label}
-            </span>
-          </div>
+                      {/* Step label pill */}
+                      <div style={{
+                        display: 'inline-flex', alignItems: 'center', gap: 5,
+                        background: 'rgba(79,126,255,0.1)',
+                        border: '1px solid rgba(79,126,255,0.18)',
+                        borderRadius: 20, padding: '3px 10px', marginBottom: 14,
+                      }}>
+                        <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#4F7EFF' }} />
+                        <span className="font-display" style={{
+                          fontSize: 8, fontWeight: 700, letterSpacing: '0.13em',
+                          color: '#4F7EFF', textTransform: 'uppercase',
+                        }}>
+                          {step.label}
+                        </span>
+                      </div>
+
+                      {/* Cards within step */}
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                        {step.cards.map((card, ci) => (
+                          <div key={ci} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                            <div style={{
+                              width: 38, height: 38, borderRadius: 11,
+                              background: 'rgba(255,255,255,0.05)',
+                              border: '1px solid rgba(255,255,255,0.07)',
+                              display: 'flex', alignItems: 'center', justifyContent: 'center',
+                              flexShrink: 0, fontSize: 17, lineHeight: 1,
+                            }}>
+                              {card.icon}
+                            </div>
+                            <div style={{ flex: 1, paddingTop: 2 }}>
+                              <p className="font-display" style={{
+                                fontSize: 13, fontWeight: 600, color: '#EAECF4',
+                                marginBottom: card.sub || card.tags ? 3 : 0, lineHeight: 1.3,
+                              }}>
+                                {card.title}
+                              </p>
+                              {card.sub && (
+                                <p className="font-body" style={{ fontSize: 11, color: '#8B9AB5', lineHeight: 1.45 }}>
+                                  {card.sub}
+                                </p>
+                              )}
+                              {card.tags && (
+                                <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 4 }}>
+                                  {card.tags.map((tag, ti) => {
+                                    const c = tagColor(tag.color)
+                                    return (
+                                      <span key={ti} style={{
+                                        fontSize: 9, fontWeight: 600, padding: '2px 8px', borderRadius: 20,
+                                        background: c.bg, color: c.text, border: `1px solid ${c.border}`,
+                                      }}>
+                                        {tag.label}
+                                      </span>
+                                    )
+                                  })}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Connector */}
+                    {si < wf.steps.length - 1 && (
+                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '6px 0' }}>
+                        <div style={{
+                          width: 1, height: 18,
+                          background: 'linear-gradient(to bottom, rgba(79,126,255,0.5), rgba(79,126,255,0.1))',
+                        }} />
+                        <svg width="10" height="7" viewBox="0 0 10 7" fill="none">
+                          <path d="M1 1L5 5.5L9 1" stroke="rgba(79,126,255,0.4)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+
+                {/* Final badge */}
+                <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 16 }}>
+                  <div style={{
+                    display: 'inline-flex', alignItems: 'center', gap: 7,
+                    background: 'rgba(34,197,94,0.08)',
+                    border: '1px solid rgba(34,197,94,0.2)',
+                    borderRadius: 20, padding: '7px 18px',
+                  }}>
+                    <div style={{
+                      width: 6, height: 6, borderRadius: '50%', background: '#22c55e',
+                      boxShadow: '0 0 6px rgba(34,197,94,0.6)',
+                    }} />
+                    <span className="font-display" style={{
+                      fontSize: 9, fontWeight: 700, letterSpacing: '0.14em',
+                      textTransform: 'uppercase', color: '#22c55e',
+                    }}>
+                      ✓ {wf.steps[wf.steps.length - 1].label}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* ── Navigation dots ── */}
+        <div style={{
+          position: 'absolute', bottom: 0, left: 0, right: 0,
+          paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 20px)',
+          paddingTop: 20,
+          display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 6,
+          background: 'linear-gradient(to top, #07090F 55%, transparent)',
+          pointerEvents: 'none',
+        }}>
+          {Array.from({ length: total }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => onNavigate(i)}
+              style={{
+                width: i === index ? 22 : 6, height: 6, borderRadius: 3,
+                background: i === index ? '#4F7EFF' : 'rgba(255,255,255,0.16)',
+                border: 'none', cursor: 'pointer', padding: 0,
+                transition: 'width 0.3s ease, background 0.3s ease',
+                pointerEvents: 'auto',
+              }}
+            />
+          ))}
         </div>
       </motion.div>
     </>,
@@ -440,7 +613,11 @@ function MobileWorkflowSheet({ index, onClose }: { index: number; onClose: () =>
 }
 
 // ─── Desktop workflow popup ─────────────────────────────────────────
-function WorkflowPopup({ index }: { index: number }) {
+function WorkflowPopup({ index, onMouseEnter, onMouseLeave }: {
+  index: number
+  onMouseEnter: () => void
+  onMouseLeave: () => void
+}) {
   const wf = SERVICE_WORKFLOWS[index] ?? SERVICE_WORKFLOWS[0]
 
   return createPortal(
@@ -463,6 +640,8 @@ function WorkflowPopup({ index }: { index: number }) {
         animate={{ scale: 1,    y: 0,  opacity: 1 }}
         exit={{    scale: 0.94, y: 12, opacity: 0 }}
         transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
         style={{
           width: 'min(96vw, 1020px)',
           borderRadius: 16,
@@ -470,6 +649,7 @@ function WorkflowPopup({ index }: { index: number }) {
           background: '#0D1018',
           border: '1px solid rgba(255,255,255,0.1)',
           boxShadow: '0 48px 100px rgba(0,0,0,0.7)',
+          pointerEvents: 'auto',
         }}
       >
         {/* ── Header ── */}
@@ -589,6 +769,9 @@ function ServiceCard({
   reduce,
   onOpen,
   onWorkflowOpen,
+  onHoverStart,
+  onHoverEnd,
+  isHovered,
   featured = false,
   spanTwo = false,
 }: {
@@ -599,10 +782,12 @@ function ServiceCard({
   reduce: boolean | null
   onOpen: () => void
   onWorkflowOpen: () => void
+  onHoverStart: () => void
+  onHoverEnd: () => void
+  isHovered: boolean
   featured?: boolean
   spanTwo?: boolean
 }) {
-  const [hovered, setHovered] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [mobileVideoError, setMobileVideoError] = useState(false)
   const [muted, setMuted] = useState(true)
@@ -697,11 +882,11 @@ function ServiceCard({
         initial={reduce ? {} : { opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.4, delay }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+        onMouseEnter={onHoverStart}
+        onMouseLeave={onHoverEnd}
         onClick={onOpen}
         style={{
-          background: hovered ? '#111722' : '#07090F',
+          background: isHovered ? '#111722' : '#07090F',
           padding: featured || spanTwo ? '28px 40px' : 28,
           flexDirection: featured || spanTwo ? 'row' : 'column',
           alignItems: featured || spanTwo ? 'center' : undefined,
@@ -711,18 +896,17 @@ function ServiceCard({
           position: 'relative',
         }}
       >
-        <div style={{ width: 56, height: 56, borderRadius: 12, background: hovered ? 'rgba(79,126,255,0.2)' : 'rgba(79,126,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.25s', flexShrink: 0 }}>
+        <div style={{ width: 56, height: 56, borderRadius: 12, background: isHovered ? 'rgba(79,126,255,0.2)' : 'rgba(79,126,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.25s', flexShrink: 0 }}>
           <Icon size={featured || spanTwo ? 32 : 28} style={{ color: '#FFFFFF' }} />
         </div>
         <div style={{ flex: featured || spanTwo ? 1 : undefined }}>
           <h3 className="font-display" style={{ fontSize: featured || spanTwo ? 18 : 16, fontWeight: 600, color: '#EAECF4', marginBottom: 8, lineHeight: 1.3 }}>{service.title}</h3>
           <p className="font-body" style={{ fontSize: 14, color: '#8B9AB5', lineHeight: 1.65, maxWidth: featured || spanTwo ? 480 : undefined }}>{service.description}</p>
         </div>
-        <span className="font-body" style={{ fontSize: 11, color: hovered ? '#4F7EFF' : 'rgba(255,255,255,0.18)', transition: 'color 0.25s', marginTop: featured || spanTwo ? 0 : 'auto', flexShrink: 0 }}>
+        <span className="font-body" style={{ fontSize: 11, color: isHovered ? '#4F7EFF' : 'rgba(255,255,255,0.18)', transition: 'color 0.25s', marginTop: featured || spanTwo ? 0 : 'auto', flexShrink: 0 }}>
           Ver detalles →
         </span>
 
-        {hovered && <WorkflowPopup index={index} />}
 
       </motion.div>
     </>
@@ -738,6 +922,11 @@ export default function Services() {
   const reduce = useReducedMotion()
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [mobileWorkflowIndex, setMobileWorkflowIndex] = useState<number | null>(null)
+  const [desktopHoverIndex, setDesktopHoverIndex] = useState<number | null>(null)
+  const hoverTimer = useRef<ReturnType<typeof setTimeout>>()
+
+  const hoverStart = (i: number) => { clearTimeout(hoverTimer.current); setDesktopHoverIndex(i) }
+  const hoverEnd   = () => { hoverTimer.current = setTimeout(() => setDesktopHoverIndex(null), 120) }
 
   // Close mobile sheet when user scrolls completely out of the services section
   useEffect(() => {
@@ -790,6 +979,9 @@ export default function Services() {
                 if (!VIDEOS_ENABLED) setActiveIndex(i)
               }}
               onWorkflowOpen={() => setMobileWorkflowIndex(i)}
+              isHovered={desktopHoverIndex === i}
+              onHoverStart={() => hoverStart(i)}
+              onHoverEnd={hoverEnd}
               featured={services.length % 3 === 1 && i === services.length - 1}
               spanTwo={services.length % 3 === 2 && i >= services.length - 2}
             />
@@ -798,13 +990,25 @@ export default function Services() {
 
       </div>
 
+      {/* Desktop workflow popup */}
+      <AnimatePresence>
+        {desktopHoverIndex !== null && (
+          <WorkflowPopup
+            index={desktopHoverIndex}
+            onMouseEnter={() => hoverStart(desktopHoverIndex)}
+            onMouseLeave={hoverEnd}
+          />
+        )}
+      </AnimatePresence>
+
       {/* Mobile workflow sheet */}
       <AnimatePresence>
         {mobileWorkflowIndex !== null && (
           <MobileWorkflowSheet
-            key={mobileWorkflowIndex}
             index={mobileWorkflowIndex}
             onClose={() => setMobileWorkflowIndex(null)}
+            total={services.length}
+            onNavigate={setMobileWorkflowIndex}
           />
         )}
       </AnimatePresence>
