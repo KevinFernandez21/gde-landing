@@ -763,7 +763,6 @@ function WorkflowPopup({ index, onMouseEnter, onMouseLeave }: {
 // ─── Individual card ───────────────────────────────────────────────
 function ServiceCard({
   service,
-  index,
   delay,
   inView,
   reduce,
@@ -776,7 +775,6 @@ function ServiceCard({
   spanTwo = false,
 }: {
   service: Service
-  index: number
   delay: number
   inView: boolean
   reduce: boolean | null
@@ -971,7 +969,6 @@ export default function Services() {
             <ServiceCard
               key={s.title}
               service={s}
-              index={i}
               delay={0.1 + i * 0.06}
               inView={inView}
               reduce={reduce}
