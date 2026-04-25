@@ -21,27 +21,27 @@ const dm = DM_Sans({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.turboia.app'),
-  title: 'Turboia',
+  metadataBase: new URL('https://www.zetter.app'),
+  title: 'Zetter',
   description: 'Automatiza, escala y transforma tu empresa con chatbots, flujos inteligentes y agentes de IA.',
   icons: {
     icon: '/Logo/logo-T.webp',
     apple: '/Logo/logo-T.webp',
   },
   openGraph: {
-    title: 'TurboIA',
+    title: 'Zetter',
     description: 'Automatiza, escala y transforma tu empresa con chatbots, flujos inteligentes y agentes de IA.',
-    url: 'https://www.turboia.app',
-    siteName: 'TurboIA',
+    url: 'https://www.zetter.app',
+    siteName: 'Zetter',
     locale: 'es_LA',
     type: 'website',
     images: [
       {
         // IMPORTANTE: WhatsApp casi NUNCA soporta .webp. Siempre usa .png o .jpg para OpenGraph
-        url: '/Logo/opengraph-image.png', 
+        url: '/Logo/opengraph-image.png',
         width: 1200,
         height: 630,
-        alt: 'Turboia - Inteligencia Artificial',
+        alt: 'Zetter - Inteligencia Artificial',
       },
     ],
   },
@@ -52,10 +52,10 @@ const jsonLd = {
   '@graph': [
     {
       '@type': 'Organization',
-      '@id': 'https://www.turboia.app/#organization',
-      name: 'TurboIA',
-      url: 'https://www.turboia.app/',
-      logo: 'https://www.turboia.app/Logo/turboia-icon.webp',
+      '@id': 'https://www.zetter.app/#organization',
+      name: 'Zetter',
+      url: 'https://www.zetter.app/',
+      logo: 'https://www.zetter.app/Logo/zetter-icon.webp',
       description: 'Diseñamos e implementamos inteligencia artificial que reemplaza procesos, optimiza decisiones y convierte tu operación en una ventaja competitiva real.',
       slogan: 'El futuro pertenece a las empresas que evolucionan.',
       foundingLocation: { '@type': 'Place', name: 'Guayaquil, Ecuador' },
@@ -75,22 +75,22 @@ const jsonLd = {
     },
     {
       '@type': 'WebSite',
-      '@id': 'https://www.turboia.app/#website',
-      url: 'https://www.turboia.app/',
-      name: 'TurboIA',
+      '@id': 'https://www.zetter.app/#website',
+      url: 'https://www.zetter.app/',
+      name: 'Zetter',
       inLanguage: ['es', 'en'],
-      publisher: { '@id': 'https://www.turboia.app/#organization' },
+      publisher: { '@id': 'https://www.zetter.app/#organization' },
     },
     {
       '@type': 'Service',
-      '@id': 'https://www.turboia.app/#services',
+      '@id': 'https://www.zetter.app/#services',
       name: 'Automatización empresarial con inteligencia artificial',
-      provider: { '@id': 'https://www.turboia.app/#organization' },
+      provider: { '@id': 'https://www.zetter.app/#organization' },
       areaServed: 'Latin America',
       audience: { '@type': 'BusinessAudience', audienceType: 'Pequeñas y medianas empresas' },
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'Servicios de TurboIA',
+        name: 'Servicios de Zetter',
         itemListElement: [
           { '@type': 'Offer', name: 'Chatbots con IA', itemOffered: { '@type': 'Service', description: 'Automatización de atención al cliente en WhatsApp para reducir carga operativa y mejorar tiempos de respuesta.' } },
           { '@type': 'Offer', name: 'Agentes de IA', itemOffered: { '@type': 'Service', description: 'Sistemas autónomos capaces de ejecutar tareas y optimizar procesos empresariales.' } },

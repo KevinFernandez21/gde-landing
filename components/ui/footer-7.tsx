@@ -8,8 +8,8 @@ import { useLanguage } from '@/lib/language-context'
 
 const SOCIAL_LINKS = [
   { icon: <FaInstagram className="size-5" />, href: '#', label: 'Instagram' },
-  { icon: <FaXTwitter  className="size-5" />, href: '#', label: 'X (Twitter)' },
-  { icon: <FaLinkedin  className="size-5" />, href: '#', label: 'LinkedIn'  },
+  { icon: <FaXTwitter className="size-5" />, href: '#', label: 'X (Twitter)' },
+  { icon: <FaLinkedin className="size-5" />, href: '#', label: 'LinkedIn' },
 ]
 
 export function Footer7() {
@@ -17,14 +17,14 @@ export function Footer7() {
   const f = t.footer
 
   const sections = [
-    { title: f.linksTitle,    links: f.links.map(l   => ({ name: l.label, href: l.href })) },
+    { title: f.linksTitle, links: f.links.map(l => ({ name: l.label, href: l.href })) },
     { title: f.servicesTitle, links: f.services.map(l => ({ name: l.label, href: l.href })) },
-    { title: f.companyTitle,  links: f.company.map(l  => ({ name: l.label, href: l.href })) },
+    { title: f.companyTitle, links: f.company.map(l => ({ name: l.label, href: l.href })) },
   ]
 
   const legalLinks = [
     { name: lang === 'en' ? 'Terms and Conditions' : 'Términos y condiciones', href: '#' },
-    { name: lang === 'en' ? 'Privacy Policy'       : 'Política de privacidad',  href: '#' },
+    { name: lang === 'en' ? 'Privacy Policy' : 'Política de privacidad', href: '#' },
   ]
 
   return (
@@ -40,8 +40,8 @@ export function Footer7() {
             {/* Logo */}
             <div style={{ position: 'relative', width: 190, height: 76 }}>
               <Image
-                src="/Logo/Logo-principal.webp"
-                alt="Turboia"
+                src="/Logo/zetter-logo.png"
+                alt="Zetter"
                 fill
                 style={{ objectFit: 'contain', objectPosition: 'left' }}
               />

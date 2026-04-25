@@ -48,7 +48,7 @@ const SERVICE_WORKFLOWS: WFDef[] = [
       ]},
       { num: 2, label: 'NOTIFICACIÓN', cards: [
         { icon: '💬', title: 'Mensaje de bienvenida', sub: 'WhatsApp · Email' },
-        { icon: '🤖', title: 'TurboIA Bot',            sub: '¡Hola Carlos! Bienvenido a MiPyme S.A.' },
+        { icon: '🤖', title: 'Zetter Bot',            sub: '¡Hola Carlos! Bienvenido a MiPyme S.A.' },
       ]},
       { num: 3, label: 'SINCRONIZACIÓN', cards: [
         { icon: '🔄', title: 'Sistema actualizado',    sub: 'CRM · Google Sheets · ERP' },

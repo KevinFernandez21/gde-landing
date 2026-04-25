@@ -16,9 +16,9 @@ export function Header() {
   const { openModal } = useExpertModal()
 
   const links = [
-    { label: t.nav.services,   href: '#servicios' },
+    { label: t.nav.services, href: '#servicios' },
     { label: t.nav.howItWorks, href: '#como-funciona' },
-    { label: t.nav.about,      href: '#nosotros' },
+    { label: t.nav.about, href: '#nosotros' },
   ]
 
   React.useEffect(() => {
@@ -70,8 +70,8 @@ export function Header() {
         {/* Logo */}
         <a href="#" className="flex items-center" style={{ position: 'relative', width: 40, height: 40 }}>
           <Image
-            src="/Logo/logo-T.webp"
-            alt="Turboia"
+            src="/Logo/zetter-icon.png"
+            alt="Zetter"
             fill
             sizes="40px"
             priority
