@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   title: 'Zetter',
   description: 'Automatiza, escala y transforma tu empresa con chatbots, flujos inteligentes y agentes de IA.',
   icons: {
-    icon: '/Logo/logo-T.webp',
-    apple: '/Logo/logo-T.webp',
+    icon: '/Logo/zetter-icon-black.png',
+    apple: '/Logo/zetter-icon-black.png',
   },
   openGraph: {
     title: 'Zetter',
