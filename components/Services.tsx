@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence, useInView, useReducedMotion } from 'framer-motion'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, Fragment } from 'react'
 import { createPortal } from 'react-dom'
 import { Bot, Workflow, Cpu, Zap, LineChart, Code2, Volume2, VolumeX, X, Globe, Search } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
@@ -397,7 +397,7 @@ function MobileWorkflowSheet({
 
         {/* ── Swipeable area ── */}
         <div
-          style={{ flex: 1, overflow: 'hidden', position: 'relative' }}
+          style={{ flex: 1, overflow: 'hidden', position: 'relative', minHeight: 0 }}
           onTouchStart={e => {
             touchStartX.current = e.touches[0].clientX
             touchStartY.current = e.touches[0].clientY
@@ -422,29 +422,23 @@ function MobileWorkflowSheet({
               transition={{ duration: 0.26, ease: [0.32, 0.72, 0, 1] }}
               style={{
                 position: 'absolute', inset: 0,
-                overflowY: 'auto', WebkitOverflowScrolling: 'touch',
+                display: 'flex', flexDirection: 'column',
               }}
             >
-              {/* Service title + platforms */}
-              <div style={{ padding: '22px 20px 16px' }}>
-                <p className="font-display" style={{
-                  fontSize: 9, fontWeight: 700, letterSpacing: '0.15em',
-                  textTransform: 'uppercase', color: '#4F7EFF', marginBottom: 6,
-                }}>
-                  Paso a paso
-                </p>
+              {/* Title + platforms — compact, fixed height */}
+              <div style={{ padding: '12px 20px 8px', flexShrink: 0 }}>
                 <h2 className="font-display" style={{
-                  fontSize: 17, fontWeight: 700, color: '#EAECF4',
-                  lineHeight: 1.25, marginBottom: 12,
+                  fontSize: 13, fontWeight: 700, color: '#EAECF4',
+                  lineHeight: 1.2, marginBottom: 6,
                 }}>
                   {wf.title.includes('·') ? wf.title.split('·').slice(1).join('·').trim() : wf.title}
                 </h2>
-                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
                   {wf.platforms.map(p => (
                     <span key={p} style={{
-                      fontSize: 10, padding: '3px 11px', borderRadius: 20,
+                      fontSize: 9, padding: '2px 8px', borderRadius: 20,
                       background: 'rgba(255,255,255,0.05)',
-                      color: 'rgba(255,255,255,0.4)',
+                      color: 'rgba(255,255,255,0.38)',
                       border: '1px solid rgba(255,255,255,0.07)',
                     }}>
                       {p}
@@ -453,125 +447,134 @@ function MobileWorkflowSheet({
                 </div>
               </div>
 
-              {/* Steps */}
-              <div style={{ padding: '0 16px 120px' }}>
+              {/* Steps — flex column, fills all remaining height, NO scroll */}
+              <div style={{
+                flex: 1, display: 'flex', flexDirection: 'column',
+                padding: '0 14px',
+                paddingBottom: 'max(env(safe-area-inset-bottom, 0px), 52px)',
+                minHeight: 0,
+              }}>
                 {wf.steps.map((step, si) => (
-                  <motion.div
-                    key={si}
-                    initial={{ opacity: 0, y: 18 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.38, delay: 0.06 + si * 0.07, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    {/* Card */}
-                    <div style={{
-                      background: 'rgba(255,255,255,0.03)',
-                      border: '1px solid rgba(255,255,255,0.07)',
-                      borderRadius: 20,
-                      padding: '18px 18px',
-                      position: 'relative',
-                      overflow: 'hidden',
-                    }}>
-                      {/* Watermark number */}
-                      <span className="font-display" style={{
-                        position: 'absolute', top: 0, right: 14,
-                        fontSize: 72, fontWeight: 800,
-                        color: 'rgba(255,255,255,0.025)',
-                        lineHeight: 1, userSelect: 'none', pointerEvents: 'none',
-                      }}>
-                        {step.num}
-                      </span>
-
-                      {/* Step label pill */}
+                  <Fragment key={si}>
+                    {/* Each step takes equal vertical share */}
+                    <motion.div
+                      style={{
+                        flex: 1, display: 'flex', flexDirection: 'column',
+                        justifyContent: 'center', minHeight: 0,
+                      }}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.34, delay: 0.04 + si * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                    >
                       <div style={{
-                        display: 'inline-flex', alignItems: 'center', gap: 5,
-                        background: 'rgba(79,126,255,0.1)',
-                        border: '1px solid rgba(79,126,255,0.18)',
-                        borderRadius: 20, padding: '3px 10px', marginBottom: 14,
+                        background: 'rgba(255,255,255,0.03)',
+                        border: '1px solid rgba(255,255,255,0.07)',
+                        borderRadius: 14,
+                        padding: '7px 12px',
+                        position: 'relative', overflow: 'hidden',
                       }}>
-                        <div style={{ width: 4, height: 4, borderRadius: '50%', background: '#4F7EFF' }} />
+                        {/* Watermark */}
                         <span className="font-display" style={{
-                          fontSize: 8, fontWeight: 700, letterSpacing: '0.13em',
-                          color: '#4F7EFF', textTransform: 'uppercase',
+                          position: 'absolute', top: -2, right: 10,
+                          fontSize: 50, fontWeight: 800,
+                          color: 'rgba(255,255,255,0.025)',
+                          lineHeight: 1, userSelect: 'none', pointerEvents: 'none',
                         }}>
-                          {step.label}
+                          {step.num}
                         </span>
-                      </div>
 
-                      {/* Cards within step */}
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                        {step.cards.map((card, ci) => (
-                          <div key={ci} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+                        {/* Step label pill */}
+                        <div style={{
+                          display: 'inline-flex', alignItems: 'center', gap: 4,
+                          background: 'rgba(79,126,255,0.1)',
+                          border: '1px solid rgba(79,126,255,0.16)',
+                          borderRadius: 20, padding: '2px 8px', marginBottom: 6,
+                        }}>
+                          <div style={{ width: 3, height: 3, borderRadius: '50%', background: '#4F7EFF' }} />
+                          <span className="font-display" style={{
+                            fontSize: 7, fontWeight: 700, letterSpacing: '0.12em',
+                            color: '#4F7EFF', textTransform: 'uppercase',
+                          }}>
+                            {step.label}
+                          </span>
+                        </div>
+
+                        {/* Single card → icon box + title + subtitle */}
+                        {step.cards.length === 1 ? (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                             <div style={{
-                              width: 38, height: 38, borderRadius: 11,
+                              width: 28, height: 28, borderRadius: 9,
                               background: 'rgba(255,255,255,0.05)',
                               border: '1px solid rgba(255,255,255,0.07)',
                               display: 'flex', alignItems: 'center', justifyContent: 'center',
-                              flexShrink: 0, fontSize: 17, lineHeight: 1,
+                              flexShrink: 0, fontSize: 14, lineHeight: 1,
                             }}>
-                              {card.icon}
+                              {step.cards[0].icon}
                             </div>
-                            <div style={{ flex: 1, paddingTop: 2 }}>
+                            <div>
                               <p className="font-display" style={{
-                                fontSize: 13, fontWeight: 600, color: '#EAECF4',
-                                marginBottom: card.sub || card.tags ? 3 : 0, lineHeight: 1.3,
+                                fontSize: 11, fontWeight: 600, color: '#EAECF4',
+                                lineHeight: 1.2, marginBottom: step.cards[0].sub ? 2 : 0,
                               }}>
-                                {card.title}
+                                {step.cards[0].title}
                               </p>
-                              {card.sub && (
-                                <p className="font-body" style={{ fontSize: 11, color: '#8B9AB5', lineHeight: 1.45 }}>
-                                  {card.sub}
+                              {step.cards[0].sub && (
+                                <p className="font-body" style={{ fontSize: 9, color: '#8B9AB5', lineHeight: 1.3 }}>
+                                  {step.cards[0].sub}
                                 </p>
-                              )}
-                              {card.tags && (
-                                <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 4 }}>
-                                  {card.tags.map((tag, ti) => {
-                                    const c = tagColor(tag.color)
-                                    return (
-                                      <span key={ti} style={{
-                                        fontSize: 9, fontWeight: 600, padding: '2px 8px', borderRadius: 20,
-                                        background: c.bg, color: c.text, border: `1px solid ${c.border}`,
-                                      }}>
-                                        {tag.label}
-                                      </span>
-                                    )
-                                  })}
-                                </div>
                               )}
                             </div>
                           </div>
-                        ))}
+                        ) : (
+                          /* Multi-card → 2-column compact grid */
+                          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '4px 10px' }}>
+                            {step.cards.map((card, ci) => (
+                              <div key={ci} style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                                <span style={{ fontSize: 13, lineHeight: 1, flexShrink: 0 }}>{card.icon}</span>
+                                <span className="font-display" style={{
+                                  fontSize: 9, fontWeight: 600, color: '#EAECF4', lineHeight: 1.2,
+                                }}>
+                                  {card.title}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
-                    </div>
+                    </motion.div>
 
-                    {/* Connector */}
+                    {/* Connector — fixed height, never grows */}
                     {si < wf.steps.length - 1 && (
-                      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '6px 0' }}>
+                      <div style={{
+                        flexShrink: 0, height: 16,
+                        display: 'flex', flexDirection: 'column', alignItems: 'center',
+                      }}>
                         <div style={{
-                          width: 1, height: 18,
-                          background: 'linear-gradient(to bottom, rgba(79,126,255,0.5), rgba(79,126,255,0.1))',
+                          width: 1, flex: 1,
+                          background: 'linear-gradient(to bottom, rgba(79,126,255,0.4), rgba(79,126,255,0.1))',
                         }} />
-                        <svg width="10" height="7" viewBox="0 0 10 7" fill="none">
-                          <path d="M1 1L5 5.5L9 1" stroke="rgba(79,126,255,0.4)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <svg width="8" height="5" viewBox="0 0 8 5" fill="none">
+                          <path d="M1 1L4 4L7 1" stroke="rgba(79,126,255,0.38)" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                         </svg>
                       </div>
                     )}
-                  </motion.div>
+                  </Fragment>
                 ))}
 
                 {/* Final badge */}
-                <div style={{ display: 'flex', justifyContent: 'center', paddingTop: 16 }}>
+                <div style={{ flexShrink: 0, display: 'flex', justifyContent: 'center', paddingTop: 8 }}>
                   <div style={{
-                    display: 'inline-flex', alignItems: 'center', gap: 7,
+                    display: 'inline-flex', alignItems: 'center', gap: 6,
                     background: 'rgba(34,197,94,0.08)',
-                    border: '1px solid rgba(34,197,94,0.2)',
-                    borderRadius: 20, padding: '7px 18px',
+                    border: '1px solid rgba(34,197,94,0.18)',
+                    borderRadius: 20, padding: '5px 14px',
                   }}>
                     <div style={{
-                      width: 6, height: 6, borderRadius: '50%', background: '#22c55e',
-                      boxShadow: '0 0 6px rgba(34,197,94,0.6)',
+                      width: 5, height: 5, borderRadius: '50%', background: '#22c55e',
+                      boxShadow: '0 0 6px rgba(34,197,94,0.5)',
                     }} />
                     <span className="font-display" style={{
-                      fontSize: 9, fontWeight: 700, letterSpacing: '0.14em',
+                      fontSize: 8, fontWeight: 700, letterSpacing: '0.13em',
                       textTransform: 'uppercase', color: '#22c55e',
                     }}>
                       ✓ {wf.steps[wf.steps.length - 1].label}
