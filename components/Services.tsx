@@ -609,10 +609,9 @@ function MobileWorkflowSheet({
 }
 
 // ─── Desktop workflow popup ─────────────────────────────────────────
-function WorkflowPopup({ index, onMouseEnter, onMouseLeave }: {
+function WorkflowPopup({ index, onClose }: {
   index: number
-  onMouseEnter: () => void
-  onMouseLeave: () => void
+  onClose: () => void
 }) {
   const wf = SERVICE_WORKFLOWS[index] ?? SERVICE_WORKFLOWS[0]
 
@@ -622,13 +621,14 @@ function WorkflowPopup({ index, onMouseEnter, onMouseLeave }: {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
+      onClick={onClose}
       style={{
         position: 'fixed', inset: 0, zIndex: 9999,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         background: 'rgba(0,0,0,0.6)',
         backdropFilter: 'blur(14px)',
         WebkitBackdropFilter: 'blur(14px)',
-        pointerEvents: 'none',
+        cursor: 'pointer',
       }}
     >
       <motion.div
@@ -636,8 +636,7 @@ function WorkflowPopup({ index, onMouseEnter, onMouseLeave }: {
         animate={{ scale: 1,    y: 0,  opacity: 1 }}
         exit={{    scale: 0.94, y: 12, opacity: 0 }}
         transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
-        onMouseEnter={onMouseEnter}
-        onMouseLeave={onMouseLeave}
+        onClick={e => e.stopPropagation()}
         style={{
           width: 'min(96vw, 1020px)',
           borderRadius: 16,
@@ -660,7 +659,7 @@ function WorkflowPopup({ index, onMouseEnter, onMouseLeave }: {
               {wf.title}
             </span>
           </div>
-          <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
+          <div style={{ display: 'flex', gap: 6, flexShrink: 0, alignItems: 'center' }}>
             {wf.platforms.map(p => (
               <span key={p} style={{
                 fontSize: 11, fontWeight: 500, padding: '3px 10px', borderRadius: 6,
@@ -668,6 +667,18 @@ function WorkflowPopup({ index, onMouseEnter, onMouseLeave }: {
                 border: '1px solid rgba(255,255,255,0.1)',
               }}>{p}</span>
             ))}
+            <button
+              onClick={onClose}
+              style={{
+                width: 28, height: 28, borderRadius: '50%',
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                cursor: 'pointer', marginLeft: 6, flexShrink: 0,
+              }}
+            >
+              <X size={13} style={{ color: '#8B9AB5' }} />
+            </button>
           </div>
         </div>
 
@@ -764,9 +775,7 @@ function ServiceCard({
   reduce,
   onOpen,
   onWorkflowOpen,
-  onHoverStart,
-  onHoverEnd,
-  isHovered,
+  onDesktopWorkflow,
   featured = false,
   spanTwo = false,
 }: {
@@ -776,9 +785,7 @@ function ServiceCard({
   reduce: boolean | null
   onOpen: () => void
   onWorkflowOpen: () => void
-  onHoverStart: () => void
-  onHoverEnd: () => void
-  isHovered: boolean
+  onDesktopWorkflow: () => void
   featured?: boolean
   spanTwo?: boolean
 }) {
@@ -876,32 +883,43 @@ function ServiceCard({
         initial={reduce ? {} : { opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.4, delay }}
-        onMouseEnter={onHoverStart}
-        onMouseLeave={onHoverEnd}
-        onClick={onOpen}
         style={{
-          background: isHovered ? '#111722' : '#07090F',
+          background: '#07090F',
           padding: featured || spanTwo ? '28px 40px' : 28,
           flexDirection: featured || spanTwo ? 'row' : 'column',
           alignItems: featured || spanTwo ? 'center' : undefined,
           gap: featured || spanTwo ? 32 : 20,
-          cursor: 'pointer',
-          transition: 'background 0.25s',
           position: 'relative',
         }}
       >
-        <div style={{ width: 56, height: 56, borderRadius: 12, background: isHovered ? 'rgba(79,126,255,0.2)' : 'rgba(79,126,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.25s', flexShrink: 0 }}>
+        <div style={{ width: 56, height: 56, borderRadius: 12, background: 'rgba(79,126,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
           <Icon size={featured || spanTwo ? 32 : 28} style={{ color: '#FFFFFF' }} />
         </div>
         <div style={{ flex: featured || spanTwo ? 1 : undefined }}>
           <h3 className="font-display" style={{ fontSize: featured || spanTwo ? 18 : 16, fontWeight: 600, color: '#EAECF4', marginBottom: 8, lineHeight: 1.3 }}>{service.title}</h3>
           <p className="font-body" style={{ fontSize: 14, color: '#8B9AB5', lineHeight: 1.65, maxWidth: featured || spanTwo ? 480 : undefined }}>{service.description}</p>
         </div>
-        <span className="font-body" style={{ fontSize: 11, color: isHovered ? '#4F7EFF' : 'rgba(255,255,255,0.18)', transition: 'color 0.25s', marginTop: featured || spanTwo ? 0 : 'auto', flexShrink: 0 }}>
-          Ver detalles →
-        </span>
-
-
+        <button
+          onClick={onDesktopWorkflow}
+          className="font-body"
+          style={{
+            padding: '11px 20px',
+            borderRadius: 8,
+            background: 'transparent',
+            border: '1px solid rgba(79,126,255,0.35)',
+            color: '#4F7EFF',
+            fontSize: 13, fontWeight: 500,
+            cursor: 'pointer',
+            marginTop: featured || spanTwo ? 0 : 'auto',
+            flexShrink: 0,
+            transition: 'background 0.2s, border-color 0.2s',
+            whiteSpace: 'nowrap',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = 'rgba(79,126,255,0.12)'; e.currentTarget.style.borderColor = '#4F7EFF' }}
+          onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(79,126,255,0.35)' }}
+        >
+          Ver flujo de trabajo →
+        </button>
       </motion.div>
     </>
   )
@@ -916,11 +934,7 @@ export default function Services() {
   const reduce = useReducedMotion()
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
   const [mobileWorkflowIndex, setMobileWorkflowIndex] = useState<number | null>(null)
-  const [desktopHoverIndex, setDesktopHoverIndex] = useState<number | null>(null)
-  const hoverTimer = useRef<ReturnType<typeof setTimeout>>()
-
-  const hoverStart = (i: number) => { clearTimeout(hoverTimer.current); setDesktopHoverIndex(i) }
-  const hoverEnd   = () => { hoverTimer.current = setTimeout(() => setDesktopHoverIndex(null), 120) }
+  const [desktopWorkflowIndex, setDesktopWorkflowIndex] = useState<number | null>(null)
 
   // Close mobile sheet when user scrolls completely out of the services section
   useEffect(() => {
@@ -972,9 +986,7 @@ export default function Services() {
                 if (!VIDEOS_ENABLED) setActiveIndex(i)
               }}
               onWorkflowOpen={() => setMobileWorkflowIndex(i)}
-              isHovered={desktopHoverIndex === i}
-              onHoverStart={() => hoverStart(i)}
-              onHoverEnd={hoverEnd}
+              onDesktopWorkflow={() => setDesktopWorkflowIndex(i)}
               featured={services.length % 3 === 1 && i === services.length - 1}
               spanTwo={services.length % 3 === 2 && i >= services.length - 2}
             />
@@ -985,11 +997,10 @@ export default function Services() {
 
       {/* Desktop workflow popup */}
       <AnimatePresence>
-        {desktopHoverIndex !== null && (
+        {desktopWorkflowIndex !== null && (
           <WorkflowPopup
-            index={desktopHoverIndex}
-            onMouseEnter={() => hoverStart(desktopHoverIndex)}
-            onMouseLeave={hoverEnd}
+            index={desktopWorkflowIndex}
+            onClose={() => setDesktopWorkflowIndex(null)}
           />
         )}
       </AnimatePresence>
