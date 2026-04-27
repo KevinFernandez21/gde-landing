@@ -18,7 +18,7 @@ type WFCard = { icon: string; title: string; sub?: string; tags?: WFTag[] }
 type WFStep = { num: number; label: string; cards: WFCard[] }
 type WFDef  = { title: string; platforms: string[]; steps: WFStep[] }
 
-const SERVICE_WORKFLOWS: WFDef[] = [
+const SERVICE_WORKFLOWS_ES: WFDef[] = [
   // 0 – Chatbots
   {
     title: 'CHATBOT AUTOMATIZADO · FLUJO COMPLETO',
@@ -138,6 +138,131 @@ const SERVICE_WORKFLOWS: WFDef[] = [
     ],
   },
 ]
+
+const SERVICE_WORKFLOWS_EN: WFDef[] = [
+  // 0 – Chatbots
+  {
+    title: 'AUTOMATED CHATBOT · COMPLETE FLOW',
+    platforms: ['WhatsApp', 'Web', 'Instagram'],
+    steps: [
+      { num: 1, label: 'TRIGGER',        cards: [{ icon: '💬', title: 'Customer writes',     sub: 'WhatsApp · Web · Instagram' }] },
+      { num: 2, label: 'IN < 1 SECOND',  cards: [{ icon: '🤖', title: 'AI responds',         sub: 'GPT · Llama · Claude' }] },
+      { num: 3, label: 'QUALIFICATION',  cards: [{ icon: '❓', title: 'Key questions',       sub: 'Automatic scoring' }] },
+      { num: 4, label: 'SEGMENTATION',   cards: [
+        { icon: '🔥', title: 'Hot lead',  tags: [{ label: '+Company',   color: 'green' }] },
+        { icon: '⚡', title: 'Warm lead', tags: [{ label: 'Individual', color: 'yellow' }] },
+      ]},
+      { num: 5, label: 'RESULT',         cards: [
+        { icon: '✅', title: 'Lead in your CRM',  sub: 'Name · Company · Need' },
+        { icon: '📅', title: 'Meeting scheduled', sub: 'Auto Calendly' },
+      ]},
+    ],
+  },
+  // 1 – Automated Flows
+  {
+    title: 'AUTOMATED FLOW · NEW REGISTERED CLIENT',
+    platforms: ['Make', 'n8n', 'Zapier'],
+    steps: [
+      { num: 1, label: 'TRIGGER', cards: [
+        { icon: '🎯', title: 'Action detected',   sub: 'New client · Form · CRM' },
+        { icon: '⚡', title: 'Trigger activated', sub: 'Carlos Vega · MyBiz Co.', tags: [{ label: 'New', color: 'green' }] },
+      ]},
+      { num: 2, label: 'NOTIFICATION', cards: [
+        { icon: '💬', title: 'Welcome message', sub: 'WhatsApp · Email' },
+        { icon: '🤖', title: 'Zetter Bot',      sub: 'Hi Carlos! Welcome to MyBiz Co.' },
+      ]},
+      { num: 3, label: 'SYNC', cards: [
+        { icon: '🔄', title: 'System updated',      sub: 'CRM · Google Sheets · ERP' },
+        { icon: '📊', title: 'Row in Google Sheets' },
+        { icon: '🔗', title: 'Contact in HubSpot' },
+        { icon: '🔑', title: 'Access generated' },
+      ]},
+      { num: 4, label: 'INTERNAL ALERT', cards: [
+        { icon: '🔔', title: 'Team notified', sub: 'Slack · Email · Teams' },
+        { icon: '💬', title: '#sales · Slack', sub: 'Carlos Vega from MyBiz Co. — assigned to sales' },
+      ]},
+      { num: 5, label: 'DONE', cards: [
+        { icon: '✅', title: 'Complete record', sub: 'CRM · Notified · Active access' },
+      ]},
+    ],
+  },
+  // 2 – AI Agents
+  {
+    title: 'AI AGENT · EXECUTION CYCLE',
+    platforms: ['GPT-4o', 'Claude', 'Llama 3'],
+    steps: [
+      { num: 1, label: 'REQUEST',   cards: [{ icon: '📥', title: 'Task received',   sub: 'User · System · Event' }] },
+      { num: 2, label: 'ANALYSIS',  cards: [{ icon: '🧠', title: 'Reasoning',       sub: 'Context · Memory · Tools' }] },
+      { num: 3, label: 'DECISION',  cards: [{ icon: '🔎', title: 'Tool selection',  sub: 'Search · Code · API' }] },
+      { num: 4, label: 'EXECUTION', cards: [{ icon: '🚀', title: 'Action executed', sub: 'Result obtained' }] },
+      { num: 5, label: 'REPORT',    cards: [{ icon: '📊', title: 'Final response',  sub: 'Structured · Verified' }] },
+    ],
+  },
+  // 3 – Business Automation
+  {
+    title: 'AUTOMATION PIPELINE · END TO END',
+    platforms: ['API', 'Webhook', 'Cron'],
+    steps: [
+      { num: 1, label: 'SOURCE',        cards: [{ icon: '📡', title: 'Data input',            sub: 'API · CSV · Webhook' }] },
+      { num: 2, label: 'PROCESSING',    cards: [{ icon: '⚙️', title: 'Transformation',        sub: 'Map · Filter · Reduce' }] },
+      { num: 3, label: 'VALIDATION',    cards: [{ icon: '🛡️', title: 'Quality control',       sub: 'Schema · Rules · Logs' }] },
+      { num: 4, label: 'DISTRIBUTION',  cards: [{ icon: '📤', title: 'Auto delivery',         sub: 'CRM · DB · Email · Slack' }] },
+      { num: 5, label: 'MONITORING',    cards: [{ icon: '📈', title: 'Live dashboard',        sub: 'Alerts · KPIs · Audit' }] },
+    ],
+  },
+  // 4 – Consulting
+  {
+    title: 'CONSULTING PROCESS · FROM START TO FINISH',
+    platforms: ['Zoom', 'Meet', 'In-Person'],
+    steps: [
+      { num: 1, label: 'DIAGNOSIS',       cards: [{ icon: '🔍', title: 'Initial analysis',       sub: 'Processes · Tools · Team' }] },
+      { num: 2, label: 'STRATEGY',        cards: [{ icon: '🗺️', title: 'Roadmap',                sub: 'Priorities · ROI · Timeline' }] },
+      { num: 3, label: 'DESIGN',          cards: [{ icon: '✏️', title: 'Custom solution',        sub: 'Architecture · Stack · Flows' }] },
+      { num: 4, label: 'IMPLEMENTATION',  cards: [{ icon: '🏗️', title: 'Guided execution',      sub: 'Sprint · QA · Training' }] },
+      { num: 5, label: 'FOLLOW-UP',       cards: [{ icon: '📊', title: 'Metrics & improvements', sub: 'KPIs · Adjustments · Scale' }] },
+    ],
+  },
+  // 5 – Custom Software
+  {
+    title: 'DEVELOPMENT CYCLE · CUSTOM SOFTWARE',
+    platforms: ['Web', 'Mobile', 'API'],
+    steps: [
+      { num: 1, label: 'REQUIREMENTS', cards: [{ icon: '📋', title: 'Defined backlog',      sub: 'User stories · Criteria' }] },
+      { num: 2, label: 'DESIGN',       cards: [{ icon: '🎨', title: 'UI/UX + Architecture', sub: 'Figma · Diagram · Stack' }] },
+      { num: 3, label: 'DEVELOPMENT',  cards: [{ icon: '💻', title: 'Code sprints',         sub: 'TDD · Code review · CI' }] },
+      { num: 4, label: 'QA',           cards: [{ icon: '🧪', title: 'Full testing',         sub: 'Unit · Integration · E2E' }] },
+      { num: 5, label: 'DELIVERY',     cards: [{ icon: '🚀', title: 'Deploy & handoff',     sub: 'Docs · Training · Support' }] },
+    ],
+  },
+  // 6 – Landing Page
+  {
+    title: 'LANDING PAGE · FROM BRIEF TO LIVE',
+    platforms: ['Next.js', 'React', 'Webflow'],
+    steps: [
+      { num: 1, label: 'BRIEFING',      cards: [{ icon: '📝', title: 'Goals & audience',     sub: 'Goal · CTA · Message' }] },
+      { num: 2, label: 'DESIGN',        cards: [{ icon: '🎨', title: 'Approved mockup',       sub: 'Figma · Branding · UX' }] },
+      { num: 3, label: 'DEVELOPMENT',   cards: [{ icon: '⚡', title: 'Optimized code',        sub: 'Performance · Responsive' }] },
+      { num: 4, label: 'TECHNICAL SEO', cards: [{ icon: '🔍', title: 'On-page optimization', sub: 'Meta · Schema · Speed' }] },
+      { num: 5, label: 'LAUNCH',        cards: [{ icon: '✅', title: 'Live & measuring',      sub: 'Analytics · Conversions' }] },
+    ],
+  },
+  // 7 – SEO
+  {
+    title: 'SEO STRATEGY · ORGANIC POSITIONING',
+    platforms: ['Google', 'Bing', 'Analytics'],
+    steps: [
+      { num: 1, label: 'AUDIT',        cards: [{ icon: '🔍', title: 'Current state',          sub: 'Technical · On-page · Links' }] },
+      { num: 2, label: 'KEYWORDS',     cards: [{ icon: '🎯', title: 'Keyword research',       sub: 'Volume · Competition · Intent' }] },
+      { num: 3, label: 'OPTIMIZATION', cards: [{ icon: '⚙️', title: 'Technical improvements', sub: 'Core Web Vitals · Schema' }] },
+      { num: 4, label: 'CONTENT',      cards: [{ icon: '✍️', title: 'Editorial plan',         sub: 'Clusters · E-E-A-T · Backlinks' }] },
+      { num: 5, label: 'RESULTS',      cards: [{ icon: '📈', title: 'Rising rankings',        sub: 'Traffic · Leads · ROI' }] },
+    ],
+  },
+]
+
+function getWorkflows(lang: string): WFDef[] {
+  return lang === 'en' ? SERVICE_WORKFLOWS_EN : SERVICE_WORKFLOWS_ES
+}
 
 // ─── Data ──────────────────────────────────────────────────────────
 type ServiceMeta = {
@@ -324,12 +449,14 @@ function MobileWorkflowSheet({
   total,
   onNavigate,
   serviceTitles,
+  workflows,
 }: {
   index: number
   onClose: () => void
   total: number
   onNavigate: (i: number) => void
   serviceTitles: string[]
+  workflows: WFDef[]
 }) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [containerWidth, setContainerWidth] = useState(0)
@@ -430,7 +557,7 @@ function MobileWorkflowSheet({
             dragMomentum={false}
             onDragEnd={handleDragEnd}
           >
-            {SERVICE_WORKFLOWS.slice(0, total).map((wf, i) => (
+            {workflows.slice(0, total).map((wf, i) => (
               <div
                 key={i}
                 style={{
@@ -609,11 +736,13 @@ function MobileWorkflowSheet({
 }
 
 // ─── Desktop workflow popup ─────────────────────────────────────────
-function WorkflowPopup({ index, onClose }: {
+function WorkflowPopup({ index, onClose, workflows, hint }: {
   index: number
   onClose: () => void
+  workflows: WFDef[]
+  hint: string
 }) {
-  const wf = SERVICE_WORKFLOWS[index] ?? SERVICE_WORKFLOWS[0]
+  const wf = workflows[index] ?? workflows[0]
 
   return createPortal(
     <motion.div
@@ -758,7 +887,7 @@ function WorkflowPopup({ index, onClose }: {
         {/* ── Hint ── */}
         <div style={{ padding: '0 20px 14px', textAlign: 'center' }}>
           <p className="font-body" style={{ fontSize: 11, color: 'rgba(255,255,255,0.18)' }}>
-            — desliza para ver el flujo completo —
+            {hint}
           </p>
         </div>
       </motion.div>
@@ -789,6 +918,7 @@ function ServiceCard({
   featured?: boolean
   spanTwo?: boolean
 }) {
+  const { t } = useLanguage()
   const [isMobile, setIsMobile] = useState(false)
   const [mobileVideoError, setMobileVideoError] = useState(false)
   const [muted, setMuted] = useState(true)
@@ -918,7 +1048,7 @@ function ServiceCard({
           onMouseEnter={e => { e.currentTarget.style.background = 'rgba(79,126,255,0.12)'; e.currentTarget.style.borderColor = '#4F7EFF' }}
           onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.borderColor = 'rgba(79,126,255,0.35)' }}
         >
-          Ver flujo de trabajo →
+          {t.services.workflowBtn}
         </button>
       </motion.div>
     </>
@@ -928,6 +1058,7 @@ function ServiceCard({
 // ─── Section ───────────────────────────────────────────────────────
 export default function Services() {
   const { t, lang } = useLanguage()
+  const workflows = getWorkflows(lang)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const sectionVisible = useInView(ref, { once: false, amount: 0.01 })
@@ -1001,6 +1132,8 @@ export default function Services() {
           <WorkflowPopup
             index={desktopWorkflowIndex}
             onClose={() => setDesktopWorkflowIndex(null)}
+            workflows={workflows}
+            hint={t.services.workflowHint}
           />
         )}
       </AnimatePresence>
@@ -1014,6 +1147,7 @@ export default function Services() {
             total={services.length}
             onNavigate={setMobileWorkflowIndex}
             serviceTitles={services.map(s => s.title)}
+            workflows={workflows}
           />
         )}
       </AnimatePresence>

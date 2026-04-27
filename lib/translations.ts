@@ -27,9 +27,11 @@ export const translations = {
     services: {
       eyebrow: 'Servicios',
       title:   'Todo lo que necesitas para escalar con IA',
-      drawerBuild: '¿Qué obtendrás?',
-      drawerStack: 'Herramientas & Tecnología',
-      drawerCta:   'Hablar con un experto',
+      drawerBuild:  '¿Qué obtendrás?',
+      drawerStack:  'Herramientas & Tecnología',
+      drawerCta:    'Hablar con un experto',
+      workflowBtn:  'Ver flujo de trabajo →',
+      workflowHint: '— desliza para ver el flujo completo —',
       items: [
         { title: 'Chatbots con IA',           description: 'Convierte cada conversación en una oportunidad de negocio', detail: 'Sistemas conversacionales que entienden tu empresa, responden con precisión y generan valor en cada interacción.', tags: ['ChatGPT', 'RAG', 'WhatsApp', 'Web', 'Telegram'] },
         { title: 'Flujos Automatizados',       description: 'Elimina el trabajo repetitivo de tu operación', detail: 'Diseñamos flujos inteligentes que conectan tus herramientas y ejecutan procesos sin fricción.', tags: ['n8n', 'Make', 'Zapier', 'Webhooks', 'API REST'] },
@@ -126,9 +128,11 @@ export const translations = {
     services: {
       eyebrow: 'Services',
       title:   'Everything you need to scale with AI',
-      drawerBuild: 'What will you get?',
-      drawerStack: 'Tools & Technology',
-      drawerCta:   'Talk to an expert',
+      drawerBuild:  'What will you get?',
+      drawerStack:  'Tools & Technology',
+      drawerCta:    'Talk to an expert',
+      workflowBtn:  'View workflow →',
+      workflowHint: '— scroll to see the complete flow —',
       items: [
         { title: 'AI Chatbots',         description: 'Turn every conversation into a business opportunity', detail: 'Conversational systems that understand your business, respond accurately, and generate value in every interaction.', tags: ['ChatGPT', 'RAG', 'WhatsApp', 'Web', 'Telegram'] },
         { title: 'Automated Flows',     description: 'Eliminate repetitive work from your operation', detail: 'We design intelligent flows that connect your tools and execute processes frictionlessly.', tags: ['n8n', 'Make', 'Zapier', 'Webhooks', 'REST API'] },
